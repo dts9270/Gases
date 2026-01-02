@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RCM Naye Bharat Ka Nirman Tracker</title>
+    <title>RCM Online Tracker</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         :root {
-            --primary-color: #000080; /* Navy Blue (Chakra Color) */
+            --primary-color: #000080;
             --saffron: #FF9933;
             --white: #FFFFFF;
             --green: #138808;
@@ -31,10 +31,9 @@
             padding: 20px;
             border-radius: var(--border-radius);
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            overflow: hidden;
         }
 
-        /* --- FLAG ANIMATION HEADER START --- */
+        /* Flag Header */
         .flag-header-container {
             position: relative;
             background: linear-gradient(120deg, var(--saffron) 33%, var(--white) 33%, var(--white) 66%, var(--green) 66%);
@@ -46,135 +45,56 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
-        /* Flowing Effect Overlay */
         .flag-wave {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 200%;
-            height: 100%;
-            background: linear-gradient(to right, 
-                rgba(255,255,255,0) 0%, 
-                rgba(255,255,255,0.3) 50%, 
-                rgba(255,255,255,0) 100%);
-            transform: skewX(-20deg);
-            animation: flowFlag 3s linear infinite;
+            position: absolute; top: 0; left: 0; width: 200%; height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-20deg); animation: flowFlag 3s linear infinite;
         }
-
-        @keyframes flowFlag {
-            0% { left: -150%; }
-            100% { left: 150%; }
-        }
+        @keyframes flowFlag { 0% { left: -150%; } 100% { left: 150%; } }
 
         .header-title {
-            position: relative;
-            z-index: 2;
-            color: var(--primary-color);
-            font-size: 2rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            text-shadow: 2px 2px 0px #ffffff, -1px -1px 0px #ffffff;
-            margin: 0;
-            letter-spacing: 1px;
+            position: relative; z-index: 2; color: var(--primary-color);
+            font-size: 2rem; font-weight: 900; text-transform: uppercase;
+            text-shadow: 2px 2px 0px #ffffff; margin: 0;
         }
-
         .header-subtitle {
-            position: relative;
-            z-index: 2;
-            color: #333;
-            font-weight: bold;
-            background: rgba(255, 255, 255, 0.8);
-            display: inline-block;
-            padding: 5px 15px;
-            border-radius: 20px;
-            margin-top: 5px;
-            font-size: 0.9rem;
+            position: relative; z-index: 2; background: rgba(255, 255, 255, 0.8);
+            padding: 5px 15px; border-radius: 20px; margin-top: 5px; font-size: 0.9rem; font-weight: bold;
         }
-        /* --- FLAG ANIMATION END --- */
 
+        /* Inputs */
         .date-container {
-            background: var(--primary-color);
-            padding: 10px;
-            border-radius: 8px;
-            color: white;
-            text-align: center;
-            margin-bottom: 20px;
+            background: var(--primary-color); padding: 10px; border-radius: 8px;
+            color: white; text-align: center; margin-bottom: 20px;
         }
+        .date-container input { padding: 5px; border-radius: 4px; border: none; font-weight: bold; }
 
-        .date-container input {
-            padding: 5px;
-            border-radius: 4px;
-            border: none;
-            font-weight: bold;
-        }
-
-        /* Sections */
-        .gases-section {
-            margin-bottom: 15px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            overflow: hidden;
-            background: #fff;
-        }
-
-        .section-header {
-            background-color: var(--secondary-color);
-            padding: 10px 15px;
-            display: flex;
-            align-items: center;
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-
-        .letter-icon {
-            background: var(--primary-color);
-            color: white;
-            width: 28px;
-            height: 28px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-
+        .gases-section { margin-bottom: 15px; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; background: #fff; }
+        .section-header { background-color: var(--secondary-color); padding: 10px 15px; display: flex; align-items: center; font-weight: bold; color: var(--primary-color); }
+        .letter-icon { background: var(--primary-color); color: white; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; margin-right: 10px; }
         .sub-task-list { padding: 10px 15px; }
-
-        .task-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-            padding-bottom: 10px;
-            border-bottom: 1px dashed #eee;
-            justify-content: space-between;
-        }
+        .task-item { display: flex; align-items: center; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px dashed #eee; justify-content: space-between; }
         .task-item:last-child { border-bottom: none; }
-
         .task-left { display: flex; align-items: center; flex: 1; }
         .task-item input[type="checkbox"] { width: 18px; height: 18px; margin-right: 10px; }
-
-        .num-input {
-            width: 60px; padding: 5px; border: 2px solid var(--primary-color);
-            border-radius: 5px; text-align: center; font-weight: bold; margin-left: 10px;
-        }
-
+        .num-input { width: 60px; padding: 5px; border: 2px solid var(--primary-color); border-radius: 5px; text-align: center; font-weight: bold; margin-left: 10px; }
         .task-label { font-size: 0.9rem; cursor: pointer; }
         .task-category { font-size: 0.7rem; color: #ff6f00; font-weight: bold; display: block; }
         .select-target { padding: 5px; border-radius: 5px; border: 1px solid #ccc; }
 
+        /* Buttons */
         .btn-submit {
             background: var(--primary-color); color: white; border: none;
             padding: 15px; width: 100%; border-radius: 50px; font-weight: bold;
-            cursor: pointer; margin-top: 15px;
+            cursor: pointer; margin-top: 15px; transition: 0.3s;
         }
+        .btn-submit:hover { opacity: 0.9; }
+        .btn-save { background: var(--green); margin-top: 20px; }
         .btn-pdf { background: #d32f2f; margin-top: 10px; }
 
-        #resultArea {
-            display: none; margin-top: 15px; padding: 15px;
-            background: #fff3e0; border-left: 5px solid #ff9800; border-radius: 5px;
-        }
+        #resultArea { display: none; margin-top: 15px; padding: 15px; background: #fff3e0; border-left: 5px solid #ff9800; border-radius: 5px; }
         
-        #saveStatus { text-align: right; font-size: 0.8rem; color: green; height: 20px; }
+        #loadingMsg { text-align: center; color: var(--primary-color); font-weight: bold; display: none; margin-bottom: 10px; }
     </style>
 </head>
 <body>
@@ -182,29 +102,27 @@
 <div class="container" id="reportContent">
     
     <div class="flag-header-container">
-        <div class="flag-wave"></div> <h1 class="header-title">🇮🇳 नए भारत का निर्माण 🇮🇳</h1>
-        <div class="header-subtitle">RCM GASES Success Tracker</div>
+        <div class="flag-wave"></div>
+        <h1 class="header-title">🇮🇳 नए भारत का निर्माण 🇮🇳</h1>
+        <div class="header-subtitle">Online RCM Cloud Tracker</div>
     </div>
 
     <div class="date-container" data-html2canvas-ignore="true">
         <label>तारीख (Date): </label>
-        <input type="date" id="reportDate" onchange="loadDataByDate()">
+        <input type="date" id="reportDate">
+        <button id="btnLoad" style="margin-left:10px; padding:5px; cursor:pointer;">Load Data</button>
     </div>
     
-    <div id="saveStatus"></div>
+    <div id="loadingMsg">🔄 Connecting to Server...</div>
 
     <form id="trackerForm">
         
         <div class="gases-section">
-            <div class="section-header">
-                <div><span class="letter-icon">G</span> ग्रोथ (Growth)</div>
-            </div>
+            <div class="section-header"><div><span class="letter-icon">G</span> ग्रोथ (Growth)</div></div>
             <div class="sub-task-list">
                 <div class="task-item">
-                    <div class="task-left">
-                        <label class="task-label"><span class="task-category">TARGET</span>महिन्याचे ग्रोथ टार्गेट</label>
-                    </div>
-                    <select id="growthTarget" class="select-target" onchange="autoSave()">
+                    <div class="task-left"><label class="task-label"><span class="task-category">TARGET</span>महिन्याचे ग्रोथ टार्गेट</label></div>
+                    <select id="growthTarget" class="select-target">
                         <option value="0">Normal</option>
                         <option value="25">25% Growth</option>
                         <option value="50">50% Growth</option>
@@ -212,126 +130,77 @@
                     </select>
                 </div>
                 <div class="task-item">
-                    <div class="task-left">
-                        <label class="task-label"><span class="task-category">SHOW THE PLAN</span>आज किती प्लान (Plan) दाखवले?</label>
-                    </div>
-                    <input type="number" id="numPlan" class="num-input" placeholder="0" min="0" oninput="autoSave()">
+                    <div class="task-left"><label class="task-label"><span class="task-category">SHOW THE PLAN</span>आज किती प्लान (Plan) दाखवले?</label></div>
+                    <input type="number" id="numPlan" class="num-input" placeholder="0" min="0">
                 </div>
                 <div class="task-item">
-                    <div class="task-left">
-                        <input type="checkbox" id="g_vital" class="track-check" onchange="autoSave()">
-                        <label for="g_vital" class="task-label"><span class="task-category">NEW VITAL</span>नवीन Vital Achiever साठी काम?</label>
-                    </div>
+                    <div class="task-left"><input type="checkbox" id="g_vital" class="track-check"><label for="g_vital" class="task-label"><span class="task-category">NEW VITAL</span>नवीन Vital Achiever साठी काम?</label></div>
                 </div>
                 <div class="task-item">
-                    <div class="task-left">
-                        <input type="checkbox" id="g_display" class="track-check" onchange="autoSave()">
-                        <label for="g_display" class="task-label"><span class="task-category">NEW STATION</span>नवीन Display Wall / केंद्र सुरु केले?</label>
-                    </div>
+                    <div class="task-left"><input type="checkbox" id="g_display" class="track-check"><label for="g_display" class="task-label"><span class="task-category">NEW STATION</span>नवीन Display Wall / केंद्र सुरु?</label></div>
                 </div>
             </div>
         </div>
 
         <div class="gases-section">
-            <div class="section-header">
-                <div><span class="letter-icon">A</span> एक्टिव दर (Active Rate)</div>
-            </div>
+            <div class="section-header"><div><span class="letter-icon">A</span> एक्टिव दर (Active Rate)</div></div>
             <div class="sub-task-list">
                 <div class="task-item">
-                    <div class="task-left">
-                        <label class="task-label"><span class="task-category">CALLING</span>फॉलो-अप कॉल्स (Calls)?</label>
-                    </div>
-                    <input type="number" id="numCalls" class="num-input" placeholder="0" min="0" oninput="autoSave()">
+                    <div class="task-left"><label class="task-label"><span class="task-category">CALLING</span>फॉलो-अप कॉल्स (Calls)?</label></div>
+                    <input type="number" id="numCalls" class="num-input" placeholder="0" min="0">
                 </div>
                 <div class="task-item">
-                    <div class="task-left">
-                        <label class="task-label"><span class="task-category">MEETINGS</span>होम / वेलकम मीटिंग्स?</label>
-                    </div>
-                    <input type="number" id="numMeetings" class="num-input" placeholder="0" min="0" oninput="autoSave()">
+                    <div class="task-left"><label class="task-label"><span class="task-category">MEETINGS</span>होम / वेलकम मीटिंग्स?</label></div>
+                    <input type="number" id="numMeetings" class="num-input" placeholder="0" min="0">
                 </div>
                 <div class="task-item">
-                    <div class="task-left">
-                        <input type="checkbox" id="a_ulp" class="track-check" onchange="autoSave()">
-                        <label for="a_ulp" class="task-label"><span class="task-category">ULP QUICK</span>ULP (Unique Login Point) लिस्ट चेक केली?</label>
-                    </div>
+                    <div class="task-left"><input type="checkbox" id="a_ulp" class="track-check"><label for="a_ulp" class="task-label"><span class="task-category">ULP QUICK</span>ULP (Unique Login Point) लिस्ट?</label></div>
                 </div>
                 <div class="task-item">
-                    <div class="task-left">
-                        <input type="checkbox" id="a_first_purchase" class="track-check" onchange="autoSave()">
-                        <label for="a_first_purchase" class="task-label"><span class="task-category">FIRST PURCHASE</span>नवीन व्यक्तीची पहिली खरेदी?</label>
-                    </div>
+                    <div class="task-left"><input type="checkbox" id="a_first_purchase" class="track-check"><label for="a_first_purchase" class="task-label"><span class="task-category">FIRST PURCHASE</span>नवीन व्यक्तीची पहिली खरेदी?</label></div>
                 </div>
             </div>
         </div>
 
         <div class="gases-section">
-            <div class="section-header">
-                <div><span class="letter-icon">S</span> स्वयं की खरीद (Self Use)</div>
-            </div>
+            <div class="section-header"><div><span class="letter-icon">S</span> स्वयं की खरीद (Self Use)</div></div>
             <div class="sub-task-list">
                 <div class="task-item">
-                    <div class="task-left">
-                        <label class="task-label"><span class="task-category">SALES / PV</span>आजची विक्री (Selling/Self ID) ₹?</label>
-                    </div>
-                    <input type="number" id="numPV" class="num-input" placeholder="₹" min="0" oninput="autoSave()">
+                    <div class="task-left"><label class="task-label"><span class="task-category">SALES / PV</span>आजची विक्री (Selling/Self ID) ₹?</label></div>
+                    <input type="number" id="numPV" class="num-input" placeholder="₹" min="0">
                 </div>
                 <div class="task-item">
-                    <div class="task-left">
-                        <input type="checkbox" id="s_online" class="track-check" onchange="autoSave()">
-                        <label for="s_online" class="task-label"><span class="task-category">ONLINE ORDER</span>स्वतःची ऑर्डर ऑनलाईन टाकली?</label>
-                    </div>
+                    <div class="task-left"><input type="checkbox" id="s_online" class="track-check"><label for="s_online" class="task-label"><span class="task-category">ONLINE ORDER</span>स्वतःची ऑर्डर ऑनलाईन टाकली?</label></div>
                 </div>
                 <div class="task-item">
-                    <div class="task-left">
-                        <input type="checkbox" id="s_billing" class="track-check" onchange="autoSave()">
-                        <label for="s_billing" class="task-label"><span class="task-category">BILLING</span>हाथोहाथ (Immediate) बिलिंग केले?</label>
-                    </div>
+                    <div class="task-left"><input type="checkbox" id="s_billing" class="track-check"><label for="s_billing" class="task-label"><span class="task-category">BILLING</span>हाथोहाथ (Immediate) बिलिंग केले?</label></div>
                 </div>
             </div>
         </div>
 
         <div class="gases-section">
-            <div class="section-header">
-                <div><span class="letter-icon">E</span> एक रूप शिक्षा (Education)</div>
-            </div>
+            <div class="section-header"><div><span class="letter-icon">E</span> एक रूप शिक्षा (Education)</div></div>
             <div class="sub-task-list">
                 <div class="task-item">
-                    <div class="task-left">
-                        <input type="checkbox" id="e_learn" class="track-check" onchange="autoSave()">
-                        <label for="e_learn" class="task-label"><span class="task-category">LEARNING</span>गुरुकुल / उडान व्हिडिओ पाहिला?</label>
-                    </div>
+                    <div class="task-left"><input type="checkbox" id="e_learn" class="track-check"><label for="e_learn" class="task-label"><span class="task-category">LEARNING</span>गुरुकुल / उडान व्हिडिओ पाहिला?</label></div>
                 </div>
                 <div class="task-item">
-                    <div class="task-left">
-                        <input type="checkbox" id="e_teach" class="track-check" onchange="autoSave()">
-                        <label for="e_teach" class="task-label"><span class="task-category">TEACHING</span>टीम ट्रेनिंग (Duplication) दिले?</label>
-                    </div>
+                    <div class="task-left"><input type="checkbox" id="e_teach" class="track-check"><label for="e_teach" class="task-label"><span class="task-category">TEACHING</span>टीम ट्रेनिंग (Duplication) दिले?</label></div>
                 </div>
             </div>
         </div>
 
         <div class="gases-section">
-            <div class="section-header">
-                <div><span class="letter-icon">S</span> सामाजिक दायरा (Social)</div>
-            </div>
+            <div class="section-header"><div><span class="letter-icon">S</span> सामाजिक दायरा (Social)</div></div>
             <div class="sub-task-list">
                 <div class="task-item">
-                    <div class="task-left">
-                        <input type="checkbox" id="so_relation" class="track-check" onchange="autoSave()">
-                        <label for="so_relation" class="task-label"><span class="task-category">RELATION</span>नातेवाईक/मित्र संपर्क (Non-Business)?</label>
-                    </div>
+                    <div class="task-left"><input type="checkbox" id="so_relation" class="track-check"><label for="so_relation" class="task-label"><span class="task-category">RELATION</span>नातेवाईक/मित्र संपर्क (Non-Business)?</label></div>
                 </div>
                 <div class="task-item">
-                    <div class="task-left">
-                        <input type="checkbox" id="so_forgive" class="track-check" onchange="autoSave()">
-                        <label for="so_forgive" class="task-label"><span class="task-category">FORGIVENESS</span>मनातील राग सोडून दिला (Forgiveness)?</label>
-                    </div>
+                    <div class="task-left"><input type="checkbox" id="so_forgive" class="track-check"><label for="so_forgive" class="task-label"><span class="task-category">FORGIVENESS</span>मनातील राग सोडून दिला (Forgiveness)?</label></div>
                 </div>
                 <div class="task-item">
-                    <div class="task-left">
-                        <input type="checkbox" id="so_health" class="track-check" onchange="autoSave()">
-                        <label for="so_health" class="task-label"><span class="task-category">HEALTH/SEVA</span>आरोग्य (Health) किंवा सेवा कार्य?</label>
-                    </div>
+                    <div class="task-left"><input type="checkbox" id="so_health" class="track-check"><label for="so_health" class="task-label"><span class="task-category">HEALTH/SEVA</span>आरोग्य (Health) किंवा सेवा कार्य?</label></div>
                 </div>
             </div>
         </div>
@@ -345,71 +214,152 @@
 </div>
 
 <div class="container" style="background: transparent; box-shadow: none; margin-top: 0; padding-top: 0;">
-    <button type="button" class="btn-submit" onclick="calculateAndShow()">🔍 Calculate & Show Analysis</button>
-    <button type="button" class="btn-submit btn-pdf" onclick="downloadPDF()">📥 Download PDF Report</button>
+    <button type="button" class="btn-submit btn-save" id="btnSaveData">☁️ Save Data to Cloud</button>
+    <button type="button" class="btn-submit" id="btnCalc">🔍 Calculate Analysis</button>
+    <button type="button" class="btn-submit btn-pdf" id="btnDownloadPDF">📥 Download PDF Report</button>
 </div>
 
-<script>
-    const dateInput = document.getElementById('reportDate');
-    const statusMsg = document.getElementById('saveStatus');
+<script type="module">
+  // Import Firebase
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-    dateInput.valueAsDate = new Date();
-    
-    window.onload = function() { loadDataByDate(); };
+  // Configuration provided by user
+  const firebaseConfig = {
+    apiKey: "AIzaSyCsgwBoTiEtSNJ2xMm4di0F0GiAtFxoswM",
+    authDomain: "order-b15a8.firebaseapp.com",
+    projectId: "order-b15a8",
+    storageBucket: "order-b15a8.firebasestorage.app",
+    messagingSenderId: "614443594278",
+    appId: "1:614443594278:web:e31715b6ee592b30326ce7"
+  };
 
-    function autoSave() {
-        const dateKey = 'rcm_data_' + dateInput.value;
-        const data = {
-            target: document.getElementById('growthTarget').value,
-            plans: document.getElementById('numPlan').value,
-            calls: document.getElementById('numCalls').value,
-            meetings: document.getElementById('numMeetings').value,
-            pv: document.getElementById('numPV').value,
-            g_vital: document.getElementById('g_vital').checked,
-            g_display: document.getElementById('g_display').checked,
-            a_ulp: document.getElementById('a_ulp').checked,
-            a_first_purchase: document.getElementById('a_first_purchase').checked,
-            s_online: document.getElementById('s_online').checked,
-            s_billing: document.getElementById('s_billing').checked,
-            e_learn: document.getElementById('e_learn').checked,
-            e_teach: document.getElementById('e_teach').checked,
-            so_relation: document.getElementById('so_relation').checked,
-            so_forgive: document.getElementById('so_forgive').checked,
-            so_health: document.getElementById('so_health').checked
-        };
-        localStorage.setItem(dateKey, JSON.stringify(data));
-        statusMsg.innerText = "Saving... ✔";
-        setTimeout(() => statusMsg.innerText = "", 1500);
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // UI Elements
+  const dateInput = document.getElementById('reportDate');
+  const loadingMsg = document.getElementById('loadingMsg');
+  
+  // Set Today's Date
+  dateInput.valueAsDate = new Date();
+
+  // --- SAVE DATA FUNCTION ---
+  window.saveToFirebase = async function() {
+    const dateVal = dateInput.value;
+    if(!dateVal) { alert("Please select a date!"); return; }
+
+    loadingMsg.style.display = 'block';
+    loadingMsg.innerText = "Saving to Cloud...";
+
+    const data = {
+        target: document.getElementById('growthTarget').value,
+        plans: document.getElementById('numPlan').value,
+        g_vital: document.getElementById('g_vital').checked,
+        g_display: document.getElementById('g_display').checked,
+        
+        calls: document.getElementById('numCalls').value,
+        meetings: document.getElementById('numMeetings').value,
+        a_ulp: document.getElementById('a_ulp').checked,
+        a_first_purchase: document.getElementById('a_first_purchase').checked,
+        
+        pv: document.getElementById('numPV').value,
+        s_online: document.getElementById('s_online').checked,
+        s_billing: document.getElementById('s_billing').checked,
+        
+        e_learn: document.getElementById('e_learn').checked,
+        e_teach: document.getElementById('e_teach').checked,
+        
+        so_relation: document.getElementById('so_relation').checked,
+        so_forgive: document.getElementById('so_forgive').checked,
+        so_health: document.getElementById('so_health').checked,
+        
+        lastUpdated: new Date()
+    };
+
+    try {
+        // Saving to collection 'rcm_daily_tracker', document ID = date (e.g. '2025-10-04')
+        await setDoc(doc(db, "rcm_daily_tracker", dateVal), data);
+        alert("✅ Data Saved Successfully Online!");
+    } catch (error) {
+        console.error("Error saving document: ", error);
+        alert("Error saving data: " + error.message);
+    } finally {
+        loadingMsg.style.display = 'none';
     }
+  }
 
-    function loadDataByDate() {
-        const dateKey = 'rcm_data_' + dateInput.value;
-        const savedData = localStorage.getItem(dateKey);
-        document.getElementById('resultArea').style.display = 'none';
+  // --- LOAD DATA FUNCTION ---
+  window.loadFromFirebase = async function() {
+    const dateVal = dateInput.value;
+    if(!dateVal) return;
 
-        if (savedData) {
-            const data = JSON.parse(savedData);
+    loadingMsg.style.display = 'block';
+    loadingMsg.innerText = "Loading from Cloud...";
+    
+    // Hide previous results
+    document.getElementById('resultArea').style.display = 'none';
+
+    try {
+        const docRef = doc(db, "rcm_daily_tracker", dateVal);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            const data = docSnap.data();
+            
+            // Populate fields
             document.getElementById('growthTarget').value = data.target || 0;
             document.getElementById('numPlan').value = data.plans || "";
-            document.getElementById('numCalls').value = data.calls || "";
-            document.getElementById('numMeetings').value = data.meetings || "";
-            document.getElementById('numPV').value = data.pv || "";
             document.getElementById('g_vital').checked = data.g_vital || false;
             document.getElementById('g_display').checked = data.g_display || false;
+            
+            document.getElementById('numCalls').value = data.calls || "";
+            document.getElementById('numMeetings').value = data.meetings || "";
             document.getElementById('a_ulp').checked = data.a_ulp || false;
             document.getElementById('a_first_purchase').checked = data.a_first_purchase || false;
+            
+            document.getElementById('numPV').value = data.pv || "";
             document.getElementById('s_online').checked = data.s_online || false;
             document.getElementById('s_billing').checked = data.s_billing || false;
+            
             document.getElementById('e_learn').checked = data.e_learn || false;
             document.getElementById('e_teach').checked = data.e_teach || false;
+            
             document.getElementById('so_relation').checked = data.so_relation || false;
             document.getElementById('so_forgive').checked = data.so_forgive || false;
             document.getElementById('so_health').checked = data.so_health || false;
+            
+            console.log("Data loaded for", dateVal);
         } else {
+            // No data found for this date
             document.getElementById('trackerForm').reset();
             document.getElementById('growthTarget').value = "0";
+            console.log("No such document!");
         }
+    } catch (error) {
+        console.error("Error getting document:", error);
+        alert("Error loading data. Check internet connection.");
+    } finally {
+        loadingMsg.style.display = 'none';
     }
+  }
+
+  // Attach functions to buttons
+  document.getElementById('btnSaveData').addEventListener('click', window.saveToFirebase);
+  document.getElementById('btnLoad').addEventListener('click', window.loadFromFirebase);
+  document.getElementById('reportDate').addEventListener('change', window.loadFromFirebase);
+
+  // Initial load
+  window.loadFromFirebase();
+
+</script>
+
+<script>
+    // --- NON-FIREBASE FUNCTIONS (Calculation & PDF) ---
+    
+    document.getElementById('btnCalc').addEventListener('click', calculateAndShow);
+    document.getElementById('btnDownloadPDF').addEventListener('click', downloadPDF);
 
     function calculateAndShow() {
         let score = 0;
@@ -418,6 +368,7 @@
         let meetings = parseInt(document.getElementById('numMeetings').value) || 0;
         let pv = parseInt(document.getElementById('numPV').value) || 0;
 
+        // Scoring Logic
         score += Math.min(plans * 10, 30);
         score += Math.min(meetings * 15, 30);
         score += Math.min(calls * 2, 10);
@@ -430,12 +381,12 @@
 
         if(score > 100) score = 100;
 
-        let feedback = `Total Score: <strong style="font-size:1.3rem; color:${score < 50 ? 'red' : 'green'}">${Math.round(score)}/100</strong><br><br>`;
+        let feedback = `Total Cloud Score: <strong style="font-size:1.3rem; color:${score < 50 ? 'red' : 'green'}">${Math.round(score)}/100</strong><br><br>`;
         
-        if(plans === 0 && meetings === 0) feedback += "🔴 <strong>Action:</strong> फिल्ड वर्क झिरो आहे. ग्रोथ थांबली आहे.<br>";
+        if(plans === 0 && meetings === 0) feedback += "🔴 <strong>Action:</strong> फिल्ड वर्क झिरो आहे.<br>";
         else feedback += "🟢 <strong>Good:</strong> फिल्ड वर्क चालू आहे.<br>";
 
-        if(score > 80) feedback += "🏆 <strong>Victory:</strong> तुम्ही 'नए भारत का निर्माण' करण्यास सक्षम आहात!";
+        if(score > 80) feedback += "🏆 <strong>Victory:</strong> तुम्ही 'नए भारत का निर्माण' करत आहात!";
         else if(score < 40) feedback += "⚠️ <strong>Alert:</strong> काम वाढवा, नाहीतर मागे पडाल.";
 
         document.getElementById('analysisText').innerHTML = feedback;
@@ -445,10 +396,10 @@
     function downloadPDF() {
         calculateAndShow();
         const element = document.getElementById('reportContent');
-        const dateVal = dateInput.value;
+        const dateVal = document.getElementById('reportDate').value;
         const opt = {
             margin: 0.3,
-            filename: `RCM_Naye_Bharat_${dateVal}.pdf`,
+            filename: `RCM_Cloud_Report_${dateVal}.pdf`,
             image: { type: 'jpeg', quality: 0.98 },
             html2canvas: { scale: 2 },
             jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
