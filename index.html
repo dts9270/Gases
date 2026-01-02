@@ -3,354 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GASES Gurumantra Tracker</title>
+    <title>RCM Permanent Tracker</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         :root {
-            --primary-gradient: linear-gradient(135deg, #000080, #1a237e);
-            --secondary-bg: #f8f9fa;
-            --card-shadow: 0 10px 20px rgba(0,0,0,0.08);
-            --accent-color: #ff6f00;
-            --text-dark: #2c3e50;
+            --primary-color: #000080;
+            --saffron: #FF9933;
+            --white: #FFFFFF;
+            --green: #138808;
+            --bg-color: #f4f6f9;
         }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-color); margin: 0; padding: 10px; color: #333; }
+        .container { max-width: 700px; margin: 0 auto; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
 
-        body { font-family: 'Segoe UI', 'Roboto', sans-serif; background-color: #eceff1; margin: 0; padding: 15px; color: var(--text-dark); }
-        .container { max-width: 750px; margin: 0 auto; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); overflow: hidden; }
-
-        /* --- NEW: ATTRACTIVE TIRKAS (SLANTED) HEADER --- */
-        .flag-header-wrapper {
-            margin: -25px -25px 30px -25px; /* Full width */
-            padding-bottom: 20px;
-            overflow: hidden;
-            filter: drop-shadow(0 10px 10px rgba(0,0,0,0.2));
+        /* Flag Header */
+        .flag-header {
+            background: linear-gradient(135deg, #FF9933, #FFFFFF, #138808);
+            padding: 30px; text-align: center; border-radius: 15px; margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2); border: 1px solid #ddd;
         }
+        .header-title { color: #000080; font-size: 2rem; font-weight: 900; margin: 0; text-shadow: 1px 1px 0 #fff; text-transform: uppercase; }
+        .header-sub { background: #000080; color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; margin-top: 5px; display: inline-block; }
 
-        .flag-header-container {
-            position: relative;
-            /* तिरंगा (Tirkas Gradient) */
-            background: linear-gradient(135deg, #FF9933 25%, #FFFFFF 50%, #138808 75%);
-            padding: 50px 20px 70px 20px;
-            text-align: center;
-            /* तिरकस आकार (Slanted Shape) */
-            transform: skewY(-4deg);
-            transform-origin: top left;
-            border-bottom: 5px solid #d4af37; /* Gold Border */
-        }
+        /* Sections */
+        .section { background: #fff; border: 1px solid #ddd; border-radius: 10px; padding: 15px; margin-bottom: 15px; border-left: 5px solid var(--primary-color); }
+        .sec-title { font-weight: bold; color: var(--primary-color); margin-bottom: 10px; display: flex; align-items: center; font-size: 1.1rem; }
+        .sec-icon { background: #eee; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; margin-right: 10px; }
 
-        /* ॲनिमेशन (Waving Effect) */
-        .flag-wave {
-            position: absolute; top: 0; left: -100%; width: 200%; height: 100%;
-            background: linear-gradient(110deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 70%);
-            animation: shine 3s infinite linear;
-            pointer-events: none;
-        }
-
-        @keyframes shine { 
-            0% { transform: translateX(0); } 
-            100% { transform: translateX(100%); } 
-        }
-
-        /* मजकूर सरळ करण्यासाठी (Un-skew text) */
-        .header-content {
-            transform: skewY(4deg); /* Counter skew */
-            position: relative; z-index: 5;
-        }
-
-        .header-title { 
-            color: #000080; 
-            font-size: 2.5rem; 
-            font-weight: 900; 
-            text-transform: uppercase; 
-            text-shadow: 3px 3px 0px #fff, 0px 0px 15px rgba(255,255,255,0.8); 
-            margin: 0; 
-            letter-spacing: 1px;
-            font-family: 'Arya', sans-serif; /* Indian style font fallback */
-        }
+        /* Inputs */
+        .row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px dashed #eee; }
+        .row:last-child { border-bottom: none; }
+        .inp-num { width: 80px; padding: 5px; border: 1px solid #ccc; border-radius: 5px; text-align: center; font-weight: bold; color: #000080; }
+        .inp-check { width: 20px; height: 20px; margin-right: 10px; }
         
-        .header-subtitle { 
-            background: #000080; 
-            color: white;
-            padding: 5px 20px; 
-            border-radius: 30px; 
-            margin-top: 5px; 
-            font-size: 1.1rem; 
-            font-weight: bold; 
-            display: inline-block; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            border: 2px solid #fff;
-        }
+        /* Business Stats */
+        .biz-box { background: #fff8e1; border: 2px solid #ffc107; padding: 15px; border-radius: 10px; margin-bottom: 20px; }
+        .biz-row { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 5px; align-items: center; margin-bottom: 5px; font-size: 0.9rem; }
+        .growth-val { font-weight: bold; text-align: center; font-size: 0.8rem; }
+        .pos { color: green; } .neg { color: red; }
 
-        /* --- COUNTDOWN --- */
-        .countdown-box {
-            background: linear-gradient(to right, #d32f2f, #c62828); color: white; text-align: center; padding: 12px; border-radius: 10px; margin-bottom: 25px; font-weight: bold; font-size: 1.1rem;
-            box-shadow: 0 4px 15px rgba(211, 47, 47, 0.3); letter-spacing: 0.5px;
-        }
-
-        /* --- REST OF THE CSS (Original) --- */
-        .business-section {
-            background: #fff; border-radius: 15px; padding: 20px; margin-bottom: 25px;
-            box-shadow: var(--card-shadow); border-top: 5px solid #ffca28;
-        }
-        .business-title { color: #f57f17; font-weight: 800; text-align: center; margin-bottom: 15px; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; }
-        
-        .biz-grid-row { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 8px; align-items: center; margin-bottom: 10px; }
-        .biz-head { font-size: 0.8rem; font-weight: 700; text-align: center; color: #7f8c8d; text-transform: uppercase; }
-        .biz-label { font-weight: 700; font-size: 0.95rem; color: #2c3e50; }
-        .biz-input { width: 100%; padding: 8px; border: 1px solid #e0e0e0; border-radius: 8px; text-align: center; font-weight: bold; font-size: 1rem; transition: border 0.3s; }
-        .biz-input:focus { border-color: #000080; outline: none; }
-        .biz-readonly { background: #f1f2f6; color: #7f8c8d; border: 1px solid #dcdcdc; } 
-        .growth-display { font-size: 0.85rem; font-weight: 800; text-align: center; padding: 5px; border-radius: 6px; }
-        .pos { color: #2e7d32; background: #e8f5e9; } 
-        .neg { color: #c62828; background: #ffebee; }
-
-        .gases-card {
-            background: white; border-radius: 15px; margin-bottom: 20px; overflow: hidden;
-            box-shadow: var(--card-shadow); transition: transform 0.3s ease; border: 1px solid #f0f0f0;
-        }
-        .gases-card:hover { transform: translateY(-3px); }
-        .card-header { background: var(--primary-gradient); padding: 12px 20px; color: white; display: flex; align-items: center; }
-        .card-icon { background: rgba(255,255,255,0.2); width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin-right: 15px; }
-        .card-title { font-weight: bold; font-size: 1.1rem; letter-spacing: 0.5px; }
-        .card-body { padding: 15px 20px; }
-        .task-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f0f0f0; }
-        .task-item:last-child { border-bottom: none; }
-        .task-label { font-size: 0.95rem; color: #455a64; font-weight: 500; cursor: pointer; flex: 1; }
-        .task-sub { font-size: 0.75rem; color: var(--accent-color); font-weight: bold; display: block; margin-bottom: 2px; text-transform: uppercase; }
-        .styled-checkbox { width: 22px; height: 22px; cursor: pointer; accent-color: #000080; margin-right: 15px; }
-        .styled-input { width: 80px; padding: 6px; border: 2px solid #e0e0e0; border-radius: 8px; text-align: center; font-weight: bold; color: #000080; }
-        .styled-input:focus { border-color: var(--accent-color); outline: none; }
-        .styled-select { padding: 6px; border-radius: 6px; border: 1px solid #ccc; font-weight: bold; color: #333; }
-
-        .plan-section { border-top: 4px solid #ff6f00; }
-        .plan-header { background: linear-gradient(135deg, #ff6f00, #ff8f00); }
-        .plan-row { display: flex; gap: 10px; margin-bottom: 10px; }
-        .plan-input-field { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; font-size: 0.95rem; }
-        .btn-add { background: #ff6f00; color: white; border: none; padding: 8px 20px; border-radius: 30px; font-weight: bold; cursor: pointer; font-size: 0.9rem; margin-top: 10px; box-shadow: 0 4px 10px rgba(255, 111, 0, 0.3); }
-
-        #resultArea { display: none; margin-top: 30px; background: #fff; border-radius: 15px; border: 2px solid #000080; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .analysis-header { background: #000080; color: white; padding: 15px; text-align: center; font-weight: bold; font-size: 1.2rem; }
-        .analysis-content { padding: 20px; font-size: 0.95rem; line-height: 1.6; color: #333; }
-        .analysis-score { font-size: 1.5rem; color: #000080; font-weight: 900; text-align: center; margin-bottom: 15px; display: block; }
-        
-        .btn-group { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
-        .btn-main { padding: 15px; border: none; border-radius: 10px; color: white; font-weight: bold; font-size: 1rem; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: transform 0.2s; }
-        .btn-main:active { transform: scale(0.98); }
-        .btn-save { background: linear-gradient(to right, #2e7d32, #43a047); }
-        .btn-calc { background: linear-gradient(to right, #000080, #1a237e); }
+        /* Buttons */
+        .btn { width: 100%; padding: 12px; border: none; border-radius: 50px; font-weight: bold; color: white; cursor: pointer; margin-top: 10px; font-size: 1rem; }
+        .btn-save { background: #2e7d32; }
         .btn-wa { background: #25D366; }
         .btn-pdf { background: #d32f2f; }
+        .btn-load { background: #000080; width: auto; padding: 8px 20px; margin-left: 10px; }
 
-        .date-picker-styled { padding: 8px; border-radius: 8px; border: 1px solid #ccc; font-weight: bold; }
-        .loader { text-align: center; color: #000080; font-weight: bold; display: none; margin: 10px 0; }
+        .date-box { text-align: center; margin-bottom: 15px; padding: 10px; background: #e3f2fd; border-radius: 10px; }
+        #statusMsg { text-align: center; font-weight: bold; margin: 10px 0; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
 <div class="container" id="reportContent">
     
-    <div class="flag-header-wrapper">
-        <div class="flag-header-container">
-            <div class="flag-wave"></div>
-            <div class="header-content">
-                <h1 class="header-title">🇮🇳 GASES गुरुमंत्र 🇮🇳</h1>
-                <div class="header-subtitle">RCM यशाचा महामार्ग</div>
-            </div>
+    <div class="flag-header">
+        <h1 class="header-title">🇮🇳 GASES गुरुमंत्र 🇮🇳</h1>
+        <div class="header-sub">RCM Permanent Data Tracker</div>
+    </div>
+
+    <div class="date-box" data-html2canvas-ignore="true">
+        <label><b>तारीख (Date):</b></label>
+        <input type="date" id="reportDate" style="padding: 6px; font-weight: bold;">
+        <button class="btn btn-load" onclick="window.loadFromFirebase()">🔄 डेटा लोड करा</button>
+    </div>
+    <div id="statusMsg">Loading system...</div>
+
+    <div class="biz-box">
+        <div style="text-align:center; font-weight:bold; color:#e65100; margin-bottom:10px;">📊 बिझनेस रिपोर्ट (Business)</div>
+        <div class="biz-row" style="font-weight:bold; color:#555;">
+            <div>Type</div> <div>Today</div> <div>Yest</div> <div>Growth</div>
+        </div>
+        <div class="biz-row">
+            <div>Total PV</div>
+            <input type="number" id="totalToday" class="inp-num" placeholder="0" oninput="calcGrowth()">
+            <input type="number" id="totalYest" class="inp-num" placeholder="0" readonly style="background:#eee;">
+            <div id="gTotal" class="growth-val">-</div>
+        </div>
+        <div class="biz-row">
+            <div style="color:green;">Leg A</div>
+            <input type="number" id="legAToday" class="inp-num" placeholder="0" oninput="calcGrowth()">
+            <input type="number" id="legAYest" class="inp-num" placeholder="0" readonly style="background:#eee;">
+            <div id="gLegA" class="growth-val">-</div>
+        </div>
+        <div class="biz-row">
+            <div style="color:#d32f2f;">Leg B</div>
+            <input type="number" id="legBToday" class="inp-num" placeholder="0" oninput="calcGrowth()">
+            <input type="number" id="legBYest" class="inp-num" placeholder="0" readonly style="background:#eee;">
+            <div id="gLegB" class="growth-val">-</div>
         </div>
     </div>
-
-    <div class="countdown-box" id="countdownTimer">
-        ⏳ Mission March 2026 Loading...
-    </div>
-
-    <div style="text-align:center; margin-bottom:20px;" data-html2canvas-ignore="true">
-        <label><b>तारीख निवडा:</b> </label>
-        <input type="date" id="reportDate" class="date-picker-styled">
-        <button onclick="window.loadFromFirebase()" style="padding:8px 15px; border-radius:8px; border:none; background:#eee; cursor:pointer; font-weight:bold;">🔄 Load Data</button>
-    </div>
-    <div id="loadingMsg" class="loader">🔄 क्लाउड वरून माहिती घेत आहे...</div>
 
     <form id="trackerForm">
+        <div class="section">
+            <div class="sec-title"><div class="sec-icon">G</div> ग्रोथ (Growth)</div>
+            <div class="row"><span>महिन्याचे टार्गेट</span> <select id="target" style="padding:5px;"><option>Normal</option><option>25%</option><option>50%</option><option>100%</option></select></div>
+            <div class="row"><span>प्लान शो (संख्या)</span> <input type="number" id="plans" class="inp-num" placeholder="0"></div>
+            <div class="row"><span>नवीन Vital काम</span> <input type="checkbox" id="g_vital" class="inp-check"></div>
+            <div class="row"><span>नवीन केंद्र / डिस्प्ले वॉल</span> <input type="checkbox" id="g_display" class="inp-check"></div>
+        </div>
 
-        <div class="business-section">
-            <div class="business-title">📊 बिझनेस रिपोर्ट (PV Comparison)</div>
-            <div class="biz-grid-row">
-                <div class="biz-head" style="text-align:left;">CATEGORY</div>
-                <div class="biz-head">TODAY</div>
-                <div class="biz-head">YESTERDAY</div>
-                <div class="biz-head">GROWTH</div>
-            </div>
-            <div class="biz-grid-row">
-                <div class="biz-label">Total Group PV</div>
-                <input type="number" id="totalToday" class="biz-input" placeholder="0" oninput="calcGrowth()">
-                <input type="number" id="totalYest" class="biz-input biz-readonly" placeholder="0" readonly>
-                <div id="gTotal" class="growth-display">-</div>
-            </div>
-            <div class="biz-grid-row">
-                <div class="biz-label" style="color:green">Leg A (Power)</div>
-                <input type="number" id="legAToday" class="biz-input" placeholder="0" oninput="calcGrowth()">
-                <input type="number" id="legAYest" class="biz-input biz-readonly" placeholder="0" readonly>
-                <div id="gLegA" class="growth-display">-</div>
-            </div>
-            <div class="biz-grid-row">
-                <div class="biz-label" style="color:#d84315">Leg B (Second)</div>
-                <input type="number" id="legBToday" class="biz-input" placeholder="0" oninput="calcGrowth()">
-                <input type="number" id="legBYest" class="biz-input biz-readonly" placeholder="0" readonly>
-                <div id="gLegB" class="growth-display">-</div>
-            </div>
+        <div class="section">
+            <div class="sec-title"><div class="sec-icon">A</div> एक्टिव (Active)</div>
+            <div class="row"><span>कॉलिंग (Calls)</span> <input type="number" id="calls" class="inp-num" placeholder="0"></div>
+            <div class="row"><span>मीटिंग्स</span> <input type="number" id="meetings" class="inp-num" placeholder="0"></div>
+            <div class="row"><span>ULP चेक केली</span> <input type="checkbox" id="a_ulp" class="inp-check"></div>
+            <div class="row"><span>Zero ID एक्टिवेशन</span> <input type="checkbox" id="a_zero" class="inp-check"></div>
+        </div>
+
+        <div class="section">
+            <div class="sec-title"><div class="sec-icon">S</div> खरेदी (Self Purchase)</div>
+            <div class="row"><span>सेल्फ PV (₹)</span> <input type="number" id="pv" class="inp-num" placeholder="₹"></div>
+            <div class="row"><span>डायमंड क्लब</span> <input type="checkbox" id="s_diamond" class="inp-check"></div>
+            <div class="row"><span>बिलिंग केले (Billing)</span> <input type="checkbox" id="s_billing" class="inp-check"></div>
+        </div>
+
+        <div class="section">
+            <div class="sec-title"><div class="sec-icon">E</div> शिक्षण (Education)</div>
+            <div class="row"><span>गुरुकुल / व्हिडिओ</span> <input type="checkbox" id="e_learn" class="inp-check"></div>
+            <div class="row"><span>पुस्तक वाचन</span> <input type="checkbox" id="e_book" class="inp-check"></div>
+            <div class="row"><span>टीम ट्रेनिंग</span> <input type="checkbox" id="e_teach" class="inp-check"></div>
+        </div>
+
+        <div class="section">
+            <div class="sec-title"><div class="sec-icon">S</div> सोशल (Social)</div>
+            <div class="row"><span>संबंध (Relationship)</span> <input type="checkbox" id="so_relation" class="inp-check"></div>
+            <div class="row"><span>माफी / राग सोडला</span> <input type="checkbox" id="so_forgive" class="inp-check"></div>
+        </div>
+
+        <div class="section" style="border-left-color: #ff6f00;">
+            <div class="sec-title" style="color:#ff6f00;"><div class="sec-icon">📝</div> उद्याचे नियोजन</div>
+            <div id="planContainer"></div>
+            <button type="button" onclick="addPlan()" style="background:#ff6f00; color:white; border:none; padding:5px 15px; border-radius:15px; cursor:pointer; margin-top:5px;">+ काम ॲड करा</button>
         </div>
         
-        <div class="gases-card">
-            <div class="card-header">
-                <div class="card-icon">G</div>
-                <div class="card-title">ग्रोथ (Growth Activities)</div>
-            </div>
-            <div class="card-body">
-                <div class="task-item">
-                    <label class="task-label"><span class="task-sub">TARGET</span>महिन्याचे ग्रोथ टार्गेट</label>
-                    <select id="growthTarget" class="styled-select">
-                        <option value="0">Normal</option>
-                        <option value="25">25% Growth</option>
-                        <option value="50">50% Growth</option>
-                        <option value="100">100% Double</option>
-                    </select>
-                </div>
-                <div class="task-item">
-                    <label class="task-label"><span class="task-sub">ACTION</span>आज प्लान दाखवले (Plan Show)</label>
-                    <input type="number" id="numPlan" class="styled-input" placeholder="0">
-                </div>
-                <div class="task-item">
-                    <label class="task-label" for="g_vital"><span class="task-sub">STRUCTURE</span>नवीन Vital (Openner/Eagle) साठी काम</label>
-                    <input type="checkbox" id="g_vital" class="styled-checkbox">
-                </div>
-                <div class="task-item">
-                    <label class="task-label" for="g_display"><span class="task-sub">EXPANSION</span>नवीन केंद्र / डिस्प्ले वॉल ओपनिंग</label>
-                    <input type="checkbox" id="g_display" class="styled-checkbox">
-                </div>
-            </div>
-        </div>
-
-        <div class="gases-card">
-            <div class="card-header">
-                <div class="card-icon">A</div>
-                <div class="card-title">एक्टिव (Active Rate)</div>
-            </div>
-            <div class="card-body">
-                <div class="task-item">
-                    <label class="task-label"><span class="task-sub">FOLLOW-UP</span>कॉलिंग (Calls Made)</label>
-                    <input type="number" id="numCalls" class="styled-input" placeholder="0">
-                </div>
-                <div class="task-item">
-                    <label class="task-label"><span class="task-sub">EVENT</span>मीटिंग्स (Home/Welcome)</label>
-                    <input type="number" id="numMeetings" class="styled-input" placeholder="0">
-                </div>
-                <div class="task-item">
-                    <label class="task-label" for="a_ulp"><span class="task-sub">TECHNICAL</span>ULP (Unique Login) चेक केली</label>
-                    <input type="checkbox" id="a_ulp" class="styled-checkbox">
-                </div>
-                <div class="task-item">
-                    <label class="task-label" for="a_zero"><span class="task-sub">ACTIVATION</span>Zero ID (खरेदी नसलेले) एक्टिव केले?</label>
-                    <input type="checkbox" id="a_zero" class="styled-checkbox">
-                </div>
-            </div>
-        </div>
-
-        <div class="gases-card">
-            <div class="card-header">
-                <div class="card-icon">S</div>
-                <div class="card-title">स्वतःची खरेदी (Self Use & Sale)</div>
-            </div>
-            <div class="card-body">
-                <div class="task-item">
-                    <label class="task-label"><span class="task-sub">TURNOVER</span>विक्री / सेल्फ PV (₹)</label>
-                    <input type="number" id="numPV" class="styled-input" placeholder="₹">
-                </div>
-                <div class="task-item">
-                    <label class="task-label" for="s_diamond"><span class="task-sub">CONSISTENCY</span>डायमंड क्लब / सातत्यपूर्ण खरेदी</label>
-                    <input type="checkbox" id="s_diamond" class="styled-checkbox">
-                </div>
-                <div class="task-item">
-                    <label class="task-label" for="s_online"><span class="task-sub">DIGITAL</span>स्वतःची ऑर्डर ऑनलाईन टाकली</label>
-                    <input type="checkbox" id="s_online" class="styled-checkbox">
-                </div>
-                <div class="task-item">
-                    <label class="task-label" for="s_billing"><span class="task-sub">DISCIPLINE</span>लगेच बिलिंग (Immediate Billing) केले</label>
-                    <input type="checkbox" id="s_billing" class="styled-checkbox">
-                </div>
-            </div>
-        </div>
-
-        <div class="gases-card">
-            <div class="card-header">
-                <div class="card-icon">E</div>
-                <div class="card-title">शिक्षण (Education)</div>
-            </div>
-            <div class="card-body">
-                <div class="task-item">
-                    <label class="task-label" for="e_learn"><span class="task-sub">LEARN</span>गुरुकुल / उडान व्हिडिओ पाहिला</label>
-                    <input type="checkbox" id="e_learn" class="styled-checkbox">
-                </div>
-                <div class="task-item">
-                    <label class="task-label" for="e_book"><span class="task-sub">MINDSET</span>पुस्तक वाचन (Book Reading 30 Min)</label>
-                    <input type="checkbox" id="e_book" class="styled-checkbox">
-                </div>
-                <div class="task-item">
-                    <label class="task-label" for="e_teach"><span class="task-sub">DUPLICATION</span>टीम ट्रेनिंग (शिकलेले शिकवले)</label>
-                    <input type="checkbox" id="e_teach" class="styled-checkbox">
-                </div>
-            </div>
-        </div>
-
-        <div class="gases-card">
-            <div class="card-header">
-                <div class="card-icon">S</div>
-                <div class="card-title">सामाजिक (Social & Values)</div>
-            </div>
-            <div class="card-body">
-                <div class="task-item">
-                    <label class="task-label" for="so_relation"><span class="task-sub">RELATION</span>नातेवाईक/मित्र संपर्क</label>
-                    <input type="checkbox" id="so_relation" class="styled-checkbox">
-                </div>
-                <div class="task-item">
-                    <label class="task-label" for="so_forgive"><span class="task-sub">PEACE</span>मनातील राग सोडला / माफी (Forgiveness)</label>
-                    <input type="checkbox" id="so_forgive" class="styled-checkbox">
-                </div>
-                <div class="task-item">
-                    <label class="task-label" for="so_health"><span class="task-sub">SEVA</span>आरोग्य / सेवा कार्य</label>
-                    <input type="checkbox" id="so_health" class="styled-checkbox">
-                </div>
-            </div>
-        </div>
-
-        <div class="gases-card plan-section">
-            <div class="card-header plan-header">
-                <div class="card-icon">📝</div>
-                <div class="card-title">उद्याचे नियोजन (Planning)</div>
-            </div>
-            <div class="card-body" style="text-align: center;">
-                <div id="planContainer">
-                    </div>
-                <button type="button" class="btn-add" onclick="addPlanField()">+ नवीन काम जोडा</button>
-            </div>
-        </div>
-
-        <div id="resultArea">
-            <div class="analysis-header">🤖 Professional Analysis Report</div>
-            <div class="analysis-content">
-                <span id="scoreDisplay" class="analysis-score"></span>
-                <div id="detailedReport"></div>
-            </div>
+        <div id="analysisBox" style="display:none; background:#e0f2f1; padding:15px; border-radius:10px; border:1px solid #00695c; margin-top:15px;">
+            <h3 style="margin:0 0 10px 0; color:#00695c;">🤖 विश्लेषण (Analysis)</h3>
+            <div id="analysisText"></div>
         </div>
 
     </form>
 </div>
 
-<div class="container" style="background: transparent; box-shadow: none; margin-top: 0; padding-top: 0;">
-    <div class="btn-group">
-        <button type="button" class="btn-main btn-save" onclick="window.saveToFirebase()">☁️ Save Data to Cloud</button>
-        <button type="button" class="btn-main btn-calc" onclick="generateDetailedReport()">📊 Generate Analysis Report</button>
-        <button type="button" class="btn-main btn-wa" onclick="shareToWhatsApp()">📲 WhatsApp Share</button>
-        <button type="button" class="btn-main btn-pdf" onclick="downloadPDF()">📥 Download Professional PDF</button>
-    </div>
+<div class="container" style="background:transparent; box-shadow:none; margin-top:0;">
+    <button class="btn btn-save" onclick="window.saveToFirebase()">☁️ माहिती सेव्ह करा (Save Data)</button>
+    <button class="btn btn-wa" onclick="shareWA()">📲 WhatsApp वर पाठवा</button>
+    <button class="btn btn-pdf" onclick="dlPDF()">📥 PDF रिपोर्ट</button>
 </div>
 
 <script type="module">
@@ -369,138 +167,127 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   const dateInput = document.getElementById('reportDate');
-  const loadingMsg = document.getElementById('loadingMsg');
+  const statusMsg = document.getElementById('statusMsg');
   
   dateInput.valueAsDate = new Date();
 
-  window.onload = function() {
-    window.loadFromFirebase();
-    updateCountdown();
-  };
+  // Load on Start
+  window.onload = function() { window.loadFromFirebase(); };
 
+  // SAVE
   window.saveToFirebase = async function() {
     const dateVal = dateInput.value;
-    if(!dateVal) { alert("Date required!"); return; }
-    loadingMsg.style.display = 'block';
+    if(!dateVal) { alert("तारीख निवडा!"); return; }
+    statusMsg.innerText = "⏳ Saving...";
+    statusMsg.style.color = "blue";
 
-    let plansList = [];
-    document.querySelectorAll('.plan-input-field').forEach(i => {
-        if(i.value.trim()) plansList.push(i.value.trim());
-    });
+    // Collect Plans
+    let plans = [];
+    document.querySelectorAll('.dyn-plan').forEach(el => { if(el.value) plans.push(el.value); });
 
     const data = {
-        totalToday: document.getElementById('totalToday').value,
-        legAToday: document.getElementById('legAToday').value,
-        legBToday: document.getElementById('legBToday').value,
-        target: document.getElementById('growthTarget').value,
-        plans: document.getElementById('numPlan').value,
-        g_vital: document.getElementById('g_vital').checked,
-        g_display: document.getElementById('g_display').checked,
-        calls: document.getElementById('numCalls').value,
-        meetings: document.getElementById('numMeetings').value,
-        a_ulp: document.getElementById('a_ulp').checked,
-        a_zero: document.getElementById('a_zero').checked,
-        pv: document.getElementById('numPV').value,
-        s_diamond: document.getElementById('s_diamond').checked,
-        s_online: document.getElementById('s_online').checked,
-        s_billing: document.getElementById('s_billing').checked,
-        e_learn: document.getElementById('e_learn').checked,
-        e_book: document.getElementById('e_book').checked,
-        e_teach: document.getElementById('e_teach').checked,
-        so_relation: document.getElementById('so_relation').checked,
-        so_forgive: document.getElementById('so_forgive').checked,
-        so_health: document.getElementById('so_health').checked,
-        plansList: plansList,
-        lastUpdated: new Date()
+        totalToday: val('totalToday'), legAToday: val('legAToday'), legBToday: val('legBToday'),
+        target: val('target', false), plans: val('plans'),
+        g_vital: chk('g_vital'), g_display: chk('g_display'),
+        calls: val('calls'), meetings: val('meetings'),
+        a_ulp: chk('a_ulp'), a_zero: chk('a_zero'),
+        pv: val('pv'), s_diamond: chk('s_diamond'), s_billing: chk('s_billing'),
+        e_learn: chk('e_learn'), e_book: chk('e_book'), e_teach: chk('e_teach'),
+        so_relation: chk('so_relation'), so_forgive: chk('so_forgive'),
+        planList: plans,
+        timestamp: new Date()
     };
 
     try {
-        await setDoc(doc(db, "rcm_pro_tracker", dateVal), data);
-        alert("✅ Data Saved Successfully!");
-    } catch (error) { alert(error.message); } 
-    finally { loadingMsg.style.display = 'none'; }
+        await setDoc(doc(db, "rcm_permanent_data", dateVal), data);
+        statusMsg.innerText = "✅ Data Saved Successfully!";
+        statusMsg.style.color = "green";
+        alert("माहिती यशस्वीरित्या सेव्ह झाली!");
+        genAnalysis();
+    } catch (e) {
+        statusMsg.innerText = "❌ Save Failed: " + e.message;
+        statusMsg.style.color = "red";
+        alert("Error: " + e.message);
+    }
   }
 
+  // LOAD
   window.loadFromFirebase = async function() {
     const dateVal = dateInput.value;
     if(!dateVal) return;
-    loadingMsg.style.display = 'block';
+    statusMsg.innerText = "⏳ Loading Data...";
+    statusMsg.style.color = "blue";
     
-    const current = new Date(dateVal);
-    current.setDate(current.getDate() - 1);
-    const yestVal = current.toISOString().split('T')[0];
+    // Previous Day
+    const prevDate = new Date(dateVal);
+    prevDate.setDate(prevDate.getDate() - 1);
+    const yestVal = prevDate.toISOString().split('T')[0];
 
     try {
-        const docRef = doc(db, "rcm_pro_tracker", dateVal);
-        const docSnap = await getDoc(docRef);
+        // Load Today
+        const docRef = doc(db, "rcm_permanent_data", dateVal);
+        const snap = await getDoc(docRef);
         
-        document.getElementById('planContainer').innerHTML = ""; 
+        document.getElementById('planContainer').innerHTML = ""; // Clear plans
 
-        if (docSnap.exists()) {
-            const d = docSnap.data();
-            document.getElementById('totalToday').value = d.totalToday || "";
-            document.getElementById('legAToday').value = d.legAToday || "";
-            document.getElementById('legBToday').value = d.legBToday || "";
-            document.getElementById('growthTarget').value = d.target || 0;
-            document.getElementById('numPlan').value = d.plans || "";
-            document.getElementById('g_vital').checked = d.g_vital || false;
-            document.getElementById('g_display').checked = d.g_display || false;
-            document.getElementById('numCalls').value = d.calls || "";
-            document.getElementById('numMeetings').value = d.meetings || "";
-            document.getElementById('a_ulp').checked = d.a_ulp || false;
-            document.getElementById('a_zero').checked = d.a_zero || false;
-            document.getElementById('numPV').value = d.pv || "";
-            document.getElementById('s_diamond').checked = d.s_diamond || false;
-            document.getElementById('s_online').checked = d.s_online || false;
-            document.getElementById('s_billing').checked = d.s_billing || false;
-            document.getElementById('e_learn').checked = d.e_learn || false;
-            document.getElementById('e_book').checked = d.e_book || false;
-            document.getElementById('e_teach').checked = d.e_teach || false;
-            document.getElementById('so_relation').checked = d.so_relation || false;
-            document.getElementById('so_forgive').checked = d.so_forgive || false;
-            document.getElementById('so_health').checked = d.so_health || false;
+        if(snap.exists()) {
+            const d = snap.data();
+            setVal('totalToday', d.totalToday); setVal('legAToday', d.legAToday); setVal('legBToday', d.legBToday);
+            document.getElementById('target').value = d.target || "Normal";
+            setVal('plans', d.plans); setChk('g_vital', d.g_vital); setChk('g_display', d.g_display);
+            setVal('calls', d.calls); setVal('meetings', d.meetings); setChk('a_ulp', d.a_ulp); setChk('a_zero', d.a_zero);
+            setVal('pv', d.pv); setChk('s_diamond', d.s_diamond); setChk('s_billing', d.s_billing);
+            setChk('e_learn', d.e_learn); setChk('e_book', d.e_book); setChk('e_teach', d.e_teach);
+            setChk('so_relation', d.so_relation); setChk('so_forgive', d.so_forgive);
             
-            if(d.plansList && d.plansList.length) {
-                d.plansList.forEach(p => window.addPlanField(p));
-            } else { window.addPlanField(); }
+            if(d.planList && d.planList.length) d.planList.forEach(t => addPlan(t));
+            else addPlan();
+
+            statusMsg.innerText = "✅ Data Loaded!";
+            statusMsg.style.color = "green";
+            genAnalysis();
         } else {
             document.getElementById('trackerForm').reset();
-            document.getElementById('totalToday').value = "";
-            window.addPlanField();
+            addPlan();
+            statusMsg.innerText = "⚠️ No data for this date.";
+            statusMsg.style.color = "orange";
         }
 
-        const yRef = doc(db, "rcm_pro_tracker", yestVal);
-        const ySnap = await getDoc(yRef);
+        // Load Yesterday
+        const ySnap = await getDoc(doc(db, "rcm_permanent_data", yestVal));
         if(ySnap.exists()) {
-            document.getElementById('totalYest').value = ySnap.data().totalToday || 0;
-            document.getElementById('legAYest').value = ySnap.data().legAToday || 0;
-            document.getElementById('legBYest').value = ySnap.data().legBToday || 0;
+            setVal('totalYest', ySnap.data().totalToday);
+            setVal('legAYest', ySnap.data().legAToday);
+            setVal('legBYest', ySnap.data().legBToday);
         } else {
-            document.getElementById('totalYest').value = 0;
-            document.getElementById('legAYest').value = 0;
-            document.getElementById('legBYest').value = 0;
+            setVal('totalYest', 0); setVal('legAYest', 0); setVal('legBYest', 0);
         }
         window.calcGrowth();
-    } catch (e) { console.error(e); } 
-    finally { loadingMsg.style.display = 'none'; }
+
+    } catch (e) {
+        statusMsg.innerText = "❌ Load Error: " + e.message;
+        statusMsg.style.color = "red";
+    }
   }
 
-  document.getElementById('btnLoad').addEventListener('click', window.loadFromFirebase);
+  // Helpers
+  function val(id, isNum=true) { return isNum ? (document.getElementById(id).value || "") : document.getElementById(id).value; }
+  function chk(id) { return document.getElementById(id).checked; }
+  function setVal(id, v) { document.getElementById(id).value = v || ""; }
+  function setChk(id, v) { document.getElementById(id).checked = v || false; }
+
+  // Expose to window
+  window.loadFromFirebase = window.loadFromFirebase;
   document.getElementById('reportDate').addEventListener('change', window.loadFromFirebase);
 </script>
 
 <script>
-    function addPlanField(val = "") {
+    // --- UI Logic ---
+    function addPlan(txt = "") {
         const div = document.createElement('div');
-        div.className = 'plan-row';
-        div.innerHTML = `<input type="text" class="plan-input-field" value="${val}" placeholder="Task here...">
-                         <button type="button" onclick="this.parentElement.remove()" style="color:red;border:none;background:none;font-weight:bold;">X</button>`;
+        div.style.marginBottom = "5px";
+        div.innerHTML = `<input type="text" class="dyn-plan" value="${txt}" style="width:85%; padding:8px; border:1px solid #ccc; border-radius:5px;" placeholder="Task..."> <span onclick="this.parentElement.remove()" style="color:red; cursor:pointer; font-weight:bold;">X</span>`;
         document.getElementById('planContainer').appendChild(div);
-    }
-
-    function updateCountdown() {
-        const days = Math.floor((new Date("March 31, 2026").getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
-        document.getElementById("countdownTimer").innerText = `⏳ Mission March 2026: फक्त ${days} दिवस बाकी!`;
     }
 
     window.calcGrowth = function() {
@@ -508,63 +295,46 @@
         doCalc('legAToday', 'legAYest', 'gLegA');
         doCalc('legBToday', 'legBYest', 'gLegB');
     }
+
     function doCalc(t, y, r) {
         let T = parseFloat(document.getElementById(t).value)||0;
         let Y = parseFloat(document.getElementById(y).value)||0;
         let el = document.getElementById(r);
         let d = T-Y;
-        let cls = d>=0 ? "pos":"neg";
-        if(Y>0) {
-             let p = ((d/Y)*100).toFixed(1);
-             el.innerHTML = `<span class="${cls} growth-display" style="display:block">${d>0?'+':''}${d} (${p}%)</span>`;
-        } else {
-            el.innerHTML = T>0 ? `<span class="pos growth-display">+${T}</span>` : "-";
-        }
+        let p = Y > 0 ? ((d/Y)*100).toFixed(1) + "%" : "";
+        el.innerHTML = `<span class="${d>=0?'pos':'neg'}">${d>0?'+':''}${d} <br> ${p}</span>`;
     }
 
-    function generateDetailedReport() {
-        let plans = parseInt(document.getElementById('numPlan').value) || 0;
-        let calls = parseInt(document.getElementById('numCalls').value) || 0;
-        let pv = parseInt(document.getElementById('numPV').value) || 0;
-        let checks = document.querySelectorAll('.styled-checkbox:checked').length;
+    function genAnalysis() {
+        let p = parseInt(document.getElementById('plans').value)||0;
+        let legB = (parseFloat(document.getElementById('legBToday').value)||0) - (parseFloat(document.getElementById('legBYest').value)||0);
         
-        let score = (checks * 4) + Math.min(plans * 5, 20) + Math.min(calls * 2, 10) + Math.min(pv / 100, 18);
-        if(score > 100) score = 100;
+        let html = `<b>📊 विश्लेषण:</b><br>`;
+        if(legB > 0) html += `✅ Leg B मध्ये ${legB} PV ची वाढ झाली आहे. छान!<br>`;
+        else if(legB < 0) html += `🔴 Leg B कमी झाला आहे. डेप्थ चेक करा.<br>`;
+        else html += `⚠️ Leg B स्थिर आहे. हालचाल वाढवा.<br>`;
 
-        document.getElementById('scoreDisplay').innerText = `GASES Score: ${Math.round(score)}/100`;
+        if(p==0) html += `🔴 आज प्लान शो (Plan) झाला नाही. बिझनेससाठी घातक आहे.<br>`;
+        else html += `✅ ${p} प्लान दाखवले. सातत्य ठेवा.<br>`;
 
-        let legBGrowth = (parseFloat(document.getElementById('legBToday').value)||0) - (parseFloat(document.getElementById('legBYest').value)||0);
-        let html = `<div style="margin-bottom:15px;"><strong>📉 Business Trend:</strong><br>`;
-        if(legBGrowth > 0) html += `<span style="color:green">Great! Leg B grew by ${legBGrowth} PV.</span>`;
-        else if(legBGrowth < 0) html += `<span style="color:red">Alert: Leg B dropped by ${Math.abs(legBGrowth)} PV.</span>`;
-        else html += `<span style="color:orange">Stagnant. No movement in Leg B today.</span>`;
-        html += `</div>`;
-
-        html += `<div style="margin-bottom:15px;"><strong>⚡ Core Activities:</strong><br>`;
-        if(plans >= 2) html += `✅ Plan Show: Excellent (${plans}).<br>`;
-        else html += `❌ Plan Show: Weak (${plans}). No Plan = No Growth.<br>`;
-        
-        if(document.getElementById('e_book').checked) html += `✅ Mindset: Book reading done.<br>`;
-        else html += `⚠️ Mindset: Book reading missing.<br>`;
-        html += `</div>`;
-
-        document.getElementById('detailedReport').innerHTML = html;
-        document.getElementById('resultArea').style.display = 'block';
-        return {score, report: document.getElementById('detailedReport').innerText};
+        document.getElementById('analysisText').innerHTML = html;
+        document.getElementById('analysisBox').style.display = 'block';
+        return html;
     }
 
-    function shareToWhatsApp() {
-        let res = generateDetailedReport();
+    function shareWA() {
         let date = document.getElementById('reportDate').value;
-        let text = `🇮🇳 *GASES Gurumantra Report* (${date})%0a🏆 Score: ${Math.round(res.score)}/100%0a📝 ${res.report.replace(/\n/g, '%0a').substring(0, 400)}`;
-        window.open(`https://wa.me/?text=${text}`, '_blank');
+        let txt = document.getElementById('analysisText').innerText;
+        window.open(`https://wa.me/?text=🇮🇳 *RCM Report (${date})*%0a----------------%0a${txt}`, '_blank');
     }
 
-    function downloadPDF() {
-        generateDetailedReport();
-        const element = document.getElementById('reportContent');
-        const opt = { margin: 0.2, filename: `RCM_GASES_Report.pdf`, image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' } };
-        html2pdf().set(opt).from(element).save();
+    function dlPDF() {
+        genAnalysis(); // Ensure analysis is updated
+        const el = document.getElementById('reportContent');
+        const opt = { margin:0.2, filename:`RCM_${document.getElementById('reportDate').value}.pdf`, image:{type:'jpeg',quality:0.98}, html2canvas:{scale:2}, jsPDF:{unit:'in', format:'a4', orientation:'portrait'} };
+        
+        // Timeout to ensure rendering
+        setTimeout(() => { html2pdf().set(opt).from(el).save(); }, 500);
     }
 </script>
 
