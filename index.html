@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RCM Online Tracker</title>
+    <title>RCM Ultimate Growth Tracker</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         :root {
@@ -16,59 +16,39 @@
             --border-radius: 12px;
         }
 
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #f4f6f8;
-            margin: 0;
-            padding: 10px;
-            color: var(--text-color);
-        }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f6f8; margin: 0; padding: 10px; color: var(--text-color); }
+        .container { max-width: 700px; margin: 0 auto; background: white; padding: 20px; border-radius: var(--border-radius); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
 
-        .container {
-            max-width: 700px;
-            margin: 0 auto;
-            background: white;
-            padding: 20px;
-            border-radius: var(--border-radius);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        /* Flag Header */
+        /* --- FLAG HEADER (SAME AS BEFORE) --- */
         .flag-header-container {
-            position: relative;
-            background: linear-gradient(120deg, var(--saffron) 33%, var(--white) 33%, var(--white) 66%, var(--green) 66%);
-            padding: 30px 10px;
-            text-align: center;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            position: relative; background: linear-gradient(120deg, var(--saffron) 33%, var(--white) 33%, var(--white) 66%, var(--green) 66%);
+            padding: 30px 10px; text-align: center; border-radius: 12px; margin-bottom: 20px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
-
         .flag-wave {
             position: absolute; top: 0; left: 0; width: 200%; height: 100%;
             background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
             transform: skewX(-20deg); animation: flowFlag 3s linear infinite;
         }
         @keyframes flowFlag { 0% { left: -150%; } 100% { left: 150%; } }
+        .header-title { position: relative; z-index: 2; color: var(--primary-color); font-size: 1.8rem; font-weight: 900; text-transform: uppercase; text-shadow: 2px 2px 0px #ffffff; margin: 0; }
+        .header-subtitle { position: relative; z-index: 2; background: rgba(255, 255, 255, 0.9); padding: 5px 15px; border-radius: 20px; margin-top: 5px; font-size: 0.9rem; font-weight: bold; }
 
-        .header-title {
-            position: relative; z-index: 2; color: var(--primary-color);
-            font-size: 2rem; font-weight: 900; text-transform: uppercase;
-            text-shadow: 2px 2px 0px #ffffff; margin: 0;
+        /* --- BUSINESS SECTION (UPDATED WITH GROWTH) --- */
+        .business-section {
+            background-color: #fffde7; border: 2px solid #fbc02d; border-radius: 10px; padding: 15px; margin-bottom: 20px;
         }
-        .header-subtitle {
-            position: relative; z-index: 2; background: rgba(255, 255, 255, 0.8);
-            padding: 5px 15px; border-radius: 20px; margin-top: 5px; font-size: 0.9rem; font-weight: bold;
-        }
+        .business-title { color: #e65100; font-weight: bold; text-align: center; margin-bottom: 10px; border-bottom: 1px dashed #f57f17; padding-bottom: 5px; }
+        
+        /* Grid Layout for Growth Table */
+        .biz-grid-row { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1.2fr; gap: 5px; align-items: center; margin-bottom: 8px; }
+        .biz-head { font-size: 0.75rem; font-weight: bold; text-align: center; color: #555; }
+        .biz-label { font-weight: bold; font-size: 0.9rem; color: var(--primary-color); }
+        .biz-input { width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 5px; text-align: center; font-weight: bold; }
+        .biz-readonly { background: #eee; color: #777; border: 1px dashed #aaa; } /* Yesterday Style */
+        .growth-display { font-size: 0.8rem; font-weight: bold; text-align: center; }
+        .pos { color: green; } .neg { color: red; }
 
-        /* Inputs */
-        .date-container {
-            background: var(--primary-color); padding: 10px; border-radius: 8px;
-            color: white; text-align: center; margin-bottom: 20px;
-        }
-        .date-container input { padding: 5px; border-radius: 4px; border: none; font-weight: bold; }
-
+        /* --- GASES SECTIONS (SAME AS BEFORE) --- */
         .gases-section { margin-bottom: 15px; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; background: #fff; }
         .section-header { background-color: var(--secondary-color); padding: 10px 15px; display: flex; align-items: center; font-weight: bold; color: var(--primary-color); }
         .letter-icon { background: var(--primary-color); color: white; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; margin-right: 10px; }
@@ -82,19 +62,13 @@
         .task-category { font-size: 0.7rem; color: #ff6f00; font-weight: bold; display: block; }
         .select-target { padding: 5px; border-radius: 5px; border: 1px solid #ccc; }
 
-        /* Buttons */
-        .btn-submit {
-            background: var(--primary-color); color: white; border: none;
-            padding: 15px; width: 100%; border-radius: 50px; font-weight: bold;
-            cursor: pointer; margin-top: 15px; transition: 0.3s;
-        }
-        .btn-submit:hover { opacity: 0.9; }
+        /* Buttons & Date */
+        .date-container { text-align: center; margin-bottom: 15px; }
+        .btn-submit { background: var(--primary-color); color: white; border: none; padding: 15px; width: 100%; border-radius: 50px; font-weight: bold; cursor: pointer; margin-top: 15px; transition: 0.3s; }
         .btn-save { background: var(--green); margin-top: 20px; }
         .btn-pdf { background: #d32f2f; margin-top: 10px; }
-
-        #resultArea { display: none; margin-top: 15px; padding: 15px; background: #fff3e0; border-left: 5px solid #ff9800; border-radius: 5px; }
-        
         #loadingMsg { text-align: center; color: var(--primary-color); font-weight: bold; display: none; margin-bottom: 10px; }
+        #resultArea { display: none; margin-top: 15px; padding: 15px; background: #fff3e0; border-left: 5px solid #ff9800; border-radius: 5px; }
     </style>
 </head>
 <body>
@@ -104,109 +78,98 @@
     <div class="flag-header-container">
         <div class="flag-wave"></div>
         <h1 class="header-title">🇮🇳 नए भारत का निर्माण 🇮🇳</h1>
-        <div class="header-subtitle">Online RCM Cloud Tracker</div>
+        <div class="header-subtitle">Ultimate Business & Habit Tracker</div>
     </div>
 
     <div class="date-container" data-html2canvas-ignore="true">
-        <label>तारीख (Date): </label>
-        <input type="date" id="reportDate">
-        <button id="btnLoad" style="margin-left:10px; padding:5px; cursor:pointer;">Load Data</button>
+        <label><b>तारीख (Date):</b> </label>
+        <input type="date" id="reportDate" style="padding: 5px; border-radius: 5px;">
+        <button id="btnLoad" style="padding: 5px; cursor: pointer;">🔄 Load</button>
     </div>
-    
-    <div id="loadingMsg">🔄 Connecting to Server...</div>
+    <div id="loadingMsg">🔄 Syncing with Cloud...</div>
 
     <form id="trackerForm">
+
+        <div class="business-section">
+            <div class="business-title">📊 Business Stats & Growth</div>
+            
+            <div class="biz-grid-row">
+                <div class="biz-head" style="text-align:left;">Type</div>
+                <div class="biz-head">Today</div>
+                <div class="biz-head">Yesterday</div>
+                <div class="biz-head">Growth</div>
+            </div>
+
+            <div class="biz-grid-row">
+                <div class="biz-label">Total PV</div>
+                <input type="number" id="totalToday" class="biz-input" placeholder="0" oninput="calcGrowth()">
+                <input type="number" id="totalYest" class="biz-input biz-readonly" placeholder="0" readonly>
+                <div id="gTotal" class="growth-display">-</div>
+            </div>
+
+            <div class="biz-grid-row">
+                <div class="biz-label" style="color:green">Leg A</div>
+                <input type="number" id="legAToday" class="biz-input" placeholder="0" oninput="calcGrowth()">
+                <input type="number" id="legAYest" class="biz-input biz-readonly" placeholder="0" readonly>
+                <div id="gLegA" class="growth-display">-</div>
+            </div>
+
+            <div class="biz-grid-row">
+                <div class="biz-label" style="color:#d84315">Leg B</div>
+                <input type="number" id="legBToday" class="biz-input" placeholder="0" oninput="calcGrowth()">
+                <input type="number" id="legBYest" class="biz-input biz-readonly" placeholder="0" readonly>
+                <div id="gLegB" class="growth-display">-</div>
+            </div>
+        </div>
         
         <div class="gases-section">
             <div class="section-header"><div><span class="letter-icon">G</span> ग्रोथ (Growth)</div></div>
             <div class="sub-task-list">
-                <div class="task-item">
-                    <div class="task-left"><label class="task-label"><span class="task-category">TARGET</span>महिन्याचे ग्रोथ टार्गेट</label></div>
-                    <select id="growthTarget" class="select-target">
-                        <option value="0">Normal</option>
-                        <option value="25">25% Growth</option>
-                        <option value="50">50% Growth</option>
-                        <option value="100">100% (Double)</option>
-                    </select>
-                </div>
-                <div class="task-item">
-                    <div class="task-left"><label class="task-label"><span class="task-category">SHOW THE PLAN</span>आज किती प्लान (Plan) दाखवले?</label></div>
-                    <input type="number" id="numPlan" class="num-input" placeholder="0" min="0">
-                </div>
-                <div class="task-item">
-                    <div class="task-left"><input type="checkbox" id="g_vital" class="track-check"><label for="g_vital" class="task-label"><span class="task-category">NEW VITAL</span>नवीन Vital Achiever साठी काम?</label></div>
-                </div>
-                <div class="task-item">
-                    <div class="task-left"><input type="checkbox" id="g_display" class="track-check"><label for="g_display" class="task-label"><span class="task-category">NEW STATION</span>नवीन Display Wall / केंद्र सुरु?</label></div>
-                </div>
+                <div class="task-item"><div class="task-left"><label class="task-label"><span class="task-category">TARGET</span>महिन्याचे ग्रोथ टार्गेट</label></div><select id="growthTarget" class="select-target"><option value="0">Normal</option><option value="25">25%</option><option value="50">50%</option><option value="100">100%</option></select></div>
+                <div class="task-item"><div class="task-left"><label class="task-label">Show The Plan (Count)</label></div><input type="number" id="numPlan" class="num-input" placeholder="0"></div>
+                <div class="task-item"><div class="task-left"><input type="checkbox" id="g_vital" class="track-check"><label for="g_vital" class="task-label">New Vital Achiever Work</label></div></div>
+                <div class="task-item"><div class="task-left"><input type="checkbox" id="g_display" class="track-check"><label for="g_display" class="task-label">New Station/Display Wall</label></div></div>
             </div>
         </div>
 
         <div class="gases-section">
-            <div class="section-header"><div><span class="letter-icon">A</span> एक्टिव दर (Active Rate)</div></div>
+            <div class="section-header"><div><span class="letter-icon">A</span> एक्टिव (Active Rate)</div></div>
             <div class="sub-task-list">
-                <div class="task-item">
-                    <div class="task-left"><label class="task-label"><span class="task-category">CALLING</span>फॉलो-अप कॉल्स (Calls)?</label></div>
-                    <input type="number" id="numCalls" class="num-input" placeholder="0" min="0">
-                </div>
-                <div class="task-item">
-                    <div class="task-left"><label class="task-label"><span class="task-category">MEETINGS</span>होम / वेलकम मीटिंग्स?</label></div>
-                    <input type="number" id="numMeetings" class="num-input" placeholder="0" min="0">
-                </div>
-                <div class="task-item">
-                    <div class="task-left"><input type="checkbox" id="a_ulp" class="track-check"><label for="a_ulp" class="task-label"><span class="task-category">ULP QUICK</span>ULP (Unique Login Point) लिस्ट?</label></div>
-                </div>
-                <div class="task-item">
-                    <div class="task-left"><input type="checkbox" id="a_first_purchase" class="track-check"><label for="a_first_purchase" class="task-label"><span class="task-category">FIRST PURCHASE</span>नवीन व्यक्तीची पहिली खरेदी?</label></div>
-                </div>
+                <div class="task-item"><div class="task-left"><label class="task-label">Calls Made</label></div><input type="number" id="numCalls" class="num-input" placeholder="0"></div>
+                <div class="task-item"><div class="task-left"><label class="task-label">Meetings</label></div><input type="number" id="numMeetings" class="num-input" placeholder="0"></div>
+                <div class="task-item"><div class="task-left"><input type="checkbox" id="a_ulp" class="track-check"><label for="a_ulp" class="task-label">ULP (Unique Login) Check</label></div></div>
+                <div class="task-item"><div class="task-left"><input type="checkbox" id="a_first_purchase" class="track-check"><label for="a_first_purchase" class="task-label">First Purchase Done</label></div></div>
             </div>
         </div>
 
         <div class="gases-section">
-            <div class="section-header"><div><span class="letter-icon">S</span> स्वयं की खरीद (Self Use)</div></div>
+            <div class="section-header"><div><span class="letter-icon">S</span> Self Purchase</div></div>
             <div class="sub-task-list">
-                <div class="task-item">
-                    <div class="task-left"><label class="task-label"><span class="task-category">SALES / PV</span>आजची विक्री (Selling/Self ID) ₹?</label></div>
-                    <input type="number" id="numPV" class="num-input" placeholder="₹" min="0">
-                </div>
-                <div class="task-item">
-                    <div class="task-left"><input type="checkbox" id="s_online" class="track-check"><label for="s_online" class="task-label"><span class="task-category">ONLINE ORDER</span>स्वतःची ऑर्डर ऑनलाईन टाकली?</label></div>
-                </div>
-                <div class="task-item">
-                    <div class="task-left"><input type="checkbox" id="s_billing" class="track-check"><label for="s_billing" class="task-label"><span class="task-category">BILLING</span>हाथोहाथ (Immediate) बिलिंग केले?</label></div>
-                </div>
+                <div class="task-item"><div class="task-left"><label class="task-label">Selling/Self ID ₹</label></div><input type="number" id="numPV" class="num-input" placeholder="₹"></div>
+                <div class="task-item"><div class="task-left"><input type="checkbox" id="s_online" class="track-check"><label for="s_online" class="task-label">Online Order Placed</label></div></div>
+                <div class="task-item"><div class="task-left"><input type="checkbox" id="s_billing" class="track-check"><label for="s_billing" class="task-label">Immediate Billing</label></div></div>
             </div>
         </div>
 
         <div class="gases-section">
-            <div class="section-header"><div><span class="letter-icon">E</span> एक रूप शिक्षा (Education)</div></div>
+            <div class="section-header"><div><span class="letter-icon">E</span> Education</div></div>
             <div class="sub-task-list">
-                <div class="task-item">
-                    <div class="task-left"><input type="checkbox" id="e_learn" class="track-check"><label for="e_learn" class="task-label"><span class="task-category">LEARNING</span>गुरुकुल / उडान व्हिडिओ पाहिला?</label></div>
-                </div>
-                <div class="task-item">
-                    <div class="task-left"><input type="checkbox" id="e_teach" class="track-check"><label for="e_teach" class="task-label"><span class="task-category">TEACHING</span>टीम ट्रेनिंग (Duplication) दिले?</label></div>
-                </div>
+                <div class="task-item"><div class="task-left"><input type="checkbox" id="e_learn" class="track-check"><label for="e_learn" class="task-label">Gurukul/Udaan Video</label></div></div>
+                <div class="task-item"><div class="task-left"><input type="checkbox" id="e_teach" class="track-check"><label for="e_teach" class="task-label">Team Training (Duplication)</label></div></div>
             </div>
         </div>
 
         <div class="gases-section">
-            <div class="section-header"><div><span class="letter-icon">S</span> सामाजिक दायरा (Social)</div></div>
+            <div class="section-header"><div><span class="letter-icon">S</span> Social</div></div>
             <div class="sub-task-list">
-                <div class="task-item">
-                    <div class="task-left"><input type="checkbox" id="so_relation" class="track-check"><label for="so_relation" class="task-label"><span class="task-category">RELATION</span>नातेवाईक/मित्र संपर्क (Non-Business)?</label></div>
-                </div>
-                <div class="task-item">
-                    <div class="task-left"><input type="checkbox" id="so_forgive" class="track-check"><label for="so_forgive" class="task-label"><span class="task-category">FORGIVENESS</span>मनातील राग सोडून दिला (Forgiveness)?</label></div>
-                </div>
-                <div class="task-item">
-                    <div class="task-left"><input type="checkbox" id="so_health" class="track-check"><label for="so_health" class="task-label"><span class="task-category">HEALTH/SEVA</span>आरोग्य (Health) किंवा सेवा कार्य?</label></div>
-                </div>
+                <div class="task-item"><div class="task-left"><input type="checkbox" id="so_relation" class="track-check"><label for="so_relation" class="task-label">Relationship Call</label></div></div>
+                <div class="task-item"><div class="task-left"><input type="checkbox" id="so_forgive" class="track-check"><label for="so_forgive" class="task-label">Forgiveness (Man Ki Dhul)</label></div></div>
+                <div class="task-item"><div class="task-left"><input type="checkbox" id="so_health" class="track-check"><label for="so_health" class="task-label">Health/Seva</label></div></div>
             </div>
         </div>
 
         <div id="resultArea">
-            <strong>📊 AI विश्लेषण (Analysis):</strong>
+            <strong>📊 AI विश्लेषण:</strong>
             <p id="analysisText">...</p>
         </div>
 
@@ -220,11 +183,9 @@
 </div>
 
 <script type="module">
-  // Import Firebase
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
   import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-  // Configuration provided by user
   const firebaseConfig = {
     apiKey: "AIzaSyCsgwBoTiEtSNJ2xMm4di0F0GiAtFxoswM",
     authDomain: "order-b15a8.firebaseapp.com",
@@ -234,172 +195,201 @@
     appId: "1:614443594278:web:e31715b6ee592b30326ce7"
   };
 
-  // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  // UI Elements
   const dateInput = document.getElementById('reportDate');
   const loadingMsg = document.getElementById('loadingMsg');
   
-  // Set Today's Date
   dateInput.valueAsDate = new Date();
 
-  // --- SAVE DATA FUNCTION ---
+  // 1. SAVE FUNCTION
   window.saveToFirebase = async function() {
     const dateVal = dateInput.value;
-    if(!dateVal) { alert("Please select a date!"); return; }
-
+    if(!dateVal) { alert("Select date!"); return; }
     loadingMsg.style.display = 'block';
-    loadingMsg.innerText = "Saving to Cloud...";
 
     const data = {
+        // Business Stats (Saving only Today's. Yesterday is fetched dynamically)
+        totalToday: document.getElementById('totalToday').value,
+        legAToday: document.getElementById('legAToday').value,
+        legBToday: document.getElementById('legBToday').value,
+
+        // GASES
         target: document.getElementById('growthTarget').value,
         plans: document.getElementById('numPlan').value,
         g_vital: document.getElementById('g_vital').checked,
         g_display: document.getElementById('g_display').checked,
-        
         calls: document.getElementById('numCalls').value,
         meetings: document.getElementById('numMeetings').value,
         a_ulp: document.getElementById('a_ulp').checked,
         a_first_purchase: document.getElementById('a_first_purchase').checked,
-        
         pv: document.getElementById('numPV').value,
         s_online: document.getElementById('s_online').checked,
         s_billing: document.getElementById('s_billing').checked,
-        
         e_learn: document.getElementById('e_learn').checked,
         e_teach: document.getElementById('e_teach').checked,
-        
         so_relation: document.getElementById('so_relation').checked,
         so_forgive: document.getElementById('so_forgive').checked,
         so_health: document.getElementById('so_health').checked,
-        
         lastUpdated: new Date()
     };
 
     try {
-        // Saving to collection 'rcm_daily_tracker', document ID = date (e.g. '2025-10-04')
-        await setDoc(doc(db, "rcm_daily_tracker", dateVal), data);
-        alert("✅ Data Saved Successfully Online!");
+        await setDoc(doc(db, "rcm_ultimate_tracker", dateVal), data);
+        alert("✅ Data Saved to Cloud!");
     } catch (error) {
-        console.error("Error saving document: ", error);
-        alert("Error saving data: " + error.message);
+        alert("Error: " + error.message);
     } finally {
         loadingMsg.style.display = 'none';
     }
   }
 
-  // --- LOAD DATA FUNCTION ---
+  // 2. LOAD FUNCTION (Today + Yesterday Auto Fetch)
   window.loadFromFirebase = async function() {
     const dateVal = dateInput.value;
     if(!dateVal) return;
-
     loadingMsg.style.display = 'block';
-    loadingMsg.innerText = "Loading from Cloud...";
     
-    // Hide previous results
-    document.getElementById('resultArea').style.display = 'none';
+    // Yesterday Date
+    const current = new Date(dateVal);
+    current.setDate(current.getDate() - 1);
+    const yestVal = current.toISOString().split('T')[0];
 
     try {
-        const docRef = doc(db, "rcm_daily_tracker", dateVal);
+        // A. Load Today
+        const docRef = doc(db, "rcm_ultimate_tracker", dateVal);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
             const data = docSnap.data();
+            document.getElementById('totalToday').value = data.totalToday || "";
+            document.getElementById('legAToday').value = data.legAToday || "";
+            document.getElementById('legBToday').value = data.legBToday || "";
             
-            // Populate fields
             document.getElementById('growthTarget').value = data.target || 0;
             document.getElementById('numPlan').value = data.plans || "";
             document.getElementById('g_vital').checked = data.g_vital || false;
             document.getElementById('g_display').checked = data.g_display || false;
-            
             document.getElementById('numCalls').value = data.calls || "";
             document.getElementById('numMeetings').value = data.meetings || "";
             document.getElementById('a_ulp').checked = data.a_ulp || false;
             document.getElementById('a_first_purchase').checked = data.a_first_purchase || false;
-            
             document.getElementById('numPV').value = data.pv || "";
             document.getElementById('s_online').checked = data.s_online || false;
             document.getElementById('s_billing').checked = data.s_billing || false;
-            
             document.getElementById('e_learn').checked = data.e_learn || false;
             document.getElementById('e_teach').checked = data.e_teach || false;
-            
             document.getElementById('so_relation').checked = data.so_relation || false;
             document.getElementById('so_forgive').checked = data.so_forgive || false;
             document.getElementById('so_health').checked = data.so_health || false;
-            
-            console.log("Data loaded for", dateVal);
         } else {
-            // No data found for this date
             document.getElementById('trackerForm').reset();
-            document.getElementById('growthTarget').value = "0";
-            console.log("No such document!");
+            // Clear Growth
+            document.getElementById('totalToday').value = "";
+            document.getElementById('legAToday').value = "";
+            document.getElementById('legBToday').value = "";
         }
+
+        // B. Load Yesterday
+        const yestRef = doc(db, "rcm_ultimate_tracker", yestVal);
+        const yestSnap = await getDoc(yestRef);
+        
+        if (yestSnap.exists()) {
+            const yData = yestSnap.data();
+            document.getElementById('totalYest').value = yData.totalToday || 0;
+            document.getElementById('legAYest').value = yData.legAToday || 0;
+            document.getElementById('legBYest').value = yData.legBToday || 0;
+        } else {
+            document.getElementById('totalYest').value = 0;
+            document.getElementById('legAYest').value = 0;
+            document.getElementById('legBYest').value = 0;
+        }
+
+        window.calcGrowth();
+
     } catch (error) {
-        console.error("Error getting document:", error);
-        alert("Error loading data. Check internet connection.");
+        console.error(error);
     } finally {
         loadingMsg.style.display = 'none';
     }
   }
 
-  // Attach functions to buttons
   document.getElementById('btnSaveData').addEventListener('click', window.saveToFirebase);
   document.getElementById('btnLoad').addEventListener('click', window.loadFromFirebase);
   document.getElementById('reportDate').addEventListener('change', window.loadFromFirebase);
-
-  // Initial load
   window.loadFromFirebase();
-
 </script>
 
 <script>
-    // --- NON-FIREBASE FUNCTIONS (Calculation & PDF) ---
-    
-    document.getElementById('btnCalc').addEventListener('click', calculateAndShow);
+    // Calculation
+    window.calcGrowth = function() {
+        doCalc('totalToday', 'totalYest', 'gTotal');
+        doCalc('legAToday', 'legAYest', 'gLegA');
+        doCalc('legBToday', 'legBYest', 'gLegB');
+    }
+
+    function doCalc(tId, yId, resId) {
+        let t = parseFloat(document.getElementById(tId).value) || 0;
+        let y = parseFloat(document.getElementById(yId).value) || 0;
+        let el = document.getElementById(resId);
+        
+        let diff = t - y;
+        let sign = diff > 0 ? "+" : "";
+        let color = diff >= 0 ? "pos" : "neg";
+        
+        if(y > 0) {
+            let p = ((diff/y)*100).toFixed(1);
+            el.innerHTML = `<span class="${color}">${sign}${diff} <br> (${sign}${p}%)</span>`;
+        } else {
+            el.innerHTML = t > 0 ? `<span class="pos">+${t}</span>` : "-";
+        }
+    }
+
+    // Analysis
+    document.getElementById('btnCalc').addEventListener('click', calculateAnalysis);
     document.getElementById('btnDownloadPDF').addEventListener('click', downloadPDF);
 
-    function calculateAndShow() {
+    function calculateAnalysis() {
         let score = 0;
         let plans = parseInt(document.getElementById('numPlan').value) || 0;
-        let calls = parseInt(document.getElementById('numCalls').value) || 0;
         let meetings = parseInt(document.getElementById('numMeetings').value) || 0;
+        let calls = parseInt(document.getElementById('numCalls').value) || 0;
         let pv = parseInt(document.getElementById('numPV').value) || 0;
-
-        // Scoring Logic
-        score += Math.min(plans * 10, 30);
-        score += Math.min(meetings * 15, 30);
-        score += Math.min(calls * 2, 10);
-        score += Math.min(pv / 100, 10);
-
+        
+        // Checklist Score
         let checkboxes = document.querySelectorAll('.track-check');
         let checkedCount = 0;
         checkboxes.forEach(box => { if(box.checked) checkedCount++; });
         score += (checkedCount * 3);
 
+        // Numeric Score
+        score += Math.min(plans * 10, 30);
+        score += Math.min(meetings * 15, 30);
+        score += Math.min(calls * 2, 10);
+        score += Math.min(pv / 100, 10);
+
         if(score > 100) score = 100;
 
-        let feedback = `Total Cloud Score: <strong style="font-size:1.3rem; color:${score < 50 ? 'red' : 'green'}">${Math.round(score)}/100</strong><br><br>`;
+        let feedback = `<strong>Total Score: ${Math.round(score)}/100</strong><br>`;
         
-        if(plans === 0 && meetings === 0) feedback += "🔴 <strong>Action:</strong> फिल्ड वर्क झिरो आहे.<br>";
-        else feedback += "🟢 <strong>Good:</strong> फिल्ड वर्क चालू आहे.<br>";
+        let legB = parseInt(document.getElementById('legBToday').value) || 0;
+        let legBYest = parseInt(document.getElementById('legBYest').value) || 0;
 
-        if(score > 80) feedback += "🏆 <strong>Victory:</strong> तुम्ही 'नए भारत का निर्माण' करत आहात!";
-        else if(score < 40) feedback += "⚠️ <strong>Alert:</strong> काम वाढवा, नाहीतर मागे पडाल.";
+        if(legB > legBYest) feedback += "🚀 Leg B is Growing!<br>";
+        if(plans === 0) feedback += "🔴 No Plans Shown Today.<br>";
 
         document.getElementById('analysisText').innerHTML = feedback;
         document.getElementById('resultArea').style.display = 'block';
     }
 
     function downloadPDF() {
-        calculateAndShow();
+        calculateAnalysis();
         const element = document.getElementById('reportContent');
         const dateVal = document.getElementById('reportDate').value;
         const opt = {
             margin: 0.3,
-            filename: `RCM_Cloud_Report_${dateVal}.pdf`,
+            filename: `RCM_Daily_Report_${dateVal}.pdf`,
             image: { type: 'jpeg', quality: 0.98 },
             html2canvas: { scale: 2 },
             jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
