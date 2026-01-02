@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RCM Ultimate Growth Tracker</title>
+    <title>RCM Dynamic Tracker</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         :root {
@@ -19,56 +19,63 @@
         body { font-family: 'Segoe UI', sans-serif; background-color: #f4f6f8; margin: 0; padding: 10px; color: var(--text-color); }
         .container { max-width: 700px; margin: 0 auto; background: white; padding: 20px; border-radius: var(--border-radius); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
 
-        /* --- FLAG HEADER (SAME AS BEFORE) --- */
+        /* --- HEADER --- */
         .flag-header-container {
-            position: relative; background: linear-gradient(120deg, var(--saffron) 33%, var(--white) 33%, var(--white) 66%, var(--green) 66%);
-            padding: 30px 10px; text-align: center; border-radius: 12px; margin-bottom: 20px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            position: relative; background: linear-gradient(180deg, var(--saffron) 33.33%, var(--white) 33.33%, var(--white) 66.66%, var(--green) 66.66%);
+            padding: 40px 10px; text-align: center; border-radius: 12px; margin-bottom: 10px; overflow: hidden; box-shadow: 0 6px 15px rgba(0,0,0,0.3); border: 1px solid #ddd;
         }
         .flag-wave {
-            position: absolute; top: 0; left: 0; width: 200%; height: 100%;
-            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
-            transform: skewX(-20deg); animation: flowFlag 3s linear infinite;
+            position: absolute; top: 0; left: -150%; width: 300%; height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.15) 20%, rgba(255,255,255,0.2) 35%, rgba(0,0,0,0.15) 50%, rgba(255,255,255,0.2) 65%, rgba(0,0,0,0.15) 80%, rgba(255,255,255,0) 100%);
+            animation: flutter 4s linear infinite; pointer-events: none; z-index: 1;
         }
-        @keyframes flowFlag { 0% { left: -150%; } 100% { left: 150%; } }
-        .header-title { position: relative; z-index: 2; color: var(--primary-color); font-size: 1.8rem; font-weight: 900; text-transform: uppercase; text-shadow: 2px 2px 0px #ffffff; margin: 0; }
-        .header-subtitle { position: relative; z-index: 2; background: rgba(255, 255, 255, 0.9); padding: 5px 15px; border-radius: 20px; margin-top: 5px; font-size: 0.9rem; font-weight: bold; }
+        @keyframes flutter { 0% { transform: translateX(0); } 100% { transform: translateX(50%); } }
+        .header-title { position: relative; z-index: 2; color: var(--primary-color); font-size: 1.8rem; font-weight: 900; text-transform: uppercase; text-shadow: 3px 3px 0px #ffffff, -1px -1px 0px #ffffff; margin: 0; }
+        .header-subtitle { position: relative; z-index: 2; background: rgba(255, 255, 255, 0.9); padding: 5px 15px; border-radius: 20px; margin-top: 10px; font-size: 1rem; font-weight: bold; display: inline-block; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
 
-        /* --- BUSINESS SECTION (UPDATED WITH GROWTH) --- */
-        .business-section {
-            background-color: #fffde7; border: 2px solid #fbc02d; border-radius: 10px; padding: 15px; margin-bottom: 20px;
+        /* --- COUNTDOWN --- */
+        .countdown-box {
+            background: #d32f2f; color: white; text-align: center; padding: 10px; border-radius: 8px; margin-bottom: 20px; font-weight: bold; font-size: 1.1rem;
+            animation: pulse 2s infinite; box-shadow: 0 4px 8px rgba(211, 47, 47, 0.3);
         }
-        .business-title { color: #e65100; font-weight: bold; text-align: center; margin-bottom: 10px; border-bottom: 1px dashed #f57f17; padding-bottom: 5px; }
-        
-        /* Grid Layout for Growth Table */
-        .biz-grid-row { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1.2fr; gap: 5px; align-items: center; margin-bottom: 8px; }
-        .biz-head { font-size: 0.75rem; font-weight: bold; text-align: center; color: #555; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
+
+        /* --- CSS (Standard) --- */
+        .business-section { background-color: #fffde7; border: 2px solid #fbc02d; border-radius: 10px; padding: 15px; margin-bottom: 20px; }
+        .business-title { color: #e65100; font-weight: bold; text-align: center; margin-bottom: 10px; border-bottom: 1px dashed #f57f17; padding-bottom: 5px; font-size: 1.1rem; }
+        .biz-grid-row { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1.2fr; gap: 5px; align-items: center; margin-bottom: 8px; }
+        .biz-head { font-size: 0.8rem; font-weight: bold; text-align: center; color: #555; }
         .biz-label { font-weight: bold; font-size: 0.9rem; color: var(--primary-color); }
-        .biz-input { width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 5px; text-align: center; font-weight: bold; }
-        .biz-readonly { background: #eee; color: #777; border: 1px dashed #aaa; } /* Yesterday Style */
+        .biz-input { width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 5px; text-align: center; font-weight: bold; font-size: 1rem; }
+        .biz-readonly { background: #eee; color: #777; border: 1px dashed #aaa; } 
         .growth-display { font-size: 0.8rem; font-weight: bold; text-align: center; }
         .pos { color: green; } .neg { color: red; }
 
-        /* --- GASES SECTIONS (SAME AS BEFORE) --- */
         .gases-section { margin-bottom: 15px; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; background: #fff; }
-        .section-header { background-color: var(--secondary-color); padding: 10px 15px; display: flex; align-items: center; font-weight: bold; color: var(--primary-color); }
-        .letter-icon { background: var(--primary-color); color: white; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; margin-right: 10px; }
+        .section-header { background-color: var(--secondary-color); padding: 10px 15px; display: flex; align-items: center; font-weight: bold; color: var(--primary-color); font-size: 1.1rem; }
         .sub-task-list { padding: 10px 15px; }
         .task-item { display: flex; align-items: center; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px dashed #eee; justify-content: space-between; }
-        .task-item:last-child { border-bottom: none; }
-        .task-left { display: flex; align-items: center; flex: 1; }
-        .task-item input[type="checkbox"] { width: 18px; height: 18px; margin-right: 10px; }
-        .num-input { width: 60px; padding: 5px; border: 2px solid var(--primary-color); border-radius: 5px; text-align: center; font-weight: bold; margin-left: 10px; }
-        .task-label { font-size: 0.9rem; cursor: pointer; }
-        .task-category { font-size: 0.7rem; color: #ff6f00; font-weight: bold; display: block; }
-        .select-target { padding: 5px; border-radius: 5px; border: 1px solid #ccc; }
+        .task-item input[type="checkbox"] { width: 20px; height: 20px; margin-right: 12px; cursor: pointer; }
+        .num-input { width: 70px; padding: 5px; border: 2px solid var(--primary-color); border-radius: 5px; text-align: center; font-weight: bold; margin-left: 10px; }
+        .task-label { font-size: 0.95rem; cursor: pointer; color: #333; }
+        .task-category { font-size: 0.75rem; color: #ff6f00; font-weight: bold; display: block; margin-bottom: 2px; }
+        .select-target { padding: 5px; border-radius: 5px; border: 1px solid #ccc; font-weight: bold; }
 
-        /* Buttons & Date */
+        /* --- NEW: DYNAMIC PLAN INPUTS --- */
+        .plan-row { display: flex; margin-bottom: 10px; gap: 5px; }
+        .plan-input { flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-family: inherit; }
+        .btn-add-plan { background: #e65100; color: white; border: none; padding: 8px 15px; border-radius: 20px; font-size: 0.9rem; cursor: pointer; font-weight: bold; }
+        .btn-remove-plan { background: #ffcdd2; color: #c62828; border: none; width: 30px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+
         .date-container { text-align: center; margin-bottom: 15px; }
-        .btn-submit { background: var(--primary-color); color: white; border: none; padding: 15px; width: 100%; border-radius: 50px; font-weight: bold; cursor: pointer; margin-top: 15px; transition: 0.3s; }
+        .btn-submit { background: var(--primary-color); color: white; border: none; padding: 15px; width: 100%; border-radius: 50px; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.3s; font-size: 1.1rem; }
         .btn-save { background: var(--green); margin-top: 20px; }
-        .btn-pdf { background: #d32f2f; margin-top: 10px; }
+        .btn-pdf { background: #d32f2f; }
+        .btn-whatsapp { background: #25D366; }
+        
         #loadingMsg { text-align: center; color: var(--primary-color); font-weight: bold; display: none; margin-bottom: 10px; }
         #resultArea { display: none; margin-top: 15px; padding: 15px; background: #fff3e0; border-left: 5px solid #ff9800; border-radius: 5px; }
+        .letter-icon { background: var(--primary-color); color: white; width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; margin-right: 10px; }
     </style>
 </head>
 <body>
@@ -78,44 +85,44 @@
     <div class="flag-header-container">
         <div class="flag-wave"></div>
         <h1 class="header-title">🇮🇳 नए भारत का निर्माण 🇮🇳</h1>
-        <div class="header-subtitle">Ultimate Business & Habit Tracker</div>
+        <div class="header-subtitle">RCM संपूर्ण बिझनेस ट्रॅकर</div>
+    </div>
+
+    <div class="countdown-box" id="countdownTimer">
+        🔥 Mission March 2026: फक्त ... दिवस बाकी! 🔥
     </div>
 
     <div class="date-container" data-html2canvas-ignore="true">
-        <label><b>तारीख (Date):</b> </label>
+        <label><b>तारीख निवडा:</b> </label>
         <input type="date" id="reportDate" style="padding: 5px; border-radius: 5px;">
-        <button id="btnLoad" style="padding: 5px; cursor: pointer;">🔄 Load</button>
+        <button id="btnLoad" style="padding: 5px; cursor: pointer;">🔄 जुना डेटा पहा</button>
     </div>
-    <div id="loadingMsg">🔄 Syncing with Cloud...</div>
+    <div id="loadingMsg">🔄 क्लाउड वरून माहिती घेत आहे...</div>
 
     <form id="trackerForm">
 
         <div class="business-section">
-            <div class="business-title">📊 Business Stats & Growth</div>
-            
+            <div class="business-title">📊 बिझनेस रिपोर्ट आणि वाढ (PV)</div>
             <div class="biz-grid-row">
-                <div class="biz-head" style="text-align:left;">Type</div>
-                <div class="biz-head">Today</div>
-                <div class="biz-head">Yesterday</div>
-                <div class="biz-head">Growth</div>
+                <div class="biz-head" style="text-align:left;">ग्रुप / प्रकार</div>
+                <div class="biz-head">आज (Today)</div>
+                <div class="biz-head">काल (Yesterday)</div>
+                <div class="biz-head">वाढ (Growth)</div>
             </div>
-
             <div class="biz-grid-row">
-                <div class="biz-label">Total PV</div>
+                <div class="biz-label">एकूण PV</div>
                 <input type="number" id="totalToday" class="biz-input" placeholder="0" oninput="calcGrowth()">
                 <input type="number" id="totalYest" class="biz-input biz-readonly" placeholder="0" readonly>
                 <div id="gTotal" class="growth-display">-</div>
             </div>
-
             <div class="biz-grid-row">
-                <div class="biz-label" style="color:green">Leg A</div>
+                <div class="biz-label" style="color:green">लेग A (मोठा ग्रुप)</div>
                 <input type="number" id="legAToday" class="biz-input" placeholder="0" oninput="calcGrowth()">
                 <input type="number" id="legAYest" class="biz-input biz-readonly" placeholder="0" readonly>
                 <div id="gLegA" class="growth-display">-</div>
             </div>
-
             <div class="biz-grid-row">
-                <div class="biz-label" style="color:#d84315">Leg B</div>
+                <div class="biz-label" style="color:#d84315">लेग B (दुसरा ग्रुप)</div>
                 <input type="number" id="legBToday" class="biz-input" placeholder="0" oninput="calcGrowth()">
                 <input type="number" id="legBYest" class="biz-input biz-readonly" placeholder="0" readonly>
                 <div id="gLegB" class="growth-display">-</div>
@@ -125,46 +132,61 @@
         <div class="gases-section">
             <div class="section-header"><div><span class="letter-icon">G</span> ग्रोथ (Growth)</div></div>
             <div class="sub-task-list">
-                <div class="task-item"><div class="task-left"><label class="task-label"><span class="task-category">TARGET</span>महिन्याचे ग्रोथ टार्गेट</label></div><select id="growthTarget" class="select-target"><option value="0">Normal</option><option value="25">25%</option><option value="50">50%</option><option value="100">100%</option></select></div>
-                <div class="task-item"><div class="task-left"><label class="task-label">Show The Plan (Count)</label></div><input type="number" id="numPlan" class="num-input" placeholder="0"></div>
-                <div class="task-item"><div class="task-left"><input type="checkbox" id="g_vital" class="track-check"><label for="g_vital" class="task-label">New Vital Achiever Work</label></div></div>
-                <div class="task-item"><div class="task-left"><input type="checkbox" id="g_display" class="track-check"><label for="g_display" class="task-label">New Station/Display Wall</label></div></div>
+                <div class="task-item"><div class="task-left"><label class="task-label"><span class="task-category">TARGET</span>महिन्याचे ग्रोथ टार्गेट</label></div><select id="growthTarget" class="select-target"><option value="0">सामान्य</option><option value="25">25% वाढ</option><option value="50">50% वाढ</option><option value="100">100% (डबल)</option></select></div>
+                <div class="task-item"><div class="task-left"><label class="task-label">प्लान दाखवले (Plan Show)</label></div><input type="number" id="numPlan" class="num-input" placeholder="0"></div>
+                <div class="task-item"><div class="task-left"><input type="checkbox" id="g_vital" class="track-check"><label for="g_vital" class="task-label">नवीन Vital (Openner/Eagle) साठी काम</label></div></div>
+                <div class="task-item"><div class="task-left"><input type="checkbox" id="g_display" class="track-check"><label for="g_display" class="task-label">नवीन केंद्र / डिस्प्ले वॉल उघडली</label></div></div>
             </div>
         </div>
 
         <div class="gases-section">
             <div class="section-header"><div><span class="letter-icon">A</span> एक्टिव (Active Rate)</div></div>
             <div class="sub-task-list">
-                <div class="task-item"><div class="task-left"><label class="task-label">Calls Made</label></div><input type="number" id="numCalls" class="num-input" placeholder="0"></div>
-                <div class="task-item"><div class="task-left"><label class="task-label">Meetings</label></div><input type="number" id="numMeetings" class="num-input" placeholder="0"></div>
-                <div class="task-item"><div class="task-left"><input type="checkbox" id="a_ulp" class="track-check"><label for="a_ulp" class="task-label">ULP (Unique Login) Check</label></div></div>
-                <div class="task-item"><div class="task-left"><input type="checkbox" id="a_first_purchase" class="track-check"><label for="a_first_purchase" class="task-label">First Purchase Done</label></div></div>
+                <div class="task-item"><div class="task-left"><label class="task-label">कॉलिंग (Follow-up Calls)</label></div><input type="number" id="numCalls" class="num-input" placeholder="0"></div>
+                <div class="task-item"><div class="task-left"><label class="task-label">मीटिंग्स (Home/Welcome)</label></div><input type="number" id="numMeetings" class="num-input" placeholder="0"></div>
+                <div class="task-item"><div class="task-left"><input type="checkbox" id="a_ulp" class="track-check"><label for="a_ulp" class="task-label">ULP (Unique Login) लिस्ट चेक केली</label></div></div>
+                <div class="task-item"><div class="task-left"><input type="checkbox" id="a_zero" class="track-check"><label for="a_zero" class="task-label">Zero ID (खरेदी नसलेले) एक्टिव केले?</label></div></div>
             </div>
         </div>
 
         <div class="gases-section">
-            <div class="section-header"><div><span class="letter-icon">S</span> Self Purchase</div></div>
+            <div class="section-header"><div><span class="letter-icon">S</span> स्वतःची खरेदी (Self Use)</div></div>
             <div class="sub-task-list">
-                <div class="task-item"><div class="task-left"><label class="task-label">Selling/Self ID ₹</label></div><input type="number" id="numPV" class="num-input" placeholder="₹"></div>
-                <div class="task-item"><div class="task-left"><input type="checkbox" id="s_online" class="track-check"><label for="s_online" class="task-label">Online Order Placed</label></div></div>
-                <div class="task-item"><div class="task-left"><input type="checkbox" id="s_billing" class="track-check"><label for="s_billing" class="task-label">Immediate Billing</label></div></div>
+                <div class="task-item"><div class="task-left"><label class="task-label">विक्री / सेल्फ PV (₹)</label></div><input type="number" id="numPV" class="num-input" placeholder="₹"></div>
+                <div class="task-item"><div class="task-left"><input type="checkbox" id="s_diamond" class="track-check"><label for="s_diamond" class="task-label">डायमंड क्लब / सातत्यपूर्ण खरेदी</label></div></div>
+                <div class="task-item"><div class="task-left"><input type="checkbox" id="s_online" class="track-check"><label for="s_online" class="task-label">स्वतःची ऑर्डर ऑनलाईन टाकली</label></div></div>
+                <div class="task-item"><div class="task-left"><input type="checkbox" id="s_billing" class="track-check"><label for="s_billing" class="task-label">लगेच बिलिंग (Immediate Billing) केले</label></div></div>
             </div>
         </div>
 
         <div class="gases-section">
-            <div class="section-header"><div><span class="letter-icon">E</span> Education</div></div>
+            <div class="section-header"><div><span class="letter-icon">E</span> शिक्षण (Education)</div></div>
             <div class="sub-task-list">
-                <div class="task-item"><div class="task-left"><input type="checkbox" id="e_learn" class="track-check"><label for="e_learn" class="task-label">Gurukul/Udaan Video</label></div></div>
-                <div class="task-item"><div class="task-left"><input type="checkbox" id="e_teach" class="track-check"><label for="e_teach" class="task-label">Team Training (Duplication)</label></div></div>
+                <div class="task-item"><div class="task-left"><input type="checkbox" id="e_learn" class="track-check"><label for="e_learn" class="task-label">गुरुकुल / उडान व्हिडिओ पाहिला</label></div></div>
+                <div class="task-item"><div class="task-left"><input type="checkbox" id="e_book" class="track-check"><label for="e_book" class="task-label">पुस्तक वाचन (30 मिनिटे)</label></div></div>
+                <div class="task-item"><div class="task-left"><input type="checkbox" id="e_teach" class="track-check"><label for="e_teach" class="task-label">टीम ट्रेनिंग (Duplication)</label></div></div>
             </div>
         </div>
 
         <div class="gases-section">
-            <div class="section-header"><div><span class="letter-icon">S</span> Social</div></div>
+            <div class="section-header"><div><span class="letter-icon">S</span> सामाजिक (Social)</div></div>
             <div class="sub-task-list">
-                <div class="task-item"><div class="task-left"><input type="checkbox" id="so_relation" class="track-check"><label for="so_relation" class="task-label">Relationship Call</label></div></div>
-                <div class="task-item"><div class="task-left"><input type="checkbox" id="so_forgive" class="track-check"><label for="so_forgive" class="task-label">Forgiveness (Man Ki Dhul)</label></div></div>
-                <div class="task-item"><div class="task-left"><input type="checkbox" id="so_health" class="track-check"><label for="so_health" class="task-label">Health/Seva</label></div></div>
+                <div class="task-item"><div class="task-left"><input type="checkbox" id="so_relation" class="track-check"><label for="so_relation" class="task-label">नातेवाईक/मित्र संपर्क (Relationship)</label></div></div>
+                <div class="task-item"><div class="task-left"><input type="checkbox" id="so_forgive" class="track-check"><label for="so_forgive" class="task-label">मनातील राग सोडला / माफी (Forgiveness)</label></div></div>
+                <div class="task-item"><div class="task-left"><input type="checkbox" id="so_health" class="track-check"><label for="so_health" class="task-label">आरोग्य / सेवा कार्य (Seva)</label></div></div>
+            </div>
+        </div>
+        
+        <div class="gases-section" style="border-color: #ff9800;">
+            <div class="section-header" style="background: #fff3e0; color: #e65100;">
+                <div><span class="letter-icon" style="background:#e65100">📝</span> उद्याचे नियोजन (Tomorrow's Plan)</div>
+            </div>
+            
+            <div class="sub-task-list" id="planContainer">
+                </div>
+            
+            <div style="padding: 10px; text-align: center;">
+                <button type="button" class="btn-add-plan" onclick="addPlanField()">+ आणखी काम ॲड करा (Add Task)</button>
             </div>
         </div>
 
@@ -177,9 +199,10 @@
 </div>
 
 <div class="container" style="background: transparent; box-shadow: none; margin-top: 0; padding-top: 0;">
-    <button type="button" class="btn-submit btn-save" id="btnSaveData">☁️ Save Data to Cloud</button>
-    <button type="button" class="btn-submit" id="btnCalc">🔍 Calculate Analysis</button>
-    <button type="button" class="btn-submit btn-pdf" id="btnDownloadPDF">📥 Download PDF Report</button>
+    <button type="button" class="btn-submit btn-save" id="btnSaveData">☁️ माहिती क्लाउडवर सेव्ह करा</button>
+    <button type="button" class="btn-submit" id="btnCalc">🔍 विश्लेषण करा (Analyze)</button>
+    <button type="button" class="btn-submit btn-whatsapp" onclick="shareToWhatsApp()">📲 WhatsApp वर पाठवा</button>
+    <button type="button" class="btn-submit btn-pdf" id="btnDownloadPDF">📥 PDF रिपोर्ट डाउनलोड करा</button>
 </div>
 
 <script type="module">
@@ -197,25 +220,34 @@
 
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
-
   const dateInput = document.getElementById('reportDate');
   const loadingMsg = document.getElementById('loadingMsg');
   
   dateInput.valueAsDate = new Date();
 
-  // 1. SAVE FUNCTION
+  // Load Date & Calculate Countdown
+  window.onload = function() {
+    window.loadFromFirebase();
+    updateCountdown();
+  };
+
+  // 1. SAVE FUNCTION (Modified for Dynamic Plans)
   window.saveToFirebase = async function() {
     const dateVal = dateInput.value;
-    if(!dateVal) { alert("Select date!"); return; }
+    if(!dateVal) { alert("कृपया तारीख निवडा!"); return; }
     loadingMsg.style.display = 'block';
 
+    // Collect Plans
+    const planInputs = document.querySelectorAll('.dynamic-plan');
+    let plansList = [];
+    planInputs.forEach(input => {
+        if(input.value.trim() !== "") plansList.push(input.value.trim());
+    });
+
     const data = {
-        // Business Stats (Saving only Today's. Yesterday is fetched dynamically)
         totalToday: document.getElementById('totalToday').value,
         legAToday: document.getElementById('legAToday').value,
         legBToday: document.getElementById('legBToday').value,
-
-        // GASES
         target: document.getElementById('growthTarget').value,
         plans: document.getElementById('numPlan').value,
         g_vital: document.getElementById('g_vital').checked,
@@ -223,21 +255,26 @@
         calls: document.getElementById('numCalls').value,
         meetings: document.getElementById('numMeetings').value,
         a_ulp: document.getElementById('a_ulp').checked,
-        a_first_purchase: document.getElementById('a_first_purchase').checked,
+        a_zero: document.getElementById('a_zero').checked,
         pv: document.getElementById('numPV').value,
+        s_diamond: document.getElementById('s_diamond').checked,
         s_online: document.getElementById('s_online').checked,
         s_billing: document.getElementById('s_billing').checked,
         e_learn: document.getElementById('e_learn').checked,
+        e_book: document.getElementById('e_book').checked,
         e_teach: document.getElementById('e_teach').checked,
         so_relation: document.getElementById('so_relation').checked,
         so_forgive: document.getElementById('so_forgive').checked,
         so_health: document.getElementById('so_health').checked,
+        
+        // Save Plans List
+        plansList: plansList,
         lastUpdated: new Date()
     };
 
     try {
-        await setDoc(doc(db, "rcm_ultimate_tracker", dateVal), data);
-        alert("✅ Data Saved to Cloud!");
+        await setDoc(doc(db, "rcm_marathi_tracker", dateVal), data);
+        alert("✅ माहिती सुरक्षित सेव्ह झाली!");
     } catch (error) {
         alert("Error: " + error.message);
     } finally {
@@ -245,28 +282,28 @@
     }
   }
 
-  // 2. LOAD FUNCTION (Today + Yesterday Auto Fetch)
+  // 2. LOAD FUNCTION
   window.loadFromFirebase = async function() {
     const dateVal = dateInput.value;
     if(!dateVal) return;
     loadingMsg.style.display = 'block';
     
-    // Yesterday Date
     const current = new Date(dateVal);
     current.setDate(current.getDate() - 1);
     const yestVal = current.toISOString().split('T')[0];
 
     try {
-        // A. Load Today
-        const docRef = doc(db, "rcm_ultimate_tracker", dateVal);
+        const docRef = doc(db, "rcm_marathi_tracker", dateVal);
         const docSnap = await getDoc(docRef);
+
+        // Reset Dynamic Fields
+        document.getElementById('planContainer').innerHTML = "";
 
         if (docSnap.exists()) {
             const data = docSnap.data();
             document.getElementById('totalToday').value = data.totalToday || "";
             document.getElementById('legAToday').value = data.legAToday || "";
             document.getElementById('legBToday').value = data.legBToday || "";
-            
             document.getElementById('growthTarget').value = data.target || 0;
             document.getElementById('numPlan').value = data.plans || "";
             document.getElementById('g_vital').checked = data.g_vital || false;
@@ -274,25 +311,34 @@
             document.getElementById('numCalls').value = data.calls || "";
             document.getElementById('numMeetings').value = data.meetings || "";
             document.getElementById('a_ulp').checked = data.a_ulp || false;
-            document.getElementById('a_first_purchase').checked = data.a_first_purchase || false;
+            document.getElementById('a_zero').checked = data.a_zero || false;
             document.getElementById('numPV').value = data.pv || "";
+            document.getElementById('s_diamond').checked = data.s_diamond || false;
             document.getElementById('s_online').checked = data.s_online || false;
             document.getElementById('s_billing').checked = data.s_billing || false;
             document.getElementById('e_learn').checked = data.e_learn || false;
+            document.getElementById('e_book').checked = data.e_book || false;
             document.getElementById('e_teach').checked = data.e_teach || false;
             document.getElementById('so_relation').checked = data.so_relation || false;
             document.getElementById('so_forgive').checked = data.so_forgive || false;
             document.getElementById('so_health').checked = data.so_health || false;
+            
+            // Load Plans List
+            if (data.plansList && Array.isArray(data.plansList)) {
+                data.plansList.forEach(text => window.addPlanField(text));
+            } else {
+                window.addPlanField(); // Add one empty
+            }
+
         } else {
             document.getElementById('trackerForm').reset();
-            // Clear Growth
             document.getElementById('totalToday').value = "";
             document.getElementById('legAToday').value = "";
             document.getElementById('legBToday').value = "";
+            window.addPlanField(); // Add one empty
         }
 
-        // B. Load Yesterday
-        const yestRef = doc(db, "rcm_ultimate_tracker", yestVal);
+        const yestRef = doc(db, "rcm_marathi_tracker", yestVal);
         const yestSnap = await getDoc(yestRef);
         
         if (yestSnap.exists()) {
@@ -318,11 +364,31 @@
   document.getElementById('btnSaveData').addEventListener('click', window.saveToFirebase);
   document.getElementById('btnLoad').addEventListener('click', window.loadFromFirebase);
   document.getElementById('reportDate').addEventListener('change', window.loadFromFirebase);
-  window.loadFromFirebase();
 </script>
 
 <script>
-    // Calculation
+    // DYNAMIC PLANS LOGIC
+    window.addPlanField = function(value = "") {
+        const container = document.getElementById('planContainer');
+        const div = document.createElement('div');
+        div.className = 'plan-row';
+        div.innerHTML = `
+            <input type="text" class="plan-input dynamic-plan" value="${value}" placeholder="येथे काम लिहा...">
+            <button type="button" class="btn-remove-plan" onclick="this.parentElement.remove()">X</button>
+        `;
+        container.appendChild(div);
+    }
+
+    // Countdown
+    function updateCountdown() {
+        const targetDate = new Date("March 31, 2026 23:59:59").getTime();
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        document.getElementById("countdownTimer").innerText = `🔥 Mission March 2026: फक्त ${days} दिवस बाकी! 🔥`;
+    }
+
+    // Growth Calc
     window.calcGrowth = function() {
         doCalc('totalToday', 'totalYest', 'gTotal');
         doCalc('legAToday', 'legAYest', 'gLegA');
@@ -333,11 +399,9 @@
         let t = parseFloat(document.getElementById(tId).value) || 0;
         let y = parseFloat(document.getElementById(yId).value) || 0;
         let el = document.getElementById(resId);
-        
         let diff = t - y;
         let sign = diff > 0 ? "+" : "";
         let color = diff >= 0 ? "pos" : "neg";
-        
         if(y > 0) {
             let p = ((diff/y)*100).toFixed(1);
             el.innerHTML = `<span class="${color}">${sign}${diff} <br> (${sign}${p}%)</span>`;
@@ -357,30 +421,56 @@
         let calls = parseInt(document.getElementById('numCalls').value) || 0;
         let pv = parseInt(document.getElementById('numPV').value) || 0;
         
-        // Checklist Score
         let checkboxes = document.querySelectorAll('.track-check');
         let checkedCount = 0;
         checkboxes.forEach(box => { if(box.checked) checkedCount++; });
         score += (checkedCount * 3);
-
-        // Numeric Score
         score += Math.min(plans * 10, 30);
         score += Math.min(meetings * 15, 30);
         score += Math.min(calls * 2, 10);
         score += Math.min(pv / 100, 10);
-
         if(score > 100) score = 100;
 
-        let feedback = `<strong>Total Score: ${Math.round(score)}/100</strong><br>`;
-        
+        let feedback = `<strong>तुमचा स्कोर: ${Math.round(score)}/100</strong><br>`;
         let legB = parseInt(document.getElementById('legBToday').value) || 0;
         let legBYest = parseInt(document.getElementById('legBYest').value) || 0;
-
-        if(legB > legBYest) feedback += "🚀 Leg B is Growing!<br>";
-        if(plans === 0) feedback += "🔴 No Plans Shown Today.<br>";
+        if(legB > legBYest) feedback += "🚀 <strong>प्रगती:</strong> लेग B (दुसरा ग्रुप) वाढत आहे.<br>";
+        if(plans === 0) feedback += "🔴 <strong>सावधान:</strong> आज एकही प्लान दाखवला नाही.<br>";
 
         document.getElementById('analysisText').innerHTML = feedback;
         document.getElementById('resultArea').style.display = 'block';
+        return score;
+    }
+
+    // WhatsApp Share (Dynamic Tasks Included)
+    window.shareToWhatsApp = function() {
+        let score = calculateAnalysis() || 0;
+        let date = document.getElementById('reportDate').value;
+        let total = document.getElementById('totalToday').value || 0;
+        let legA = document.getElementById('legAToday').value || 0;
+        let legB = document.getElementById('legBToday').value || 0;
+        
+        // Get Tasks
+        let tasks = "";
+        let inputs = document.querySelectorAll('.dynamic-plan');
+        inputs.forEach((inp, index) => {
+            if(inp.value.trim() !== "") {
+                tasks += `${index + 1}. ${inp.value.trim()}%0a`;
+            }
+        });
+
+        let text = `🇮🇳 *RCM Daily Report* (${date})%0a` +
+                   `-----------------------------%0a` +
+                   `📊 *Business:* ${total} PV%0a` +
+                   `🟢 Leg A: ${legA} | 🟠 Leg B: ${legB}%0a` +
+                   `🏆 *Daily Score:* ${Math.round(score)}/100%0a` +
+                   `-----------------------------%0a` +
+                   `📝 *Planning:*%0a` +
+                   `${tasks}` +
+                   `-----------------------------%0a` +
+                   `🔥 *Mission March 2026* 🔥`;
+
+        window.open(`https://wa.me/?text=${text}`, '_blank');
     }
 
     function downloadPDF() {
@@ -389,7 +479,7 @@
         const dateVal = document.getElementById('reportDate').value;
         const opt = {
             margin: 0.3,
-            filename: `RCM_Daily_Report_${dateVal}.pdf`,
+            filename: `RCM_Report_${dateVal}.pdf`,
             image: { type: 'jpeg', quality: 0.98 },
             html2canvas: { scale: 2 },
             jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
