@@ -3,211 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RCM Permanent Tracker</title>
+    <title>RCM Professional Tracker</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         :root {
-            --primary-color: #000080;
-            --saffron: #FF9933;
-            --white: #FFFFFF;
-            --green: #138808;
-            --bg-color: #f4f6f9;
+            --primary: #1a237e; /* Professional Blue */
+            --accent: #d32f2f;  /* RCM Red */
+            --bg: #f4f6f8;      /* Clean Gray */
+            --text: #333;
+            --white: #ffffff;
         }
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-color); margin: 0; padding: 10px; color: #333; }
-        .container { max-width: 700px; margin: 0 auto; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
 
-        /* Flag Header */
-        .flag-header {
-            background: linear-gradient(135deg, #FF9933, #FFFFFF, #138808);
-            padding: 30px; text-align: center; border-radius: 15px; margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2); border: 1px solid #ddd;
-        }
-        .header-title { color: #000080; font-size: 2rem; font-weight: 900; margin: 0; text-shadow: 1px 1px 0 #fff; text-transform: uppercase; }
-        .header-sub { background: #000080; color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; margin-top: 5px; display: inline-block; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); margin: 0; padding: 15px; color: var(--text); }
+        .container { max-width: 750px; margin: 0 auto; background: var(--white); padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
 
-        /* Sections */
-        .section { background: #fff; border: 1px solid #ddd; border-radius: 10px; padding: 15px; margin-bottom: 15px; border-left: 5px solid var(--primary-color); }
-        .sec-title { font-weight: bold; color: var(--primary-color); margin-bottom: 10px; display: flex; align-items: center; font-size: 1.1rem; }
-        .sec-icon { background: #eee; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; margin-right: 10px; }
+        /* --- Header (Clean & Classy) --- */
+        .header { text-align: center; border-bottom: 3px solid var(--primary); padding-bottom: 20px; margin-bottom: 20px; }
+        .header h1 { color: var(--primary); margin: 0; font-size: 1.8rem; text-transform: uppercase; letter-spacing: 1px; }
+        .header p { color: #666; margin: 5px 0 0 0; font-weight: bold; }
+        .flag-strip { height: 6px; background: linear-gradient(90deg, #FF9933, #FFFFFF, #138808); margin-top: 10px; border-radius: 3px; }
 
-        /* Inputs */
-        .row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px dashed #eee; }
-        .row:last-child { border-bottom: none; }
-        .inp-num { width: 80px; padding: 5px; border: 1px solid #ccc; border-radius: 5px; text-align: center; font-weight: bold; color: #000080; }
-        .inp-check { width: 20px; height: 20px; margin-right: 10px; }
-        
-        /* Business Stats */
-        .biz-box { background: #fff8e1; border: 2px solid #ffc107; padding: 15px; border-radius: 10px; margin-bottom: 20px; }
-        .biz-row { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 5px; align-items: center; margin-bottom: 5px; font-size: 0.9rem; }
-        .growth-val { font-weight: bold; text-align: center; font-size: 0.8rem; }
+        /* --- Date & Load --- */
+        .controls { background: #e8eaf6; padding: 10px; border-radius: 8px; text-align: center; margin-bottom: 20px; display: flex; justify-content: center; gap: 10px; align-items: center; }
+        .date-inp { padding: 8px; border: 1px solid #ccc; border-radius: 5px; font-weight: bold; }
+        .btn-load { background: var(--primary); color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+
+        /* --- Business Stats (Table Look) --- */
+        .stats-box { border: 1px solid #ddd; border-radius: 8px; overflow: hidden; margin-bottom: 25px; }
+        .stats-header { background: #37474f; color: white; padding: 10px; font-weight: bold; text-align: center; }
+        .stats-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; padding: 10px; gap: 10px; background: #fff; align-items: center; border-bottom: 1px solid #eee; }
+        .stats-grid:last-child { border-bottom: none; }
+        .stats-label { font-weight: 600; font-size: 0.9rem; }
+        .stats-inp { width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; text-align: center; font-weight: bold; }
+        .stats-ro { background: #f5f5f5; color: #555; border: 1px dashed #ccc; }
+        .growth { font-size: 0.85rem; font-weight: bold; text-align: center; }
         .pos { color: green; } .neg { color: red; }
 
-        /* Buttons */
-        .btn { width: 100%; padding: 12px; border: none; border-radius: 50px; font-weight: bold; color: white; cursor: pointer; margin-top: 10px; font-size: 1rem; }
-        .btn-save { background: #2e7d32; }
-        .btn-wa { background: #25D366; }
-        .btn-pdf { background: #d32f2f; }
-        .btn-load { background: #000080; width: auto; padding: 8px 20px; margin-left: 10px; }
+        /* --- GASES Sections (Clean Cards) --- */
+        .section { margin-bottom: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background: #fff; overflow: hidden; }
+        .sec-head { background: #f5f5f5; padding: 10px 15px; font-weight: bold; color: var(--primary); border-bottom: 1px solid #eee; display: flex; align-items: center; }
+        .sec-icon { background: var(--primary); color: white; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; margin-right: 10px; font-size: 0.8rem; }
+        .sec-body { padding: 15px; }
 
-        .date-box { text-align: center; margin-bottom: 15px; padding: 10px; background: #e3f2fd; border-radius: 10px; }
-        #statusMsg { text-align: center; font-weight: bold; margin: 10px 0; font-size: 0.9rem; }
+        .row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .row label { font-size: 0.95rem; cursor: pointer; flex: 1; }
+        .inp-check { width: 18px; height: 18px; cursor: pointer; accent-color: var(--primary); }
+        .inp-num { width: 70px; padding: 5px; border: 1px solid #ccc; border-radius: 4px; text-align: center; font-weight: bold; }
+
+        /* --- New: Self Improvement --- */
+        .text-area { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-top: 5px; font-family: inherit; resize: vertical; min-height: 60px; }
+
+        /* --- Buttons --- */
+        .action-area { margin-top: 30px; display: flex; flex-direction: column; gap: 10px; }
+        .btn-main { padding: 12px; border: none; border-radius: 6px; font-size: 1rem; font-weight: bold; color: white; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.2); transition: 0.2s; }
+        .btn-save { background: #2e7d32; }
+        .btn-calc { background: #1565c0; }
+        .btn-pdf { background: #c62828; }
+        
+        #resultArea { margin-top: 20px; padding: 20px; background: #e3f2fd; border-radius: 8px; border-left: 5px solid var(--primary); display: none; }
+        .report-text { font-size: 0.95rem; line-height: 1.6; }
+        
+        #msg { text-align: center; font-weight: bold; margin: 10px 0; min-height: 20px; }
     </style>
 </head>
 <body>
 
 <div class="container" id="reportContent">
     
-    <div class="flag-header">
-        <h1 class="header-title">🇮🇳 GASES गुरुमंत्र 🇮🇳</h1>
-        <div class="header-sub">RCM Permanent Data Tracker</div>
+    <div class="header">
+        <h1>🇮🇳 GASES गुरुमंत्र ट्रॅकर</h1>
+        <p>Professional Business Analysis System</p>
+        <div class="flag-strip"></div>
     </div>
 
-    <div class="date-box" data-html2canvas-ignore="true">
-        <label><b>तारीख (Date):</b></label>
-        <input type="date" id="reportDate" style="padding: 6px; font-weight: bold;">
-        <button class="btn btn-load" onclick="window.loadFromFirebase()">🔄 डेटा लोड करा</button>
+    <div class="controls" data-html2canvas-ignore="true">
+        <label>Date:</label>
+        <input type="date" id="reportDate" class="date-inp">
+        <button class="btn-load" onclick="window.loadFromFirebase()">Load Data</button>
     </div>
-    <div id="statusMsg">Loading system...</div>
+    <div id="msg"></div>
 
-    <div class="biz-box">
-        <div style="text-align:center; font-weight:bold; color:#e65100; margin-bottom:10px;">📊 बिझनेस रिपोर्ट (Business)</div>
-        <div class="biz-row" style="font-weight:bold; color:#555;">
-            <div>Type</div> <div>Today</div> <div>Yest</div> <div>Growth</div>
+    <div class="stats-box">
+        <div class="stats-header">📊 BUSINESS GROWTH (PV)</div>
+        <div class="stats-grid" style="background:#eee;">
+            <div>Type</div> <div>Today</div> <div>Yesterday</div> <div>Growth</div>
         </div>
-        <div class="biz-row">
-            <div>Total PV</div>
-            <input type="number" id="totalToday" class="inp-num" placeholder="0" oninput="calcGrowth()">
-            <input type="number" id="totalYest" class="inp-num" placeholder="0" readonly style="background:#eee;">
-            <div id="gTotal" class="growth-val">-</div>
+        <div class="stats-grid">
+            <div class="stats-label">Total PV</div>
+            <input type="number" id="totalToday" class="stats-inp" placeholder="0" oninput="calcGrowth()">
+            <input type="number" id="totalYest" class="stats-inp stats-ro" placeholder="0" readonly>
+            <div id="gTotal" class="growth">-</div>
         </div>
-        <div class="biz-row">
-            <div style="color:green;">Leg A</div>
-            <input type="number" id="legAToday" class="inp-num" placeholder="0" oninput="calcGrowth()">
-            <input type="number" id="legAYest" class="inp-num" placeholder="0" readonly style="background:#eee;">
-            <div id="gLegA" class="growth-val">-</div>
+        <div class="stats-grid">
+            <div class="stats-label" style="color:green;">Leg A</div>
+            <input type="number" id="legAToday" class="stats-inp" placeholder="0" oninput="calcGrowth()">
+            <input type="number" id="legAYest" class="stats-inp stats-ro" placeholder="0" readonly>
+            <div id="gLegA" class="growth">-</div>
         </div>
-        <div class="biz-row">
-            <div style="color:#d32f2f;">Leg B</div>
-            <input type="number" id="legBToday" class="inp-num" placeholder="0" oninput="calcGrowth()">
-            <input type="number" id="legBYest" class="inp-num" placeholder="0" readonly style="background:#eee;">
-            <div id="gLegB" class="growth-val">-</div>
+        <div class="stats-grid">
+            <div class="stats-label" style="color:red;">Leg B</div>
+            <input type="number" id="legBToday" class="stats-inp" placeholder="0" oninput="calcGrowth()">
+            <input type="number" id="legBYest" class="stats-inp stats-ro" placeholder="0" readonly>
+            <div id="gLegB" class="growth">-</div>
         </div>
     </div>
 
     <form id="trackerForm">
-        <div class="section">
-            <div class="sec-title"><div class="sec-icon">G</div> ग्रोथ (Growth)</div>
-            <div class="row"><span>महिन्याचे टार्गेट</span> <select id="target" style="padding:5px;"><option>Normal</option><option>25%</option><option>50%</option><option>100%</option></select></div>
-            <div class="row"><span>प्लान शो (संख्या)</span> <input type="number" id="plans" class="inp-num" placeholder="0"></div>
-            <div class="row"><span>नवीन Vital काम</span> <input type="checkbox" id="g_vital" class="inp-check"></div>
-            <div class="row"><span>नवीन केंद्र / डिस्प्ले वॉल</span> <input type="checkbox" id="g_display" class="inp-check"></div>
-        </div>
-
-        <div class="section">
-            <div class="sec-title"><div class="sec-icon">A</div> एक्टिव (Active)</div>
-            <div class="row"><span>कॉलिंग (Calls)</span> <input type="number" id="calls" class="inp-num" placeholder="0"></div>
-            <div class="row"><span>मीटिंग्स</span> <input type="number" id="meetings" class="inp-num" placeholder="0"></div>
-            <div class="row"><span>ULP चेक केली</span> <input type="checkbox" id="a_ulp" class="inp-check"></div>
-            <div class="row"><span>Zero ID एक्टिवेशन</span> <input type="checkbox" id="a_zero" class="inp-check"></div>
-        </div>
-
-        <div class="section">
-            <div class="sec-title"><div class="sec-icon">S</div> खरेदी (Self Purchase)</div>
-            <div class="row"><span>सेल्फ PV (₹)</span> <input type="number" id="pv" class="inp-num" placeholder="₹"></div>
-            <div class="row"><span>डायमंड क्लब</span> <input type="checkbox" id="s_diamond" class="inp-check"></div>
-            <div class="row"><span>बिलिंग केले (Billing)</span> <input type="checkbox" id="s_billing" class="inp-check"></div>
-        </div>
-
-        <div class="section">
-            <div class="sec-title"><div class="sec-icon">E</div> शिक्षण (Education)</div>
-            <div class="row"><span>गुरुकुल / व्हिडिओ</span> <input type="checkbox" id="e_learn" class="inp-check"></div>
-            <div class="row"><span>पुस्तक वाचन</span> <input type="checkbox" id="e_book" class="inp-check"></div>
-            <div class="row"><span>टीम ट्रेनिंग</span> <input type="checkbox" id="e_teach" class="inp-check"></div>
-        </div>
-
-        <div class="section">
-            <div class="sec-title"><div class="sec-icon">S</div> सोशल (Social)</div>
-            <div class="row"><span>संबंध (Relationship)</span> <input type="checkbox" id="so_relation" class="inp-check"></div>
-            <div class="row"><span>माफी / राग सोडला</span> <input type="checkbox" id="so_forgive" class="inp-check"></div>
-        </div>
-
-        <div class="section" style="border-left-color: #ff6f00;">
-            <div class="sec-title" style="color:#ff6f00;"><div class="sec-icon">📝</div> उद्याचे नियोजन</div>
-            <div id="planContainer"></div>
-            <button type="button" onclick="addPlan()" style="background:#ff6f00; color:white; border:none; padding:5px 15px; border-radius:15px; cursor:pointer; margin-top:5px;">+ काम ॲड करा</button>
-        </div>
         
-        <div id="analysisBox" style="display:none; background:#e0f2f1; padding:15px; border-radius:10px; border:1px solid #00695c; margin-top:15px;">
-            <h3 style="margin:0 0 10px 0; color:#00695c;">🤖 विश्लेषण (Analysis)</h3>
-            <div id="analysisText"></div>
+        <div class="section">
+            <div class="sec-head"><div class="sec-icon">G</div> ग्रोथ (Growth)</div>
+            <div class="sec-body">
+                <div class="row">
+                    <label>महिन्याचे टार्गेट (Target)</label>
+                    <select id="target" style="padding:5px;"><option>Normal</option><option>25%</option><option>50%</option><option>100%</option></select>
+                </div>
+                <div class="row"><label>प्लान शो (Plan Count)</label> <input type="number" id="plans" class="inp-num" placeholder="0"></div>
+                <div class="row"><label>नवीन Vital / स्टेशन ओपनिंग</label> <input type="checkbox" id="g_vital" class="inp-check"></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="sec-head"><div class="sec-icon">A</div> एक्टिव (Active)</div>
+            <div class="sec-body">
+                <div class="row"><label>कॉलिंग (Calls)</label> <input type="number" id="calls" class="inp-num" placeholder="0"></div>
+                <div class="row"><label>मीटिंग्स (Meetings)</label> <input type="number" id="meetings" class="inp-num" placeholder="0"></div>
+                <div class="row"><label>Zero ID / ULP चेक</label> <input type="checkbox" id="a_zero" class="inp-check"></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="sec-head"><div class="sec-icon">S</div> खरेदी (Self Purchase)</div>
+            <div class="sec-body">
+                <div class="row"><label>सेल्फ PV (₹)</label> <input type="number" id="pv" class="inp-num" placeholder="₹"></div>
+                <div class="row"><label>डायमंड क्लब / बिलिंग</label> <input type="checkbox" id="s_diamond" class="inp-check"></div>
+            </div>
+        </div>
+
+        <div class="section" style="border-left: 4px solid #ff9800;">
+            <div class="sec-head"><div class="sec-icon" style="background:#ff9800;">🧠</div> सेल्फ इम्प्रूव्हमेंट (Self Improvement)</div>
+            <div class="sec-body">
+                <label style="font-weight:bold;">आज काय नवीन शिकलात / वाचले?</label>
+                <textarea id="selfImp" class="text-area" placeholder="येथे लिहा... (उदा. पुस्तकाची 2 पाने वाचली, नवीन व्हिडिओ पाहिला)"></textarea>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="sec-head"><div class="sec-icon">S</div> सोशल (Social)</div>
+            <div class="sec-body">
+                <div class="row"><label>संबंध / माफी (Forgiveness)</label> <input type="checkbox" id="so_relation" class="inp-check"></div>
+            </div>
+        </div>
+
+        <div id="resultArea">
+            <h3 style="margin-top:0; color:var(--primary);">📈 विश्लेषण रिपोर्ट (Analysis)</h3>
+            <div id="reportText" class="report-text"></div>
         </div>
 
     </form>
 </div>
 
-<div class="container" style="background:transparent; box-shadow:none; margin-top:0;">
-    <button class="btn btn-save" onclick="window.saveToFirebase()">☁️ माहिती सेव्ह करा (Save Data)</button>
-    <button class="btn btn-wa" onclick="shareWA()">📲 WhatsApp वर पाठवा</button>
-    <button class="btn btn-pdf" onclick="dlPDF()">📥 PDF रिपोर्ट</button>
+<div class="container" style="background:transparent; box-shadow:none; margin-top:0; padding-top:0;">
+    <div class="action-area">
+        <button class="btn-main btn-save" onclick="window.saveToFirebase()">💾 डेटा सेव्ह करा (Save)</button>
+        <button class="btn-main btn-calc" onclick="generateReport()">📊 रिपोर्ट बनवा (Analyze)</button>
+        <button class="btn-main btn-pdf" onclick="downloadPDF()">📥 PDF डाउनलोड करा</button>
+    </div>
 </div>
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
   import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyCsgwBoTiEtSNJ2xMm4di0F0GiAtFxoswM",
-    authDomain: "order-b15a8.firebaseapp.com",
-    projectId: "order-b15a8",
-    storageBucket: "order-b15a8.firebasestorage.app",
-    messagingSenderId: "614443594278",
-    appId: "1:614443594278:web:e31715b6ee592b30326ce7"
-  };
-
+  const firebaseConfig = { apiKey: "AIzaSyCsgwBoTiEtSNJ2xMm4di0F0GiAtFxoswM", authDomain: "order-b15a8.firebaseapp.com", projectId: "order-b15a8", storageBucket: "order-b15a8.firebasestorage.app", messagingSenderId: "614443594278", appId: "1:614443594278:web:e31715b6ee592b30326ce7" };
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   const dateInput = document.getElementById('reportDate');
-  const statusMsg = document.getElementById('statusMsg');
+  const msg = document.getElementById('msg');
   
   dateInput.valueAsDate = new Date();
 
-  // Load on Start
+  // Load
   window.onload = function() { window.loadFromFirebase(); };
 
   // SAVE
   window.saveToFirebase = async function() {
     const dateVal = dateInput.value;
     if(!dateVal) { alert("तारीख निवडा!"); return; }
-    statusMsg.innerText = "⏳ Saving...";
-    statusMsg.style.color = "blue";
-
-    // Collect Plans
-    let plans = [];
-    document.querySelectorAll('.dyn-plan').forEach(el => { if(el.value) plans.push(el.value); });
+    msg.innerText = "Saving..."; msg.style.color = "blue";
 
     const data = {
+        // Business
         totalToday: val('totalToday'), legAToday: val('legAToday'), legBToday: val('legBToday'),
-        target: val('target', false), plans: val('plans'),
-        g_vital: chk('g_vital'), g_display: chk('g_display'),
-        calls: val('calls'), meetings: val('meetings'),
-        a_ulp: chk('a_ulp'), a_zero: chk('a_zero'),
-        pv: val('pv'), s_diamond: chk('s_diamond'), s_billing: chk('s_billing'),
-        e_learn: chk('e_learn'), e_book: chk('e_book'), e_teach: chk('e_teach'),
-        so_relation: chk('so_relation'), so_forgive: chk('so_forgive'),
-        planList: plans,
+        // GASES
+        target: val('target', false), plans: val('plans'), g_vital: chk('g_vital'),
+        calls: val('calls'), meetings: val('meetings'), a_zero: chk('a_zero'),
+        pv: val('pv'), s_diamond: chk('s_diamond'),
+        selfImp: val('selfImp', false), // New Field
+        so_relation: chk('so_relation'),
         timestamp: new Date()
     };
 
     try {
         await setDoc(doc(db, "rcm_permanent_data", dateVal), data);
-        statusMsg.innerText = "✅ Data Saved Successfully!";
-        statusMsg.style.color = "green";
-        alert("माहिती यशस्वीरित्या सेव्ह झाली!");
-        genAnalysis();
+        msg.innerText = "✅ डेटा सेव्ह झाला!"; msg.style.color = "green";
+        generateReport(); // Show report immediately
     } catch (e) {
-        statusMsg.innerText = "❌ Save Failed: " + e.message;
-        statusMsg.style.color = "red";
-        alert("Error: " + e.message);
+        msg.innerText = "❌ Error: " + e.message; msg.style.color = "red";
     }
   }
 
@@ -215,42 +216,29 @@
   window.loadFromFirebase = async function() {
     const dateVal = dateInput.value;
     if(!dateVal) return;
-    statusMsg.innerText = "⏳ Loading Data...";
-    statusMsg.style.color = "blue";
+    msg.innerText = "Loading..."; msg.style.color = "blue";
     
-    // Previous Day
+    // Get Yesterday
     const prevDate = new Date(dateVal);
     prevDate.setDate(prevDate.getDate() - 1);
     const yestVal = prevDate.toISOString().split('T')[0];
 
     try {
         // Load Today
-        const docRef = doc(db, "rcm_permanent_data", dateVal);
-        const snap = await getDoc(docRef);
-        
-        document.getElementById('planContainer').innerHTML = ""; // Clear plans
-
+        const snap = await getDoc(doc(db, "rcm_permanent_data", dateVal));
         if(snap.exists()) {
             const d = snap.data();
             setVal('totalToday', d.totalToday); setVal('legAToday', d.legAToday); setVal('legBToday', d.legBToday);
             document.getElementById('target').value = d.target || "Normal";
-            setVal('plans', d.plans); setChk('g_vital', d.g_vital); setChk('g_display', d.g_display);
-            setVal('calls', d.calls); setVal('meetings', d.meetings); setChk('a_ulp', d.a_ulp); setChk('a_zero', d.a_zero);
-            setVal('pv', d.pv); setChk('s_diamond', d.s_diamond); setChk('s_billing', d.s_billing);
-            setChk('e_learn', d.e_learn); setChk('e_book', d.e_book); setChk('e_teach', d.e_teach);
-            setChk('so_relation', d.so_relation); setChk('so_forgive', d.so_forgive);
-            
-            if(d.planList && d.planList.length) d.planList.forEach(t => addPlan(t));
-            else addPlan();
-
-            statusMsg.innerText = "✅ Data Loaded!";
-            statusMsg.style.color = "green";
-            genAnalysis();
+            setVal('plans', d.plans); setChk('g_vital', d.g_vital);
+            setVal('calls', d.calls); setVal('meetings', d.meetings); setChk('a_zero', d.a_zero);
+            setVal('pv', d.pv); setChk('s_diamond', d.s_diamond);
+            setVal('selfImp', d.selfImp); // Load Text Area
+            setChk('so_relation', d.so_relation);
+            msg.innerText = "✅ डेटा लोड झाला."; msg.style.color = "green";
         } else {
             document.getElementById('trackerForm').reset();
-            addPlan();
-            statusMsg.innerText = "⚠️ No data for this date.";
-            statusMsg.style.color = "orange";
+            msg.innerText = "⚠️ आजचा डेटा नाही."; msg.style.color = "orange";
         }
 
         // Load Yesterday
@@ -264,77 +252,74 @@
         }
         window.calcGrowth();
 
-    } catch (e) {
-        statusMsg.innerText = "❌ Load Error: " + e.message;
-        statusMsg.style.color = "red";
-    }
+    } catch (e) { console.error(e); }
   }
 
-  // Helpers
-  function val(id, isNum=true) { return isNum ? (document.getElementById(id).value || "") : document.getElementById(id).value; }
+  function val(id, isN=true) { return isN ? (document.getElementById(id).value || "") : document.getElementById(id).value; }
   function chk(id) { return document.getElementById(id).checked; }
   function setVal(id, v) { document.getElementById(id).value = v || ""; }
   function setChk(id, v) { document.getElementById(id).checked = v || false; }
 
-  // Expose to window
-  window.loadFromFirebase = window.loadFromFirebase;
   document.getElementById('reportDate').addEventListener('change', window.loadFromFirebase);
 </script>
 
 <script>
-    // --- UI Logic ---
-    function addPlan(txt = "") {
-        const div = document.createElement('div');
-        div.style.marginBottom = "5px";
-        div.innerHTML = `<input type="text" class="dyn-plan" value="${txt}" style="width:85%; padding:8px; border:1px solid #ccc; border-radius:5px;" placeholder="Task..."> <span onclick="this.parentElement.remove()" style="color:red; cursor:pointer; font-weight:bold;">X</span>`;
-        document.getElementById('planContainer').appendChild(div);
-    }
-
+    // Growth Logic
     window.calcGrowth = function() {
         doCalc('totalToday', 'totalYest', 'gTotal');
         doCalc('legAToday', 'legAYest', 'gLegA');
         doCalc('legBToday', 'legBYest', 'gLegB');
     }
-
     function doCalc(t, y, r) {
         let T = parseFloat(document.getElementById(t).value)||0;
         let Y = parseFloat(document.getElementById(y).value)||0;
-        let el = document.getElementById(r);
         let d = T-Y;
-        let p = Y > 0 ? ((d/Y)*100).toFixed(1) + "%" : "";
+        let p = Y>0 ? ((d/Y)*100).toFixed(1)+"%" : "";
+        let el = document.getElementById(r);
         el.innerHTML = `<span class="${d>=0?'pos':'neg'}">${d>0?'+':''}${d} <br> ${p}</span>`;
     }
 
-    function genAnalysis() {
-        let p = parseInt(document.getElementById('plans').value)||0;
-        let legB = (parseFloat(document.getElementById('legBToday').value)||0) - (parseFloat(document.getElementById('legBYest').value)||0);
+    // Report Generation
+    function generateReport() {
+        let plans = parseInt(document.getElementById('plans').value)||0;
+        let legB = parseFloat(document.getElementById('legBToday').value)||0;
+        let legBY = parseFloat(document.getElementById('legBYest').value)||0;
+        let selfImp = document.getElementById('selfImp').value;
+
+        let html = ``;
         
-        let html = `<b>📊 विश्लेषण:</b><br>`;
-        if(legB > 0) html += `✅ Leg B मध्ये ${legB} PV ची वाढ झाली आहे. छान!<br>`;
-        else if(legB < 0) html += `🔴 Leg B कमी झाला आहे. डेप्थ चेक करा.<br>`;
-        else html += `⚠️ Leg B स्थिर आहे. हालचाल वाढवा.<br>`;
+        // Marathi Analysis
+        html += `<strong>1. बिझनेस स्थिती:</strong><br>`;
+        if(legB > legBY) html += `🟢 अभिनंदन! Leg B मध्ये प्रगती आहे.`;
+        else if(legB < legBY) html += `🔴 सावधान! Leg B कमी झाला आहे.`;
+        else html += `🟡 Leg B स्थिर आहे.`;
+        
+        html += `<br><br><strong>2. ऍक्शन रिपोर्ट:</strong><br>`;
+        if(plans === 0) html += `⚠️ आज प्लान शो झाला नाही. हे वाढीसाठी घातक आहे.<br>`;
+        else html += `✅ ${plans} प्लान शो झाले. उत्तम!<br>`;
 
-        if(p==0) html += `🔴 आज प्लान शो (Plan) झाला नाही. बिझनेससाठी घातक आहे.<br>`;
-        else html += `✅ ${p} प्लान दाखवले. सातत्य ठेवा.<br>`;
+        if(selfImp) html += `<br><strong>3. आजची शिकवण:</strong><br><i>"${selfImp}"</i>`;
+        else html += `<br><strong>3. आजची शिकवण:</strong><br>⚠️ काहीही नोंद नाही.`;
 
-        document.getElementById('analysisText').innerHTML = html;
-        document.getElementById('analysisBox').style.display = 'block';
-        return html;
+        document.getElementById('reportText').innerHTML = html;
+        document.getElementById('resultArea').style.display = 'block';
     }
 
-    function shareWA() {
-        let date = document.getElementById('reportDate').value;
-        let txt = document.getElementById('analysisText').innerText;
-        window.open(`https://wa.me/?text=🇮🇳 *RCM Report (${date})*%0a----------------%0a${txt}`, '_blank');
-    }
-
-    function dlPDF() {
-        genAnalysis(); // Ensure analysis is updated
-        const el = document.getElementById('reportContent');
-        const opt = { margin:0.2, filename:`RCM_${document.getElementById('reportDate').value}.pdf`, image:{type:'jpeg',quality:0.98}, html2canvas:{scale:2}, jsPDF:{unit:'in', format:'a4', orientation:'portrait'} };
-        
-        // Timeout to ensure rendering
-        setTimeout(() => { html2pdf().set(opt).from(el).save(); }, 500);
+    // Fix PDF
+    function downloadPDF() {
+        generateReport();
+        const element = document.getElementById('reportContent');
+        const opt = {
+            margin: 0.2,
+            filename: `RCM_Report_${document.getElementById('reportDate').value}.pdf`,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true },
+            jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+        };
+        // Wait specifically for DOM update
+        setTimeout(() => {
+            html2pdf().set(opt).from(element).save();
+        }, 500);
     }
 </script>
 
