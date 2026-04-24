@@ -2,107 +2,130 @@
 <html lang="mr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Ultimate Canva Poster Editor</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ultimate Poster</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Poppins;background:linear-gradient(135deg,#ff9933,#fff,#138808);padding:10px}
-.app{max-width:1180px;margin:auto;background:#fff;border-radius:18px;padding:14px;box-shadow:0 12px 35px #0003}
-h2{text-align:center;color:#000080;margin:0 0 10px}
-.grid{display:grid;grid-template-columns:390px 1fr;gap:14px}
-input,textarea,select,button{width:100%;padding:10px;margin:5px 0;border-radius:10px;border:1px solid #ccc;font-family:inherit}
-button{border:0;background:#000080;color:#fff;font-weight:900}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:7px}
-.green{background:#138808}.orange{background:#ff9933;color:#111}.red{background:#d32f2f}.dark{background:#111827}
-.poster{width:720px;height:1080px;margin:auto;position:relative;overflow:hidden;background:#111;color:#fff;box-shadow:0 15px 45px #0006}
-.bg,.shape{position:absolute;inset:0}
-.el{position:absolute;cursor:move;user-select:none;z-index:3}
-.title{font-family:"Baloo 2";font-size:68px;font-weight:900;line-height:1.05;width:620px;left:50px;top:90px;text-align:center;text-shadow:0 4px 12px #0008}
-.sub{font-size:32px;font-weight:800;width:600px;left:60px;top:240px;text-align:center;text-shadow:0 3px 10px #0008}
-.photo{width:300px;height:300px;left:210px;top:370px;border-radius:50%;border:12px solid #fff;background:#eee;overflow:hidden;display:grid;place-items:center;color:#333;font-weight:900}
-.photo img,.logo img{width:100%;height:100%;object-fit:cover}
-.name{font-size:46px;font-weight:900;width:620px;left:50px;top:700px;text-align:center;text-shadow:0 4px 12px #0008}
-.info{background:#fff;color:#111;border-radius:28px;padding:24px;font-size:29px;font-weight:900;width:620px;left:50px;top:785px;line-height:1.5}
-.host{bottom:0;left:0;width:720px;background:#0009;padding:22px;font-size:28px;font-weight:900;text-align:center}
-.badge{top:35px;left:50px;background:#ffcc00;color:#111;padding:10px 28px;border-radius:999px;font-weight:900;font-size:25px}
-.logo{top:28px;right:38px;width:95px;height:95px;border-radius:50%;overflow:hidden;background:#fff;color:#000;display:grid;place-items:center;font-weight:900;font-size:16px}
-.qr{right:45px;bottom:145px;background:#fff;padding:10px;border-radius:16px;width:120px;height:120px}
-.sticker{font-size:58px}
-.mapText{left:50px;bottom:120px;width:420px;font-size:22px;background:#ffffffdd;color:#111;padding:10px;border-radius:12px;font-weight:800}
-.resize{resize:both;overflow:hidden}
-@media(max-width:900px){.grid{grid-template-columns:1fr}.poster{width:360px;height:540px}.title{font-size:34px;width:310px;left:25px;top:45px}.sub{font-size:16px;width:300px;left:30px;top:120px}.photo{width:150px;height:150px;left:105px;top:185px;border-width:6px}.name{font-size:23px;width:310px;left:25px;top:350px}.info{font-size:14.5px;width:310px;left:25px;top:392px;padding:12px;border-radius:14px}.host{width:360px;font-size:14px;padding:11px}.badge{font-size:13px;top:18px;left:25px;padding:5px 14px}.logo{width:48px;height:48px;top:14px;right:19px;font-size:9px}.qr{width:60px;height:60px;right:22px;bottom:72px;padding:5px}.mapText{font-size:11px;left:25px;bottom:60px;width:210px}}
+body{margin:0;font-family:Poppins;background:#eee}
+.app{max-width:1000px;margin:auto;padding:10px}
+.poster{width:350px;height:550px;margin:auto;background:#111;color:#fff;position:relative;overflow:hidden}
+.bg{position:absolute;width:100%;height:100%}
+.el{position:absolute;cursor:move}
+.title{top:50px;width:100%;text-align:center;font-size:26px;font-weight:900}
+.photo{top:150px;left:100px;width:120px;height:120px;border-radius:50%;overflow:hidden;background:#ccc}
+.photo img{width:100%;height:100%;object-fit:cover}
+.name{top:280px;width:100%;text-align:center;font-size:18px}
+.info{top:320px;width:90%;left:5%;background:#fff;color:#000;padding:10px;border-radius:10px;font-size:12px}
+.host{bottom:0;width:100%;background:#000;text-align:center;padding:8px}
 </style>
 </head>
 
 <body>
+
 <div class="app">
-<h2>🚀 Ultimate Canva Poster Editor</h2>
 
-<div class="grid">
-<div>
-<input id="badgeText" value="RCM BUSINESS SEMINAR">
-<input id="titleText" value="RCM नये भारत का निर्माण">
-<textarea id="subText">स्मार्ट बचत, आरोग्य आणि उत्पन्नाची सुवर्णसंधी</textarea>
-<input id="nameText" value="दिनेश राजपूत सर">
-<div class="row">
-<input id="dateText" value="26 एप्रिल 2026">
-<input id="timeText" value="सकाळी 9:30 वा.">
-</div>
-<textarea id="venueText">कृष्णाई RCM सेवा केंद्र, स्नेह शारदा नगर, वसमत रोड, परभणी</textarea>
-<input id="mapLink" placeholder="Google Map Link paste करा">
-<div class="row">
-<input id="hostText" value="DS WORLD TEAM">
-<input id="mobileText" value="9876543210">
-</div>
+<input id="titleText" value="RCM Poster">
+<input id="nameText" value="Name">
+<input id="dateText" value="Date">
+<input id="venueText" value="Venue">
+<input id="mapLink" placeholder="Map Link">
 
-<label>Photo Upload</label>
-<input type="file" id="photoInput" accept="image/*">
-<label>Logo Upload</label>
-<input type="file" id="logoInput" accept="image/*">
+<input type="file" id="photoInput">
 
 <select id="themeSelect"></select>
-<select id="layoutSelect">
-<option value="0">Center Layout</option>
-<option value="1">Right Photo Layout</option>
-<option value="2">Left Photo Layout</option>
-<option value="3">Viral Split Layout</option>
-<option value="4">Premium Invite Layout</option>
-</select>
-<select id="photoStyle">
-<option value="circle">Circle Photo</option>
-<option value="round">Rounded Card Photo</option>
-<option value="square">Square Photo</option>
-<option value="gold">Gold Ring Photo</option>
-</select>
 
-<div class="row">
 <button onclick="updatePoster()">Update</button>
-<button class="orange" onclick="randomDesign()">Random</button>
-</div>
-<div class="row">
-<button class="green" onclick="addSticker()">Add Sticker</button>
-<button class="dark" onclick="generateQR()">QR Generate</button>
-</div>
-<div class="row">
-<button class="red" onclick="downloadPoster()">HD Download</button>
-<button class="green" onclick="shareWhatsApp()">WhatsApp Share</button>
-</div>
-</div>
+<button onclick="randomTheme()">Random</button>
+<button onclick="generateQR()">QR</button>
+<button onclick="download()">Download</button>
 
-<div>
 <div class="poster" id="poster">
 <div class="bg" id="bg"></div>
-<div class="shape" id="shape"></div>
 
-<div class="el badge resize" id="badge"></div>
-<div class="el logo resize" id="logo">LOGO</div>
-<div class="el title resize" id="pTitle"></div>
-<div class="el sub resize" id="pSub"></div>
-<div class="el photo resize" id="pPhoto">Photo</div>
-<div class="el name resize" id="pName"></div>
-<div class="el info resize"
+<div class="el title" id="pTitle"></div>
+<div class="el photo" id="pPhoto">Photo</div>
+<div class="el name" id="pName"></div>
+<div class="el info" id="pInfo"></div>
+<div class="el host" id="pHost"></div>
+<div class="el" id="qrBox" style="right:10px;bottom:80px;"></div>
+
+</div>
+
+</div>
+
+<script>
+
+window.onload=function(){
+
+const themeSelect=document.getElementById("themeSelect");
+const bg=document.getElementById("bg");
+
+const themes=[];
+const colors=[["#ff9933","#fff","#138808"],["#000","#3b82f6","#fff"]];
+
+for(let i=0;i<200;i++){
+ let c=colors[i%colors.length];
+ let a=(i*20)%360;
+ themes.push(`linear-gradient(${a}deg,${c[0]},${c[1]},${c[2]})`);
+}
+
+themes.forEach((t,i)=>{
+ let o=document.createElement("option");
+ o.value=i;
+ o.textContent="Design "+(i+1);
+ themeSelect.appendChild(o);
+});
+
+window.updatePoster=function(){
+ document.getElementById("pTitle").innerText=titleText.value;
+ document.getElementById("pName").innerText=nameText.value;
+ document.getElementById("pInfo").innerHTML=`📅 ${dateText.value}<br>📍 ${venueText.value}`;
+ document.getElementById("pHost").innerText="RCM Team";
+ bg.style.background=themes[themeSelect.value];
+}
+
+window.randomTheme=function(){
+ themeSelect.value=Math.floor(Math.random()*themes.length);
+ updatePoster();
+}
+
+document.getElementById("photoInput").onchange=function(e){
+ let f=e.target.files[0];
+ let r=new FileReader();
+ r.onload=()=>{
+  document.getElementById("pPhoto").innerHTML=`<img src="${r.result}">`;
+ }
+ r.readAsDataURL(f);
+}
+
+window.generateQR=function(){
+ let box=document.getElementById("qrBox");
+ box.innerHTML="";
+ new QRCode(box,{
+  text:document.getElementById("mapLink").value || "RCM",
+  width:80,
+  height:80
+ });
+}
+
+window.download=function(){
+ html2canvas(document.getElementById("poster")).then(canvas=>{
+  let a=document.createElement("a");
+  a.href=canvas.toDataURL();
+  a.download="poster.png";
+  a.click();
+ });
+}
+
+updatePoster();
+
+}
+
+</script>
+
+</body>
+</html>
