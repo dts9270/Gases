@@ -1,185 +1,238 @@
-<!DOCTYPE html><html lang="mr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Ultimate Canva Poster Editor</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&family=Baloo+2:wght@600;800&family=Noto+Serif+Devanagari:wght@600;800&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<style>
-*{box-sizing:border-box}body{margin:0;font-family:Poppins,Arial;background:linear-gradient(135deg,#ff9933,#fff,#138808);padding:10px}.app{max-width:1220px;margin:auto;background:#fff;border-radius:18px;padding:14px;box-shadow:0 12px 35px #0003}h2{text-align:center;color:#000080;margin:0 0 8px}.note{text-align:center;color:#64748b;font-weight:800;margin-bottom:12px}.grid{display:grid;grid-template-columns:400px 1fr;gap:14px}.panel{background:#f8fafc;border:1px solid #e5e7eb;border-radius:16px;padding:12px;max-height:92vh;overflow:auto}input,textarea,select,button{width:100%;padding:10px;margin:5px 0;border-radius:10px;border:1px solid #cbd5e1;font-family:inherit}textarea{min-height:65px;resize:vertical}button{border:0;background:#000080;color:#fff;font-weight:900;cursor:pointer}.row{display:grid;grid-template-columns:1fr 1fr;gap:7px}.green{background:#138808}.orange{background:#ff9933;color:#111}.red{background:#d32f2f}.dark{background:#111827}.purple{background:#7c3aed}.sec{font-weight:900;color:#000080;margin-top:10px}.status{text-align:center;font-weight:900;min-height:22px;color:#000080}.poster{width:720px;height:1080px;margin:auto;position:relative;overflow:hidden;background:#111;color:#fff;box-shadow:0 15px 45px #0006}.bg,.pattern,.shape1,.shape2{position:absolute;inset:0;pointer-events:none}.bg{z-index:0}.pattern{z-index:1;opacity:.12}.shape1,.shape2{z-index:2}.el{position:absolute;cursor:move;user-select:none;z-index:5}.resize{resize:both;overflow:hidden}.badge{top:35px;left:50px;background:#ffcc00;color:#111;padding:10px 28px;border-radius:999px;font-weight:900;font-size:25px}.logo{top:28px;right:38px;width:95px;height:95px;border-radius:50%;overflow:hidden;background:#fff;color:#000;display:grid;place-items:center;font-weight:900;font-size:16px}.logo img,.photo img{width:100%;height:100%;object-fit:cover}.title{font-family:'Baloo 2';font-size:68px;font-weight:900;line-height:1.05;width:620px;left:50px;top:90px;text-align:center;text-shadow:0 4px 12px #0008}.sub{font-size:32px;font-weight:800;width:600px;left:60px;top:240px;text-align:center;text-shadow:0 3px 10px #0008}.photo{width:300px;height:300px;left:210px;top:370px;border-radius:50%;border:12px solid #fff;background:#eee;overflow:hidden;display:grid;place-items:center;color:#333;font-weight:900}.name{font-size:46px;font-weight:900;width:620px;left:50px;top:700px;text-align:center;text-shadow:0 4px 12px #0008}.info{background:#fff;color:#111;border-radius:28px;padding:24px;font-size:29px;font-weight:900;width:620px;left:50px;top:785px;line-height:1.5}.host{bottom:0;left:0;width:720px;background:#0009;padding:22px;font-size:28px;font-weight:900;text-align:center}.mapText{left:50px;bottom:120px;width:420px;font-size:22px;background:#ffffffdd;color:#111;padding:10px;border-radius:12px;font-weight:800}.qr{right:45px;bottom:145px;background:#fff;padding:10px;border-radius:16px;width:120px;height:120px}.sticker{font-size:58px}.small{font-size:12px;color:#64748b;text-align:center}.hide{display:none!important}
-/* Canva style theme classes */.pat0 .pattern{display:none}.pat1 .pattern{background-image:radial-gradient(circle,#fff 2px,transparent 3px);background-size:40px 40px}.pat2 .pattern{background-image:linear-gradient(45deg,rgba(255,255,255,.7) 1px,transparent 1px);background-size:26px 26px}.pat3 .pattern{background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.55) 0 2px,transparent 2px 18px)}.shapeA .shape1{background:radial-gradient(circle at 85% 12%,#ffffff35 0 0,transparent 34%)}.shapeB .shape1{background:linear-gradient(145deg,transparent 55%,#00000038 55%)}.shapeC .shape1{inset:42px;border:4px solid #ffffff80;border-radius:32px}.shapeD .shape1{background:linear-gradient(165deg,transparent 0 58%,#ffffff28 58% 75%,transparent 75%)}
-@media(max-width:900px){.grid{grid-template-columns:1fr}.panel{max-height:none}.poster{width:360px;height:540px}.badge{font-size:13px;top:18px;left:25px;padding:5px 14px}.logo{width:48px;height:48px;top:14px;right:19px;font-size:9px}.title{font-size:34px;width:310px;left:25px;top:45px}.sub{font-size:16px;width:300px;left:30px;top:120px}.photo{width:150px;height:150px;left:105px;top:185px;border-width:6px}.name{font-size:23px;width:310px;left:25px;top:350px}.info{font-size:14.5px;width:310px;left:25px;top:392px;padding:12px;border-radius:14px}.host{width:360px;font-size:14px;padding:11px}.qr{width:60px;height:60px;right:22px;bottom:72px;padding:5px}.mapText{font-size:11px;left:25px;bottom:60px;width:210px}}
-</style>
-</head>
-<body>
-<div class="app">
-<h2>🚀 Ultimate Canva Poster Editor</h2>
-<div class="note">सगळे details inputs कायम ठेवले आहेत — फक्त design/font/layout बदलते.</div>
-<div class="status" id="status"></div>
-<div class="grid">
-<div class="panel">
-<div class="sec">Poster Details</div>
-<input id="badgeText" value="RCM BUSINESS SEMINAR" placeholder="Top Badge">
-<input id="titleText" value="RCM नये भारत का निर्माण" placeholder="Main Title">
-<textarea id="subText" placeholder="Subtitle">स्मार्ट बचत, आरोग्य आणि उत्पन्नाची सुवर्णसंधी</textarea>
-<input id="nameText" value="दिनेश राजपूत सर" placeholder="Speaker / Leader Name">
-<div class="row"><input id="dateText" value="26 एप्रिल 2026" placeholder="Date"><input id="timeText" value="सकाळी 9:30 वा." placeholder="Time"></div>
-<textarea id="venueText" placeholder="Venue / Location">कृष्णाई RCM सेवा केंद्र, स्नेह शारदा नगर, वसमत रोड, परभणी</textarea>
-<input id="mapLink" placeholder="Google Map Link paste करा">
-<div class="row"><input id="hostText" value="DS WORLD TEAM" placeholder="Host Name"><input id="mobileText" value="9876543210" placeholder="Mobile"></div>
-<div class="sec">Upload</div>
-<label>Speaker Photo</label><input type="file" id="photoInput" accept="image/*">
-<label>Logo Upload</label><input type="file" id="logoInput" accept="image/*">
-<div class="sec">Canva Design Controls</div>
-<select id="themeSelect"></select>
-<select id="layoutSelect"><option value="0">Center Layout</option><option value="1">Right Photo Business</option><option value="2">Left Photo Corporate</option><option value="3">Viral Split</option><option value="4">Premium Invite</option><option value="5">Health Camp</option></select>
-<div class="row"><select id="fontSelect"><option value="Baloo 2">Baloo 2</option><option value="Poppins">Poppins</option><option value="Noto Serif Devanagari">Noto Serif</option><option value="Oswald">Oswald</option></select><select id="photoStyle"><option value="circle">Circle Photo</option><option value="round">Rounded Card</option><option value="square">Square Photo</option><option value="gold">Gold Ring</option></select></div>
-<div class="row"><select id="patternSelect"><option value="pat0">No Pattern</option><option value="pat1">Dots Pattern</option><option value="pat2">Grid Pattern</option><option value="pat3">Line Pattern</option></select><select id="shapeSelect"><option value="shapeA">Circle Glow</option><option value="shapeB">Diagonal Shade</option><option value="shapeC">Luxury Border</option><option value="shapeD">Ribbon Shape</option></select></div>
-<div class="row"><button onclick="updatePoster()">Update</button><button class="orange" onclick="randomDesign()">Random Canva</button></div>
-<div class="row"><button class="green" onclick="addSticker()">Add Sticker</button><button class="dark" onclick="generateQR()">QR Generate</button></div>
-<div class="row"><button class="red" onclick="downloadPoster()">HD Download</button><button class="green" onclick="shareWhatsApp()">WhatsApp Share</button></div>
-<div class="row"><button class="purple" onclick="saveLocal()">Save Local</button><button class="dark" onclick="loadLocal()">Load Local</button></div>
-<p class="small">Poster वर text/photo/logo/QR drag करता येईल. Resize corner वापरून size बदलता येईल.</p>
-</div>
-<div>
-<div class="poster pat1 shapeA" id="poster">
-<div class="bg" id="bg"></div><div class="pattern"></div><div class="shape1"></div><div class="shape2"></div>
-<div class="el badge resize" id="badge"></div>
-<div class="el logo resize" id="logo">LOGO</div>
-<div class="el title resize" id="pTitle"></div>
-<div class="el sub resize" id="pSub"></div>
-<div class="el photo resize" id="pPhoto">Photo</div>
-<div class="el name resize" id="pName"></div>
-<div class="el info resize" id="pInfo"></div>
-<div class="el mapText resize" id="pMap"></div>
-<div class="el qr resize" id="qrBox"></div>
-<div class="el host resize" id="pHost"></div>
-</div>
-</div>
-</div>
-</div>
-<script>
-window.addEventListener('DOMContentLoaded',()=>{
-const $=id=>document.getElementById(id);
-const colors=[["#ff9933","#ffffff","#138808"],["#061b4e","#1d4ed8","#38bdf8"],["#111827","#fbbf24","#92400e"],["#064e3b","#16a34a","#dcfce7"],["#2e1065","#7e22ce","#f0abfc"],["#991b1b","#ef4444","#fbbf24"],["#0c4a6e","#0284c7","#e0f2fe"],["#581c87","#db2777","#fef3c7"],["#000","#434343","#fff"],["#f97316","#fff","#138808"]];
-const themes=[];
-for(let i=0;i<1000;i++){let c=colors[i%colors.length],a=(i*37)%360;if(i%4===0)themes.push(`linear-gradient(${a}deg,${c[0]},${c[1]},${c[2]})`);else if(i%4===1)themes.push(`radial-gradient(circle at top,${c[1]},${c[0]},${c[2]})`);else if(i%4===2)themes.push(`linear-gradient(${a}deg,${c[0]} 0 35%,${c[1]} 35% 60%,${c[2]} 60% 100%)`);else themes.push(`conic-gradient(from ${a}deg,${c[0]},${c[1]},${c[2]},${c[0]})`)}
-themes.forEach((t,i)=>{let o=document.createElement('option');o.value=i;o.textContent='Design '+(i+1);$('themeSelect').appendChild(o)});
-function unit(){return $('poster').offsetWidth/720}
-function px(v){return Math.round(v*unit())+'px'}
-function set(el,x,y){el.style.left=px(x);el.style.top=px(y)}
-function size(el,w,h=null){el.style.width=px(w); if(h!==null)el.style.height=px(h)}
-function resetLayoutStyle(){
-  const ids=['pTitle','pSub','pPhoto','pName','pInfo','pHost','badge','logo','pMap','qrBox'];
-  ids.forEach(id=>{const e=$(id); if(!e)return; e.style.width=''; e.style.height=''; e.style.borderRadius=''; e.style.background=''; e.style.color=''; e.style.border=''; e.style.textAlign=''; e.style.padding=''; e.style.fontSize=''; e.style.left=''; e.style.top=''; e.style.right=''; e.style.bottom=''; e.style.transform='';});
-  $('pHost').style.bottom='0'; $('pHost').style.left='0'; $('pHost').style.width=px(720);
-  size($('pPhoto'),300,300); $('pPhoto').style.border=Math.max(5,Math.round(12*unit()))+'px solid #fff';
-  size($('pTitle'),620); size($('pSub'),600); size($('pName'),620); size($('pInfo'),620);
-}
-function applyLayout(){
-  resetLayoutStyle();
-  let l=$('layoutSelect').value;// 1 Center Classic if(l==0){ set($('badge'),50,35); set($('logo'),590,28); set($('pTitle'),50,90); set($('pSub'),60,240); set($('pPhoto'),210,370); set($('pName'),50,700); set($('pInfo'),50,785); $('pInfo').style.borderRadius='28px'; $('pPhoto').style.borderRadius='50%'; }
-
-// 2 Business Right Photo if(l==1){ set($('badge'),45,55); set($('logo'),585,40); set($('pTitle'),45,140); $('pTitle').style.width=px(330); $('pTitle').style.textAlign='left'; set($('pSub'),45,330); $('pSub').style.width=px(330); $('pSub').style.textAlign='left'; set($('pPhoto'),405,245); size($('pPhoto'),250,360); $('pPhoto').style.borderRadius='35px'; set($('pName'),45,610); $('pName').style.width=px(330); $('pName').style.textAlign='left'; set($('pInfo'),45,720); $('pInfo').style.width=px(630); $('pInfo').style.borderLeft='14px solid #ffcc00'; }
-
-// 3 Corporate Left Photo if(l==2){ set($('badge'),300,55); set($('logo'),585,35); set($('pPhoto'),55,220); size($('pPhoto'),270,360); $('pPhoto').style.borderRadius='0'; set($('pTitle'),355,150); $('pTitle').style.width=px(315); $('pTitle').style.textAlign='left'; set($('pSub'),355,340); $('pSub').style.width=px(300); $('pSub').style.textAlign='left'; set($('pName'),355,535); $('pName').style.width=px(300); $('pName').style.textAlign='left'; set($('pInfo'),55,720); $('pInfo').style.width=px(610); $('pInfo').style.borderRadius='8px'; }
-
-// 4 Viral Split if(l==3){ set($('badge'),42,45); set($('logo'),590,30); set($('pTitle'),42,120); $('pTitle').style.width=px(630); $('pTitle').style.textAlign='left'; $('pTitle').style.fontSize='78px'; set($('pSub'),42,310); $('pSub').style.width='360px'; $('pSub').style.textAlign='left'; set($('pPhoto'),390,410); size($('pPhoto'),285,285); $('pPhoto').style.borderRadius='50%'; $('pPhoto').style.border='12px solid #000080'; set($('pName'),42,620); $('pName').style.width=px(320); $('pName').style.textAlign='left'; $('pName').style.color='#000080'; set($('pInfo'),42,770); $('pInfo').style.width='630px'; $('pInfo').style.border='4px solid #000080'; $('pHost').style.background='#000080'; }
-
-// 5 Premium Invite if(l==4){ set($('badge'),220,85); $('badge').style.background='#111827'; $('badge').style.color='#fbbf24'; set($('logo'),590,45); set($('pTitle'),70,170); $('pTitle').style.width=px(580); $('pTitle').style.fontFamily='Noto Serif Devanagari'; set($('pSub'),82,335); $('pSub').style.width=px(560); set($('pPhoto'),225,475); size($('pPhoto'),270,270); $('pPhoto').style.border='12px solid #fbbf24'; $('pPhoto').style.borderRadius='50%'; set($('pName'),70,755); $('pName').style.width=px(580); $('pName').style.color='#fbbf24'; set($('pInfo'),80,840); $('pInfo').style.width=px(560); $('pInfo').style.background='rgba(17,24,39,.88)'; $('pInfo').style.color='#fff'; $('pInfo').style.border='2px solid #fbbf24'; $('pHost').style.left=px(80); $('pHost').style.width=px(560); $('pHost').style.bottom='35px'; $('pHost').style.borderRadius='999px'; $('pHost').style.background='#fbbf24'; $('pHost').style.color='#111'; }
-
-// 6 Health Camp if(l==5){ set($('badge'),210,45); $('badge').style.background='#dcfce7'; $('badge').style.color='#064e3b'; set($('logo'),590,28); set($('pTitle'),55,90); $('pTitle').style.width=px(610); $('pTitle').style.color='#fff'; set($('pSub'),65,235); $('pSub').style.width=px(590); $('pSub').style.color='#dcfce7'; set($('pPhoto'),210,350); size($('pPhoto'),300,300); $('pPhoto').style.border='12px solid #dcfce7'; $('pPhoto').style.borderRadius='50%'; set($('pName'),55,670); $('pName').style.width=px(610); $('pName').style.color='#dcfce7'; set($('pInfo'),55,760); $('pInfo').style.width='610px'; $('pInfo').style.color='#064e3b'; $('pInfo').style.background='#fff'; $('pHost').style.background='#064e3b'; } } function applyPhotoStyle(){let s=$('photoStyle').value;let p=$('pPhoto');p.style.borderColor='#fff';p.style.borderRadius='50%';if(s==='round')p.style.borderRadius='35px';if(s==='square')p.style.borderRadius='0';if(s==='gold'){p.style.borderRadius='50%';p.style.borderColor='#fbbf24'}} window.updatePoster=function(){ $('badge').innerText=$('badgeText').value;$('pTitle').innerText=$('titleText').value;$('pSub').innerText=$('subText').value;$('pName').innerText=$('nameText').value;$('pInfo').innerHTML=<div>📅 ${$('dateText').value}</div><div>⏰ ${$('timeText').value}</div><div>📍 ${$('venueText').value}</div>;$('pHost').innerText=${$('hostText').value} | ${$('mobileText').value};$('pMap').innerText=$('mapLink').value?'📍 Map: '+$('mapLink').value:'';$('bg').style.background=themes[$('themeSelect').value];$('poster').style.fontFamily=$('fontSelect').value;$('poster').className='poster '+$('patternSelect').value+' '+$('shapeSelect').value;applyLayout();applyPhotoStyle();} window.randomDesign=function(){$('themeSelect').value=Math.floor(Math.random()*themes.length);$('layoutSelect').value=Math.floor(Math.random()*6);$('photoStyle').value=['circle','round','square','gold'][Math.floor(Math.random()*4)];$('patternSelect').value=['pat0','pat1','pat2','pat3'][Math.floor(Math.random()*4)];$('shapeSelect').value=['shapeA','shapeB','shapeC','shapeD'][Math.floor(Math.random()*4)];$('fontSelect').value=['Baloo 2','Poppins','Noto Serif Devanagari','Oswald'][Math.floor(Math.random()*4)];window.updatePoster();} function readImg(e,el,store){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{el.innerHTML=<img src="${r.result}">;localStorage.setItem(store,r.result)};r.readAsDataURL(f)} $('photoInput').onchange=e=>readImg(e,$('pPhoto'),'poster_photo');$('logoInput').onchange=e=>readImg(e,$('logo'),'poster_logo'); window.generateQR=function(){let box=$('qrBox');box.innerHTML='';new QRCode(box,{text:$('mapLink').value||location.href,width:100,height:100});} window.addSticker=function(){let arr=['🔥','✅','🎯','🏆','🌱','💯','📢','⭐','🚀','🎉'];let d=document.createElement('div');d.className='el sticker resize';d.innerText=arr[Math.floor(Math.random()*arr.length)];d.style.left='80px';d.style.top='80px';$('poster').appendChild(d);makeDraggable(d)} function makeDraggable(el){let ox=0,oy=0,drag=false;el.addEventListener('mousedown',start);el.addEventListener('touchstart',start,{passive:false});function start(e){drag=true;let p=e.touches?e.touches[0]:e;ox=p.clientX-el.offsetLeft;oy=p.clientY-el.offsetTop;document.addEventListener('mousemove',move);document.addEventListener('mouseup',end);document.addEventListener('touchmove',move,{passive:false});document.addEventListener('touchend',end)}function move(e){if(!drag)return;e.preventDefault();let p=e.touches?e.touches[0]:e;el.style.left=(p.clientX-ox)+'px';el.style.top=(p.clientY-oy)+'px'}function end(){drag=false}} document.querySelectorAll('.el').forEach(makeDraggable); window.downloadPoster=async function(){window.updatePoster();await document.fonts.ready;html2canvas($('poster'),{scale:4,useCORS:true,allowTaint:true}).then(c=>{let a=document.createElement('a');a.href=c.toDataURL('image/png',1);a.download='Ultimate-RCM-Poster.png';a.click()})} window.shareWhatsApp=function(){let msg=${$('titleText').value}%0A${$('subText').value}%0A📅 ${$('dateText').value}%0A⏰ ${$('timeText').value}%0A📍 ${$('venueText').value}%0A${$('mapLink').value};window.open('https://wa.me/?text='+msg,'_blank')} window.saveLocal=function(){window.updatePoster();let ids=['badgeText','titleText','subText','nameText','dateText','timeText','venueText','mapLink','hostText','mobileText','themeSelect','layoutSelect','fontSelect','photoStyle','patternSelect','shapeSelect'];let d={};ids.forEach(id=>d[id]=$(id).value);localStorage.setItem('poster_data',JSON.stringify(d));$('status').innerText='✅ Saved'} window.loadLocal=function(){let d=JSON.parse(localStorage.getItem('poster_data')||'{}');Object.keys(d).forEach(id=>{if($(id))$(id).value=d[id]});let ph=localStorage.getItem('poster_photo');if(ph)$('pPhoto').innerHTML=<img src="${ph}">;let lg=localStorage.getItem('poster_logo');if(lg)$('logo').innerHTML=<img src="${lg}">;window.updatePoster();$('status').innerText='✅ Loaded'} window.loadLocal();window.updatePoster(); }); </script>
-
-</body>
-</html>
 <!DOCTYPE html>
 <html lang="mr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Ultimate Canva Poster Editor</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&family=Baloo+2:wght@600;800&family=Noto+Serif+Devanagari:wght@600;800&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+<title>RCM ULTRA PRO V3</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Poppins,Arial;background:linear-gradient(135deg,#ff9933,#fff,#138808);padding:10px}.app{max-width:1220px;margin:auto;background:#fff;border-radius:18px;padding:14px;box-shadow:0 12px 35px #0003}h2{text-align:center;color:#000080;margin:0 0 8px}.note{text-align:center;color:#64748b;font-weight:800;margin-bottom:12px}.grid{display:grid;grid-template-columns:400px 1fr;gap:14px}.panel{background:#f8fafc;border:1px solid #e5e7eb;border-radius:16px;padding:12px;max-height:92vh;overflow:auto}input,textarea,select,button{width:100%;padding:10px;margin:5px 0;border-radius:10px;border:1px solid #cbd5e1;font-family:inherit}textarea{min-height:65px;resize:vertical}button{border:0;background:#000080;color:#fff;font-weight:900;cursor:pointer}.row{display:grid;grid-template-columns:1fr 1fr;gap:7px}.green{background:#138808}.orange{background:#ff9933;color:#111}.red{background:#d32f2f}.dark{background:#111827}.purple{background:#7c3aed}.sec{font-weight:900;color:#000080;margin-top:10px}.status{text-align:center;font-weight:900;min-height:22px;color:#000080}.poster{width:720px;height:1080px;margin:auto;position:relative;overflow:hidden;background:#111;color:#fff;box-shadow:0 15px 45px #0006}.bg,.pattern,.shape1,.shape2{position:absolute;inset:0;pointer-events:none}.bg{z-index:0}.pattern{z-index:1;opacity:.12}.shape1,.shape2{z-index:2}.el{position:absolute;cursor:move;user-select:none;z-index:5}.resize{resize:both;overflow:hidden}.badge{top:35px;left:50px;background:#ffcc00;color:#111;padding:10px 28px;border-radius:999px;font-weight:900;font-size:25px}.logo{top:28px;right:38px;width:95px;height:95px;border-radius:50%;overflow:hidden;background:#fff;color:#000;display:grid;place-items:center;font-weight:900;font-size:16px}.logo img,.photo img{width:100%;height:100%;object-fit:cover}.title{font-family:'Baloo 2';font-size:68px;font-weight:900;line-height:1.05;width:620px;left:50px;top:90px;text-align:center;text-shadow:0 4px 12px #0008}.sub{font-size:32px;font-weight:800;width:600px;left:60px;top:240px;text-align:center;text-shadow:0 3px 10px #0008}.photo{width:300px;height:300px;left:210px;top:370px;border-radius:50%;border:12px solid #fff;background:#eee;overflow:hidden;display:grid;place-items:center;color:#333;font-weight:900}.name{font-size:46px;font-weight:900;width:620px;left:50px;top:700px;text-align:center;text-shadow:0 4px 12px #0008}.info{background:#fff;color:#111;border-radius:28px;padding:24px;font-size:29px;font-weight:900;width:620px;left:50px;top:785px;line-height:1.5}.host{bottom:0;left:0;width:720px;background:#0009;padding:22px;font-size:28px;font-weight:900;text-align:center}.mapText{left:50px;bottom:120px;width:420px;font-size:22px;background:#ffffffdd;color:#111;padding:10px;border-radius:12px;font-weight:800}.qr{right:45px;bottom:145px;background:#fff;padding:10px;border-radius:16px;width:120px;height:120px}.sticker{font-size:58px}.small{font-size:12px;color:#64748b;text-align:center}.hide{display:none!important}
-/* Canva style theme classes */.pat0 .pattern{display:none}.pat1 .pattern{background-image:radial-gradient(circle,#fff 2px,transparent 3px);background-size:40px 40px}.pat2 .pattern{background-image:linear-gradient(45deg,rgba(255,255,255,.7) 1px,transparent 1px);background-size:26px 26px}.pat3 .pattern{background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.55) 0 2px,transparent 2px 18px)}.shapeA .shape1{background:radial-gradient(circle at 85% 12%,#ffffff35 0 0,transparent 34%)}.shapeB .shape1{background:linear-gradient(145deg,transparent 55%,#00000038 55%)}.shapeC .shape1{inset:42px;border:4px solid #ffffff80;border-radius:32px}.shapeD .shape1{background:linear-gradient(165deg,transparent 0 58%,#ffffff28 58% 75%,transparent 75%)}
-@media(max-width:900px){.grid{grid-template-columns:1fr}.panel{max-height:none}.poster{width:360px;height:540px}.badge{font-size:13px;top:18px;left:25px;padding:5px 14px}.logo{width:48px;height:48px;top:14px;right:19px;font-size:9px}.title{font-size:34px;width:310px;left:25px;top:45px}.sub{font-size:16px;width:300px;left:30px;top:120px}.photo{width:150px;height:150px;left:105px;top:185px;border-width:6px}.name{font-size:23px;width:310px;left:25px;top:350px}.info{font-size:14.5px;width:310px;left:25px;top:392px;padding:12px;border-radius:14px}.host{width:360px;font-size:14px;padding:11px}.qr{width:60px;height:60px;right:22px;bottom:72px;padding:5px}.mapText{font-size:11px;left:25px;bottom:60px;width:210px}}
+body{margin:0;font-family:Poppins;background:#f1f5f9}
+.app{max-width:1200px;margin:auto;padding:10px}
+.grid{display:grid;grid-template-columns:350px 1fr;gap:10px}
+
+input,textarea,select,button{
+width:100%;padding:10px;margin:5px 0;border-radius:10px;border:1px solid #ccc
+}
+button{background:#000080;color:#fff;font-weight:900;border:0}
+
+.poster{
+width:360px;height:600px;margin:auto;
+background:#111;color:#fff;position:relative;
+overflow:hidden;box-shadow:0 10px 30px #0006
+}
+
+.bg{position:absolute;width:100%;height:100%;z-index:0}
+.el{position:absolute;cursor:move;z-index:2}
+.resize{resize:both;overflow:auto}
+
+.title{top:40px;width:100%;text-align:center;font-size:28px;font-weight:900}
+.sub{top:90px;width:90%;left:5%;text-align:center}
+.photo{top:150px;left:100px;width:150px;height:150px;border-radius:50%;background:#ccc;overflow:hidden}
+.name{top:320px;width:100%;text-align:center;font-weight:900}
+.info{bottom:120px;width:90%;left:5%;background:#fff;color:#000;padding:10px;border-radius:10px}
+.host{bottom:0;width:100%;background:#000;padding:8px;text-align:center}
+.qr{bottom:60px;right:10px}
+
 </style>
 </head>
+
 <body>
+
 <div class="app">
-<h2>🚀 Ultimate Canva Poster Editor</h2>
-<div class="note">सगळे details inputs कायम ठेवले आहेत — फक्त design/font/layout बदलते.</div>
-<div class="status" id="status"></div>
 <div class="grid">
-<div class="panel">
-<div class="sec">Poster Details</div>
-<input id="badgeText" value="RCM BUSINESS SEMINAR" placeholder="Top Badge">
-<input id="titleText" value="RCM नये भारत का निर्माण" placeholder="Main Title">
-<textarea id="subText" placeholder="Subtitle">स्मार्ट बचत, आरोग्य आणि उत्पन्नाची सुवर्णसंधी</textarea>
-<input id="nameText" value="दिनेश राजपूत सर" placeholder="Speaker / Leader Name">
-<div class="row"><input id="dateText" value="26 एप्रिल 2026" placeholder="Date"><input id="timeText" value="सकाळी 9:30 वा." placeholder="Time"></div>
-<textarea id="venueText" placeholder="Venue / Location">कृष्णाई RCM सेवा केंद्र, स्नेह शारदा नगर, वसमत रोड, परभणी</textarea>
-<input id="mapLink" placeholder="Google Map Link paste करा">
-<div class="row"><input id="hostText" value="DS WORLD TEAM" placeholder="Host Name"><input id="mobileText" value="9876543210" placeholder="Mobile"></div>
-<div class="sec">Upload</div>
-<label>Speaker Photo</label><input type="file" id="photoInput" accept="image/*">
-<label>Logo Upload</label><input type="file" id="logoInput" accept="image/*">
-<div class="sec">Canva Design Controls</div>
-<select id="themeSelect"></select>
-<select id="layoutSelect"><option value="0">Center Layout</option><option value="1">Right Photo Business</option><option value="2">Left Photo Corporate</option><option value="3">Viral Split</option><option value="4">Premium Invite</option><option value="5">Health Camp</option></select>
-<div class="row"><select id="fontSelect"><option value="Baloo 2">Baloo 2</option><option value="Poppins">Poppins</option><option value="Noto Serif Devanagari">Noto Serif</option><option value="Oswald">Oswald</option></select><select id="photoStyle"><option value="circle">Circle Photo</option><option value="round">Rounded Card</option><option value="square">Square Photo</option><option value="gold">Gold Ring</option></select></div>
-<div class="row"><select id="patternSelect"><option value="pat0">No Pattern</option><option value="pat1">Dots Pattern</option><option value="pat2">Grid Pattern</option><option value="pat3">Line Pattern</option></select><select id="shapeSelect"><option value="shapeA">Circle Glow</option><option value="shapeB">Diagonal Shade</option><option value="shapeC">Luxury Border</option><option value="shapeD">Ribbon Shape</option></select></div>
-<div class="row"><button onclick="updatePoster()">Update</button><button class="orange" onclick="randomDesign()">Random Canva</button></div>
-<div class="row"><button class="green" onclick="addSticker()">Add Sticker</button><button class="dark" onclick="generateQR()">QR Generate</button></div>
-<div class="row"><button class="red" onclick="downloadPoster()">HD Download</button><button class="green" onclick="shareWhatsApp()">WhatsApp Share</button></div>
-<div class="row"><button class="purple" onclick="saveLocal()">Save Local</button><button class="dark" onclick="loadLocal()">Load Local</button></div>
-<p class="small">Poster वर text/photo/logo/QR drag करता येईल. Resize corner वापरून size बदलता येईल.</p>
-</div>
+
+<!-- LEFT PANEL -->
 <div>
-<div class="poster pat1 shapeA" id="poster">
-<div class="bg" id="bg"></div><div class="pattern"></div><div class="shape1"></div><div class="shape2"></div>
-<div class="el badge resize" id="badge"></div>
-<div class="el logo resize" id="logo">LOGO</div>
+
+<input id="titleText" value="RCM नये भारत का निर्माण">
+<textarea id="subText">Smart Income Opportunity</textarea>
+<input id="nameText" value="Leader Name">
+<input id="dateText" value="26 April">
+<input id="timeText" value="9:30 AM">
+<textarea id="venueText">Parbhani</textarea>
+<input id="mapLink" placeholder="Google Map Link">
+
+<input type="file" id="photoInput">
+<input type="file" id="bgUpload">
+
+<select id="templateSelect"></select>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px">
+<button onclick="applyTemplate()">Template</button>
+<button onclick="aiPoster()">AI Design</button>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px">
+<button onclick="qr()">QR</button>
+<button onclick="download()">Download</button>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px">
+<button onclick="saveLocal()">Save</button>
+<button onclick="loadLocal()">Load</button>
+</div>
+
+<button onclick="addText()">+ Add Text</button>
+
+</div>
+
+<!-- POSTER -->
+<div>
+<div class="poster" id="poster">
+
+<div class="bg" id="bg"></div>
+
 <div class="el title resize" id="pTitle"></div>
 <div class="el sub resize" id="pSub"></div>
 <div class="el photo resize" id="pPhoto">Photo</div>
 <div class="el name resize" id="pName"></div>
 <div class="el info resize" id="pInfo"></div>
-<div class="el mapText resize" id="pMap"></div>
-<div class="el qr resize" id="qrBox"></div>
 <div class="el host resize" id="pHost"></div>
+<div class="el qr resize" id="qrBox"></div>
+
 </div>
 </div>
+
 </div>
 </div>
+
 <script>
-window.addEventListener('DOMContentLoaded',()=>{
-const $=id=>document.getElementById(id);
-const colors=[["#ff9933","#ffffff","#138808"],["#061b4e","#1d4ed8","#38bdf8"],["#111827","#fbbf24","#92400e"],["#064e3b","#16a34a","#dcfce7"],["#2e1065","#7e22ce","#f0abfc"],["#991b1b","#ef4444","#fbbf24"],["#0c4a6e","#0284c7","#e0f2fe"],["#581c87","#db2777","#fef3c7"],["#000","#434343","#fff"],["#f97316","#fff","#138808"]];
-const themes=[];
-for(let i=0;i<1000;i++){let c=colors[i%colors.length],a=(i*37)%360;if(i%4===0)themes.push(`linear-gradient(${a}deg,${c[0]},${c[1]},${c[2]})`);else if(i%4===1)themes.push(`radial-gradient(circle at top,${c[1]},${c[0]},${c[2]})`);else if(i%4===2)themes.push(`linear-gradient(${a}deg,${c[0]} 0 35%,${c[1]} 35% 60%,${c[2]} 60% 100%)`);else themes.push(`conic-gradient(from ${a}deg,${c[0]},${c[1]},${c[2]},${c[0]})`)}
-themes.forEach((t,i)=>{let o=document.createElement('option');o.value=i;o.textContent='Design '+(i+1);$('themeSelect').appendChild(o)});
-function set(el,x,y){el.style.left=x+'px';el.style.top=y+'px'}
-function applyLayout(){let l=$('layoutSelect').value;if(l==0){set($('pTitle'),50,90);set($('pSub'),60,240);set($('pPhoto'),210,370);set($('pName'),50,700);set($('pInfo'),50,785)}if(l==1){set($('pTitle'),45,120);set($('pSub'),45,280);set($('pPhoto'),385,335);set($('pName'),45,620);set($('pInfo'),50,760)}if(l==2){set($('pPhoto'),45,330);set($('pTitle'),300,120);set($('pSub'),300,280);set($('pName'),300,620);set($('pInfo'),50,760)}if(l==3){set($('pTitle'),45,105);set($('pSub'),45,260);set($('pPhoto'),360,410);set($('pName'),45,650);set($('pInfo'),50,770)}if(l==4){set($('pTitle'),70,160);set($('pSub'),80,330);set($('pPhoto'),220,470);set($('pName'),70,760);set($('pInfo'),80,835)}if(l==5){set($('pTitle'),55,80);set($('pSub'),65,210);set($('pPhoto'),210,330);set($('pName'),50,655);set($('pInfo'),55,755)}}
-function applyPhotoStyle(){let s=$('photoStyle').value;let p=$('pPhoto');p.style.borderColor='#fff';p.style.borderRadius='50%';if(s==='round')p.style.borderRadius='35px';if(s==='square')p.style.borderRadius='0';if(s==='gold'){p.style.borderRadius='50%';p.style.borderColor='#fbbf24'}}
-window.updatePoster=function(){
-$('badge').innerText=$('badgeText').value;$('pTitle').innerText=$('titleText').value;$('pSub').innerText=$('subText').value;$('pName').innerText=$('nameText').value;$('pInfo').innerHTML=`📅 ${$('dateText').value}<br>⏰ ${$('timeText').value}<br>📍 ${$('venueText').value}`;$('pHost').innerText=`${$('hostText').value} | ${$('mobileText').value}`;$('pMap').innerText=$('mapLink').value?'📍 Map: '+$('mapLink').value:'';$('bg').style.background=themes[$('themeSelect').value];$('poster').style.fontFamily=$('fontSelect').value;$('poster').className='poster '+$('patternSelect').value+' '+$('shapeSelect').value;applyLayout();applyPhotoStyle();}
-window.randomDesign=function(){$('themeSelect').value=Math.floor(Math.random()*themes.length);$('layoutSelect').value=Math.floor(Math.random()*6);$('photoStyle').value=['circle','round','square','gold'][Math.floor(Math.random()*4)];$('patternSelect').value=['pat0','pat1','pat2','pat3'][Math.floor(Math.random()*4)];$('shapeSelect').value=['shapeA','shapeB','shapeC','shapeD'][Math.floor(Math.random()*4)];$('fontSelect').value=['Baloo 2','Poppins','Noto Serif Devanagari','Oswald'][Math.floor(Math.random()*4)];window.updatePoster();}
-function readImg(e,el,store){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{el.innerHTML=`<img src="${r.result}">`;localStorage.setItem(store,r.result)};r.readAsDataURL(f)}
-$('photoInput').onchange=e=>readImg(e,$('pPhoto'),'poster_photo');$('logoInput').onchange=e=>readImg(e,$('logo'),'poster_logo');
-window.generateQR=function(){let box=$('qrBox');box.innerHTML='';new QRCode(box,{text:$('mapLink').value||location.href,width:100,height:100});}
-window.addSticker=function(){let arr=['🔥','✅','🎯','🏆','🌱','💯','📢','⭐','🚀','🎉'];let d=document.createElement('div');d.className='el sticker resize';d.innerText=arr[Math.floor(Math.random()*arr.length)];d.style.left='80px';d.style.top='80px';$('poster').appendChild(d);makeDraggable(d)}
-function makeDraggable(el){let ox=0,oy=0,drag=false;el.addEventListener('mousedown',start);el.addEventListener('touchstart',start,{passive:false});function start(e){drag=true;let p=e.touches?e.touches[0]:e;ox=p.clientX-el.offsetLeft;oy=p.clientY-el.offsetTop;document.addEventListener('mousemove',move);document.addEventListener('mouseup',end);document.addEventListener('touchmove',move,{passive:false});document.addEventListener('touchend',end)}function move(e){if(!drag)return;e.preventDefault();let p=e.touches?e.touches[0]:e;el.style.left=(p.clientX-ox)+'px';el.style.top=(p.clientY-oy)+'px'}function end(){drag=false}}
-document.querySelectorAll('.el').forEach(makeDraggable);
-window.downloadPoster=async function(){window.updatePoster();await document.fonts.ready;html2canvas($('poster'),{scale:4,useCORS:true,allowTaint:true}).then(c=>{let a=document.createElement('a');a.href=c.toDataURL('image/png',1);a.download='Ultimate-RCM-Poster.png';a.click()})}
-window.shareWhatsApp=function(){let msg=`${$('titleText').value}%0A${$('subText').value}%0A📅 ${$('dateText').value}%0A⏰ ${$('timeText').value}%0A📍 ${$('venueText').value}%0A${$('mapLink').value}`;window.open('https://wa.me/?text='+msg,'_blank')}
-window.saveLocal=function(){window.updatePoster();let ids=['badgeText','titleText','subText','nameText','dateText','timeText','venueText','mapLink','hostText','mobileText','themeSelect','layoutSelect','fontSelect','photoStyle','patternSelect','shapeSelect'];let d={};ids.forEach(id=>d[id]=$(id).value);localStorage.setItem('poster_data',JSON.stringify(d));$('status').innerText='✅ Saved'}
-window.loadLocal=function(){let d=JSON.parse(localStorage.getItem('poster_data')||'{}');Object.keys(d).forEach(id=>{if($(id))$(id).value=d[id]});let ph=localStorage.getItem('poster_photo');if(ph)$('pPhoto').innerHTML=`<img src="${ph}">`;let lg=localStorage.getItem('poster_logo');if(lg)$('logo').innerHTML=`<img src="${lg}">`;window.updatePoster();$('status').innerText='✅ Loaded'}
-window.loadLocal();window.updatePoster();
+
+// 50 Templates
+const templates=[
+"linear-gradient(135deg,#ff9933,#fff,#138808)",
+"linear-gradient(135deg,#000,#1e3a8a)",
+"linear-gradient(135deg,#ff0000,#000)",
+"linear-gradient(135deg,#16a34a,#dcfce7)",
+"linear-gradient(135deg,#7c3aed,#f0abfc)",
+"linear-gradient(135deg,#0ea5e9,#bae6fd)"
+];
+
+for(let i=0;i<50;i++){
+let t=templates[i%templates.length];
+let o=document.createElement("option");
+o.value=t;o.textContent="Template "+(i+1);
+templateSelect.appendChild(o);
+}
+
+// UPDATE
+function update(){
+pTitle.innerText=titleText.value;
+pSub.innerText=subText.value;
+pName.innerText=nameText.value;
+
+pInfo.innerHTML=
+"📅 "+dateText.value+"<br>"+
+"⏰ "+timeText.value+"<br>"+
+"📍 "+venueText.value;
+
+pHost.innerText="RCM TEAM";
+}
+
+// TEMPLATE
+function applyTemplate(){
+bg.style.background=templateSelect.value;
+update();
+}
+
+// AI DESIGN
+function aiPoster(){
+let random=templates[Math.floor(Math.random()*templates.length)];
+bg.style.background=random;
+
+pTitle.style.fontSize=Math.random()*10+25+"px";
+pSub.style.fontSize=Math.random()*8+14+"px";
+
+update();
+}
+
+// PHOTO
+photoInput.onchange=e=>{
+let r=new FileReader();
+r.onload=()=>pPhoto.innerHTML=`<img src="${r.result}" style="width:100%;height:100%">`;
+r.readAsDataURL(e.target.files[0]);
+}
+
+// BG IMAGE
+bgUpload.onchange=e=>{
+let r=new FileReader();
+r.onload=()=>bg.style.background=`url(${r.result}) center/cover`;
+r.readAsDataURL(e.target.files[0]);
+}
+
+// QR
+function qr(){
+qrBox.innerHTML="";
+new QRCode(qrBox,{
+text:mapLink.value||"RCM",
+width:80,height:80
 });
+}
+
+// DOWNLOAD
+function download(){
+html2canvas(poster,{scale:4}).then(c=>{
+let a=document.createElement("a");
+a.href=c.toDataURL();
+a.download="poster.png";
+a.click();
+});
+}
+
+// SAVE
+function saveLocal(){
+let data={
+title:titleText.value,
+sub:subText.value,
+name:nameText.value
+};
+localStorage.setItem("posterV3",JSON.stringify(data));
+alert("Saved");
+}
+
+// LOAD
+function loadLocal(){
+let d=JSON.parse(localStorage.getItem("posterV3")||"{}");
+titleText.value=d.title||"";
+subText.value=d.sub||"";
+nameText.value=d.name||"";
+update();
+}
+
+// ADD TEXT BOX
+function addText(){
+let d=document.createElement("div");
+d.className="el resize";
+d.innerText="New Text";
+d.style.top="200px";
+d.style.left="50px";
+poster.appendChild(d);
+drag(d);
+}
+
+// DRAG
+function drag(el){
+let x,y,drag=false;
+el.onmousedown=e=>{
+drag=true;x=e.offsetX;y=e.offsetY;
+};
+document.onmousemove=e=>{
+if(drag){
+el.style.left=(e.pageX-x)+"px";
+el.style.top=(e.pageY-y)+"px";
+}
+};
+document.onmouseup=()=>drag=false;
+}
+document.querySelectorAll(".el").forEach(drag);
+
+update();
+
 </script>
+
 </body>
 </html>
