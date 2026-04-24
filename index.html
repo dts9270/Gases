@@ -1,219 +1,93 @@
 <!DOCTYPE html><html lang="mr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>HD Poster Maker - 100+ Designs</title>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ultra Pro Poster Maker</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Baloo+2:wght@600;700;800&family=Noto+Serif+Devanagari:wght@600;700;800&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<!-- Firebase optional आहे. Firebase save/load हवे असल्यास खाली config add करू. -->
 <style>
-:root{--bg:#f3efe7;--brown:#a8734e;--dark:#1f2937;--muted:#6b7280;--white:#fff;--line:#eadfd3}
-*{box-sizing:border-box}
-body{margin:0;font-family:Poppins,'Baloo 2',sans-serif;background:var(--bg);color:var(--dark)}
-.app{max-width:1200px;margin:auto;padding:14px}
-.header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
-.header h1{margin:0;font-size:22px;font-weight:800;color:#2b211b}
-.header small{color:var(--muted);font-weight:600}
-.grid{display:grid;grid-template-columns:380px 1fr;gap:16px;align-items:start}
-.panel{background:#fff;border-radius:24px;padding:16px;box-shadow:0 10px 30px rgba(55,37,24,.10);border:1px solid #fff}
-.sectionTitle{font-weight:800;color:#a8734e;letter-spacing:2px;text-transform:uppercase;font-size:13px;margin:16px 0 8px}
-.field{display:flex;align-items:center;gap:10px;background:#fbfaf7;border:1px solid var(--line);border-radius:16px;padding:12px;margin:8px 0}
-.field span{font-size:20px;color:#a8734e;width:24px;text-align:center}
-input,select,textarea{width:100%;border:0;outline:0;background:transparent;font-family:inherit;font-size:14px;color:#222}
-textarea{min-height:70px;resize:vertical}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
-button{border:0;border-radius:16px;padding:13px 14px;font-family:inherit;font-weight:800;cursor:pointer;background:#a8734e;color:#fff;box-shadow:0 8px 18px rgba(168,115,78,.28)}
-button.secondary{background:#1f2937}
-button.green{background:#138808}
-button.orange{background:#ff8a00}
-.previewWrap{display:flex;flex-direction:column;align-items:center;gap:12px;overflow:auto}
-.poster{width:720px;height:1080px;position:relative;overflow:hidden;background:#fff;box-shadow:0 18px 45px rgba(0,0,0,.18);font-family:'Baloo 2',Poppins,sans-serif}
-.poster *{position:relative;z-index:2}
-.bgLayer{position:absolute;inset:0;z-index:0}
-.pattern{position:absolute;inset:0;z-index:1;opacity:.14;background-image:radial-gradient(circle at 20% 20%,#fff 0 4px,transparent 5px),radial-gradient(circle at 80% 70%,#fff 0 5px,transparent 6px);background-size:42px 42px}
-.topBadge{display:inline-block;padding:8px 22px;border-radius:999px;font-weight:800;font-size:26px;margin:42px 0 0 42px;background:rgba(255,255,255,.9);color:#111}
-.mainTitle{font-size:64px;line-height:1.02;font-weight:800;margin:22px 42px 8px;color:#fff;text-shadow:0 4px 14px rgba(0,0,0,.28)}
-.subTitle{font-size:32px;line-height:1.2;font-weight:700;margin:0 42px;color:#fff;text-shadow:0 3px 10px rgba(0,0,0,.26)}
-.photoBox{width:300px;height:300px;border-radius:50%;overflow:hidden;border:10px solid rgba(255,255,255,.95);box-shadow:0 14px 35px rgba(0,0,0,.30);margin:36px auto 18px;background:#eee;display:flex;align-items:center;justify-content:center;color:#777;font-weight:800;font-size:28px;text-align:center}
-.photoBox img{width:100%;height:100%;object-fit:cover}
-.speakerName{text-align:center;color:#fff;font-size:42px;font-weight:800;text-shadow:0 4px 12px rgba(0,0,0,.35);padding:0 32px}
-.infoCard{margin:28px 46px 0;background:rgba(255,255,255,.94);border-radius:28px;padding:24px;box-shadow:0 14px 32px rgba(0,0,0,.18)}
-.infoLine{display:flex;gap:12px;align-items:flex-start;font-size:25px;font-weight:800;color:#2b211b;margin:10px 0;line-height:1.2}
-.infoLine b{color:#a8734e;min-width:34px;font-size:28px}
-.host{position:absolute;left:46px;right:46px;bottom:34px;background:rgba(0,0,0,.55);color:#fff;border-radius:24px;padding:16px 22px;font-size:23px;font-weight:800;display:flex;justify-content:space-between;gap:12px;align-items:center}
-.logoText{position:absolute;top:20px;right:30px;color:#fff;font-size:24px;font-weight:800;text-shadow:0 3px 10px rgba(0,0,0,.3)}
-.designBar{display:flex;gap:8px;flex-wrap:wrap;max-height:180px;overflow:auto;padding:8px;background:#fff;border-radius:20px}
-.chip{padding:8px 11px;border-radius:999px;background:#f4eadf;color:#7a4d31;font-size:12px;font-weight:800;cursor:pointer;border:2px solid transparent}.chip.active{background:#a8734e;color:#fff}
-.hint{font-size:12px;color:#6b7280;text-align:center}
-@media(max-width:900px){.grid{grid-template-columns:1fr}.poster{width:360px;height:540px}.topBadge{font-size:13px;margin:21px 0 0 21px;padding:4px 11px}.mainTitle{font-size:32px;margin:11px 21px 4px}.subTitle{font-size:16px;margin:0 21px}.photoBox{width:150px;height:150px;border-width:5px;margin:18px auto 9px;font-size:14px}.speakerName{font-size:21px;padding:0 16px}.infoCard{margin:14px 23px 0;border-radius:14px;padding:12px}.infoLine{font-size:12.5px;margin:5px 0;gap:6px}.infoLine b{font-size:14px;min-width:17px}.host{left:23px;right:23px;bottom:17px;border-radius:12px;padding:8px 11px;font-size:11.5px}.logoText{top:10px;right:15px;font-size:12px}.row,.btns{grid-template-columns:1fr}}
+*{box-sizing:border-box}body{margin:0;font-family:Poppins,Arial,sans-serif;background:linear-gradient(135deg,#ff9933,#fff,#138808);background-size:300% 300%;animation:bg 9s infinite;padding:12px}@keyframes bg{0%{background-position:0%}50%{background-position:100%}100%{background-position:0%}}
+.app{max-width:1240px;margin:auto;background:rgba(255,255,255,.97);padding:14px;border-radius:22px;box-shadow:0 18px 40px rgba(0,0,0,.18)}h2{margin:0;color:#000080;text-align:center}.subhead{text-align:center;color:#64748b;font-weight:800;margin:5px 0 12px}.grid{display:grid;grid-template-columns:420px 1fr;gap:18px}.panel{background:#f8fafc;border:1px solid #e5e7eb;border-radius:18px;padding:14px}input,textarea,select{width:100%;padding:10px;margin:5px 0;border-radius:12px;border:1px solid #d1d5db;font-family:inherit;font-size:14px;background:#fff}textarea{min-height:62px;resize:vertical}.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}button{padding:12px;border:none;border-radius:13px;font-weight:900;margin-top:8px;background:#000080;color:white;width:100%;cursor:pointer;font-family:inherit;box-shadow:0 7px 15px rgba(0,0,0,.15)}.green{background:#138808}.orange{background:#ff9933;color:#111}.red{background:#d32f2f}.dark{background:#111827}.purple{background:#7c3aed}.status{font-weight:900;text-align:center;min-height:22px;margin:5px;color:#000080}.chips{display:grid;grid-template-columns:1fr 1fr;gap:7px;max-height:190px;overflow:auto;background:#fff;padding:8px;border-radius:14px;border:1px solid #e5e7eb}.chip{padding:9px;background:#f8fafc;border:1px solid #e5e7eb;border-radius:14px;cursor:pointer;font-size:12px;font-weight:900}.chip.active{background:#000080;color:#fff}.hint{font-size:12px;color:#64748b;text-align:center;margin-top:8px}.sec{font-weight:900;color:#000080;margin:10px 0 4px}
+.poster{width:720px;height:1080px;margin:auto;position:relative;overflow:hidden;color:#fff;background:#111;box-shadow:0 18px 45px rgba(0,0,0,.25);font-family:'Baloo 2',Poppins,sans-serif}.poster *{position:relative;z-index:3}.bg,.shape,.shape2,.pattern,.overlay{position:absolute;z-index:0;pointer-events:none}.bg{inset:0}.overlay{inset:0;z-index:1}.pattern{inset:0;z-index:2;opacity:.11}.logo{position:absolute;top:26px;right:34px;font-size:24px;font-weight:900;text-shadow:0 4px 12px rgba(0,0,0,.35);z-index:5}.badge{display:inline-block;border-radius:999px;font-weight:900}.title{font-weight:900;line-height:1.02}.subtitle{font-weight:800;line-height:1.18}.photo{overflow:hidden;background:#eee;color:#555;display:grid;place-items:center;font-weight:900;box-shadow:0 20px 40px rgba(0,0,0,.28)}.photo img{width:100%;height:100%;object-fit:cover}.speaker{font-weight:900}.info{font-weight:900;line-height:1.45}.host{position:absolute;font-weight:900}.decorText{position:absolute;font-size:92px;font-weight:900;opacity:.07;z-index:1;white-space:nowrap;left:-15px;bottom:250px;transform:rotate(-18deg)}
+/* Background themes */.bg0{background:linear-gradient(135deg,#ff9933,#fff,#138808)}.bg1{background:linear-gradient(135deg,#0f172a,#1d4ed8,#38bdf8)}.bg2{background:radial-gradient(circle at top,#fef3c7,#92400e,#09090b)}.bg3{background:linear-gradient(135deg,#064e3b,#16a34a,#dcfce7)}.bg4{background:linear-gradient(180deg,#1e1b4b,#7c3aed,#f0abfc)}.bg5{background:linear-gradient(135deg,#111827,#991b1b,#fbbf24)}.bg6{background:#f8fafc}.bg7{background:linear-gradient(135deg,#0c4a6e,#0284c7,#e0f2fe)}.bg8{background:radial-gradient(circle at 20% 10%,#fde68a,#f97316,#7c2d12)}.bg9{background:linear-gradient(145deg,#f97316 0 34%,#fff 34% 55%,#138808 55%)}
+/* Layouts */.l0 .badge{margin:62px 0 0 58px;padding:13px 32px;font-size:25px;background:#fbbf24;color:#111}.l0 .title{font-size:70px;margin:34px 58px 8px}.l0 .subtitle{font-size:33px;margin:0 62px}.l0 .photo{width:300px;height:300px;border-radius:44px;border:10px solid #fff;margin:48px auto 18px}.l0 .speaker{text-align:center;font-size:45px}.l0 .info{background:#fff;color:#111;margin:34px 62px 0;padding:28px;border-radius:32px;font-size:29px}.l0 .host{left:58px;right:58px;bottom:38px;background:rgba(0,0,0,.68);border-radius:999px;padding:18px;font-size:27px;text-align:center}
+.l1 .badge{margin:56px 0 0 48px;padding:12px 28px;font-size:24px;background:#000080;color:#fff}.l1 .title{font-size:68px;margin:46px 350px 8px 48px}.l1 .subtitle{font-size:32px;margin:0 360px 0 50px}.l1 .photo{position:absolute;right:48px;top:260px;width:285px;height:360px;border-radius:34px;border:10px solid #fff}.l1 .speaker{position:absolute;left:52px;bottom:340px;width:330px;font-size:44px;text-align:left}.l1 .info{position:absolute;left:50px;right:50px;bottom:105px;background:#fff;color:#111;border-radius:28px;padding:26px;font-size:28px}.l1 .host{left:0;right:0;bottom:0;background:rgba(0,0,0,.7);padding:22px;font-size:27px;text-align:center}
+.l2 .badge{margin:58px auto 0;display:block;width:max-content;padding:12px 32px;font-size:25px;background:#fff;color:#111}.l2 .title{text-align:center;font-size:66px;margin:42px 62px 8px}.l2 .subtitle{text-align:center;font-size:32px;margin:0 70px}.l2 .photo{width:285px;height:285px;border-radius:50%;border:12px solid #fff;margin:54px auto 18px}.l2 .speaker{text-align:center;font-size:44px}.l2 .info{background:rgba(255,255,255,.94);color:#111;margin:36px 64px 0;padding:28px;border-radius:34px;font-size:29px}.l2 .host{left:0;right:0;bottom:0;background:rgba(0,0,0,.72);padding:22px;font-size:27px;text-align:center}
+.l3 .badge{margin:44px 0 0 44px;padding:12px 28px;font-size:24px;background:#111;color:#fff}.l3 .title{font-size:74px;margin:64px 38px 8px;color:#000080;text-shadow:none}.l3 .subtitle{font-size:33px;margin:0 42px;color:#111;text-shadow:none}.l3 .photo{position:absolute;right:42px;bottom:235px;width:285px;height:285px;border-radius:50%;border:12px solid #000080}.l3 .speaker{position:absolute;left:44px;bottom:330px;width:310px;color:#000080;text-shadow:none;font-size:45px;text-align:left}.l3 .info{position:absolute;left:42px;right:42px;bottom:100px;background:#fff;color:#111;border:4px solid #000080;border-radius:28px;padding:24px;font-size:27px}.l3 .host{left:0;right:0;bottom:0;background:#000080;color:#fff;padding:22px;font-size:27px;text-align:center}
+.l4 .badge{margin:74px auto 0;display:block;width:max-content;padding:12px 34px;font-size:24px;background:#111827;color:#fbbf24;border:2px solid #fbbf24}.l4 .title{text-align:center;font-size:66px;margin:52px 76px 10px;font-family:'Noto Serif Devanagari',serif}.l4 .subtitle{text-align:center;font-size:31px;margin:0 82px}.l4 .photo{width:270px;height:270px;border-radius:50%;border:12px solid #fbbf24;margin:50px auto 18px}.l4 .speaker{text-align:center;font-size:42px;color:#fbbf24}.l4 .info{background:rgba(17,24,39,.86);color:#fff;margin:34px 78px 0;padding:26px;border-radius:28px;border:2px solid #fbbf24;font-size:28px}.l4 .host{left:80px;right:80px;bottom:54px;background:#fbbf24;color:#111;border-radius:999px;padding:16px;font-size:26px;text-align:center}
+/* Shapes */.sType0 .shape{display:none}.sType1 .shape{width:620px;height:620px;border-radius:50%;background:rgba(255,255,255,.14);top:-180px;right:-220px}.sType1 .shape2{width:360px;height:360px;border-radius:50%;background:rgba(255,255,255,.10);bottom:80px;left:-120px}.sType2 .shape{width:920px;height:260px;background:rgba(255,255,255,.13);bottom:170px;left:-130px;transform:rotate(-12deg)}.sType3 .shape{inset:42px;border:4px solid rgba(255,255,255,.45);border-radius:32px}.sType3 .shape2{inset:62px;border:1px solid rgba(255,255,255,.25);border-radius:24px}.sType4 .shape{width:100%;height:230px;bottom:0;background:rgba(0,0,0,.34);transform:skewY(-6deg);transform-origin:left top}
+/* patterns */.p0 .pattern{display:none}.p1 .pattern{background-image:radial-gradient(circle,#fff 2px,transparent 3px);background-size:42px 42px}.p2 .pattern{background-image:linear-gradient(45deg,rgba(255,255,255,.7) 1px,transparent 1px);background-size:26px 26px}.p3 .pattern{background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.65) 0 2px,transparent 2px 18px)}.p4 .pattern{background-image:radial-gradient(circle at 30% 20%,rgba(255,255,255,.9) 0 2px,transparent 3px),radial-gradient(circle at 70% 60%,rgba(255,255,255,.9) 0 2px,transparent 3px);background-size:58px 58px}
+/* color tweaks */.lightMode{color:#111}.lightMode .logo{color:#111;text-shadow:none}.lightMode .title,.lightMode .subtitle{color:#111;text-shadow:none}.goldText .title,.goldText .speaker{color:#fbbf24}.blueText .title,.blueText .speaker{color:#000080;text-shadow:none}.greenText .title,.greenText .speaker{color:#dcfce7}
+@media(max-width:950px){.grid{grid-template-columns:1fr}.poster{width:360px;height:540px;font-size:50%}.logo{font-size:12px!important;top:13px!important;right:17px!important}.badge{transform:scale(.5);transform-origin:top left}.l2 .badge,.l4 .badge{transform-origin:top center}.title{font-size:35px!important}.subtitle{font-size:16px!important}.speaker{font-size:22px!important}.info{font-size:14px!important}.host{font-size:13px!important}.photo{width:150px!important;height:150px!important;border-width:5px!important}.l1 .photo{right:24px!important;top:130px!important;width:142px!important;height:180px!important}.l1 .speaker{left:26px!important;bottom:170px!important;width:165px!important}.l1 .info{left:25px!important;right:25px!important;bottom:52px!important}.l3 .photo{right:21px!important;bottom:117px!important;width:142px!important;height:142px!important}.l3 .speaker{left:22px!important;bottom:165px!important;width:155px!important}.l3 .info{left:21px!important;right:21px!important;bottom:50px!important}.chips{grid-template-columns:1fr 1fr}.row3{grid-template-columns:1fr}}
 </style>
-</head>
-<body>
-<div class="app">
-  <div class="header">
-    <div><h1>HD Poster Maker</h1><small>Info भरा आणि 100+ design मधून poster download करा</small></div>
-    <button onclick="downloadPoster()">📥 HD Download</button>
-  </div>
-  <div class="grid">
-    <div class="panel">
-      <div class="sectionTitle">Speaker Information</div>
-      <div class="field"><span>👤</span><input id="speaker" placeholder="Leader / Key Speaker Name" value="दिनेश राजपूत सर"></div>
-      <div class="field"><span>📸</span><input id="photo" type="file" accept="image/*"></div><div class="sectionTitle">Poster Text</div>
-  <div class="field"><span>🏷️</span><input id="badge" placeholder="Top Badge" value="RCM BUSINESS SEMINAR"></div>
-  <div class="field"><span>🔥</span><input id="title" placeholder="Main Title" value="RCM नये भारत का निर्माण"></div>
-  <div class="field"><span>✨</span><textarea id="subtitle" placeholder="Subtitle">स्मार्ट बचत, आरोग्य आणि उत्पन्नाची सुवर्णसंधी</textarea></div>
-
-  <div class="sectionTitle">Schedule</div>
-  <div class="row">
-    <div class="field"><span>📅</span><input id="date" placeholder="Date" value="26 एप्रिल 2026"></div>
-    <div class="field"><span>⏰</span><input id="time" placeholder="Time" value="सकाळी 9:30 वा."></div>
-  </div>
-
-  <div class="sectionTitle">Meeting Details</div>
-  <div class="field"><span>🎤</span><select id="type"><option>Business Seminar</option><option>Product Training</option><option>Opportunity Meeting</option><option>Health Camp</option><option>Team Meeting</option></select></div>
-  <div class="field"><span>📍</span><textarea id="venue" placeholder="Venue / Location">कृष्णाई RCM सेवा केंद्र, स्नेह शारदा नगर, वसमत रोड, परभणी</textarea></div>
-  <div class="field"><span>🏢</span><select id="locationType"><option>Offline / In-person</option><option>Online Zoom Meeting</option><option>Google Meet</option><option>Hybrid Meeting</option></select></div>
-
-  <div class="sectionTitle">Host Details</div>
-  <div class="field"><span>🪪</span><input id="host" placeholder="Host Name" value="DS WORLD TEAM"></div>
-  <div class="field"><span>📞</span><input id="mobile" placeholder="Host Mobile No." value="9876543210"></div>
-
-  <div class="sectionTitle">Design Choose Option</div>
-  <div class="field"><span>🎨</span>
-    <select id="designSelect" onchange="selectDesign(this.value)">
-      <option value="">Choose Design</option>
-    </select>
-  </div>
-  <div class="field"><span>🏷️</span>
-    <select id="categorySelect" onchange="filterDesigns(this.value)">
-      <option value="all">All Designs</option>
-      <option value="rcm">RCM / Tricolor</option>
-      <option value="business">Business Blue</option>
-      <option value="premium">Premium Gold</option>
-      <option value="health">Health Green</option>
-      <option value="modern">Modern Dark</option>
-    </select>
-  </div>
-  <div class="designBar" id="designBar"></div>
-  <div class="btns">
-    <button class="secondary" onclick="randomDesign()">🎲 Random</button>
-    <button class="green" onclick="applyData()">✅ Update Poster</button>
-    <button class="orange" onclick="downloadPoster()">📥 HD PNG</button>
-    <button onclick="resetData()">🔄 Reset</button>
-  </div>
-</div>
-
-<div class="panel previewWrap">
-  <div class="poster" id="poster">
-    <div class="bgLayer" id="bgLayer"></div><div class="pattern"></div>
-    <div class="logoText" id="pLogo">DS WORLD</div>
-    <div class="topBadge" id="pBadge"></div>
-    <div class="mainTitle" id="pTitle"></div>
-    <div class="subTitle" id="pSubtitle"></div>
-    <div class="photoBox" id="pPhoto">Speaker<br>Photo</div>
-    <div class="speakerName" id="pSpeaker"></div>
-    <div class="infoCard">
-      <div class="infoLine"><b>📅</b><span id="pDate"></span></div>
-      <div class="infoLine"><b>⏰</b><span id="pTime"></span></div>
-      <div class="infoLine"><b>🎤</b><span id="pType"></span></div>
-      <div class="infoLine"><b>📍</b><span id="pVenue"></span></div>
-      <div class="infoLine"><b>🏢</b><span id="pLocationType"></span></div>
-    </div>
-    <div class="host"><span id="pHost"></span><span id="pMobile"></span></div>
-  </div>
-  <div class="hint">मोबाईलवर preview छोटा दिसेल, पण download HD 1080x1620 PNG मध्ये होईल.</div>
-</div>
-
-  </div>
-</div><script>
-let currentDesign=1, photoData='';
-const gradients=[];
-const colors=[['#ff7a00','#ffffff','#138808'],['#0f172a','#2563eb','#06b6d4'],['#7c2d12','#f97316','#fde68a'],['#3b0764','#a855f7','#f0abfc'],['#052e16','#16a34a','#bbf7d0'],['#111827','#ef4444','#fbbf24'],['#1e1b4b','#4f46e5','#c7d2fe'],['#581c87','#db2777','#fef3c7'],['#0c4a6e','#0284c7','#e0f2fe'],['#422006','#a16207','#fef9c3']];
-for(let i=0;i<120;i++){let c=colors[i%colors.length];let angle=(i*23)%360;gradients.push(`linear-gradient(${angle}deg, ${c[0]} 0%, ${c[1]} 48%, ${c[2]} 100%)`)}
-function designCategory(i){
-  if(i%5===1) return 'rcm';
-  if(i%5===2) return 'business';
-  if(i%5===3) return 'premium';
-  if(i%5===4) return 'health';
-  return 'modern';
-}
-function categoryName(cat){return {rcm:'RCM / Tricolor',business:'Business Blue',premium:'Premium Gold',health:'Health Green',modern:'Modern Dark'}[cat]||'Design'}
-function loadDesignSelect(filter='all'){
-  const sel=document.getElementById('designSelect');
-  sel.innerHTML='<option value="">Choose Design</option>';
-  for(let i=1;i<=120;i++){
-    const cat=designCategory(i);
-    if(filter!=='all' && cat!==filter) continue;
-    const opt=document.createElement('option');
-    opt.value=i;
-    opt.textContent=`Design ${i} - ${categoryName(cat)}`;
-    if(i===currentDesign) opt.selected=true;
-    sel.appendChild(opt);
-  }
-}
-function filterDesigns(cat){loadDesignSelect(cat);makeChips(cat)}
-function selectDesign(val){if(!val)return;currentDesign=parseInt(val);applyDesign();makeChips(document.getElementById('categorySelect').value)}
-function makeChips(filter='all'){
-  const bar=document.getElementById('designBar');bar.innerHTML='';
-  for(let i=1;i<=120;i++){
-    const cat=designCategory(i);
-    if(filter!=='all' && cat!==filter) continue;
-    let d=document.createElement('div');
-    d.className='chip'+(i===currentDesign?' active':'');
-    d.textContent='Design '+i;
-    d.title=categoryName(cat);
-    d.onclick=()=>{currentDesign=i;applyDesign();loadDesignSelect(document.getElementById('categorySelect').value);makeChips(document.getElementById('categorySelect').value)};
-    bar.appendChild(d)
-  }
-}
-function applyDesign(){document.getElementById('bgLayer').style.background=gradients[currentDesign-1];const p=document.getElementById('poster');p.style.borderRadius=(currentDesign%3===0?'0':'8px');document.querySelector('.infoCard').style.borderRadius=(currentDesign%5===0?'6px':'28px');document.querySelector('.photoBox').style.borderRadius=(currentDesign%4===0?'28px':'50%');document.querySelector('.topBadge').style.background=(currentDesign%2===0?'rgba(0,0,0,.55)':'rgba(255,255,255,.9)');document.querySelector('.topBadge').style.color=(currentDesign%2===0?'#fff':'#111')}
-function applyData(){['Badge','Title','Subtitle','Speaker','Date','Time','Venue','Host','Mobile'].forEach(x=>{});pBadge.textContent=badge.value;pTitle.textContent=title.value;pSubtitle.textContent=subtitle.value;pSpeaker.textContent=speaker.value;pDate.textContent=date.value;pTime.textContent=time.value;pType.textContent=type.value;pVenue.textContent=venue.value;pLocationType.textContent=locationType.value;pHost.textContent='Host: '+host.value;pMobile.textContent='☎ '+mobile.value;applyDesign()}
-photo.onchange=e=>{
-  const file=e.target.files[0];
-  if(!file)return;
-  if(!file.type.startsWith('image/')){alert('कृपया फक्त image upload करा.');return;}
-  const r=new FileReader();
-  r.onload=()=>{
-    photoData=r.result;
-    pPhoto.innerHTML=`<img id="speakerImg" src="${photoData}" alt="Speaker Photo">`;
-    localStorage.setItem('poster_speaker_photo',photoData);
-  };
-  r.readAsDataURL(file);
-}
-window.addEventListener('load',()=>{
-  const savedPhoto=localStorage.getItem('poster_speaker_photo');
-  if(savedPhoto){photoData=savedPhoto;pPhoto.innerHTML=`<img id="speakerImg" src="${photoData}" alt="Speaker Photo">`;}
-});
-function randomDesign(){currentDesign=Math.floor(Math.random()*120)+1;applyDesign();loadDesignSelect(document.getElementById('categorySelect').value);makeChips(document.getElementById('categorySelect').value)}
-function resetData(){badge.value='RCM BUSINESS SEMINAR';title.value='RCM नये भारत का निर्माण';subtitle.value='स्मार्ट बचत, आरोग्य आणि उत्पन्नाची सुवर्णसंधी';speaker.value='दिनेश राजपूत सर';date.value='26 एप्रिल 2026';time.value='सकाळी 9:30 वा.';venue.value='कृष्णाई RCM सेवा केंद्र, स्नेह शारदा नगर, वसमत रोड, परभणी';host.value='DS WORLD TEAM';mobile.value='9876543210';applyData()}
-async function downloadPoster(){
-  applyData();
-  const poster=document.getElementById('poster');
-  const oldText=document.querySelector('button[onclick="downloadPoster()"]')?.textContent;
-  try{
-    await document.fonts.ready;
-    const canvas=await html2canvas(poster,{
-      scale:4,
-      useCORS:true,
-      allowTaint:true,
-      backgroundColor:null,
-      width:720,
-      height:1080,
-      scrollX:0,
-      scrollY:0
-    });
-    const a=document.createElement('a');
-    a.download='HD-RCM-Poster-'+Date.now()+'.png';
-    a.href=canvas.toDataURL('image/png',1.0);
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-  }catch(err){
-    alert('Download मध्ये issue आला. कृपया Chrome browser मध्ये open करून पुन्हा try करा.');
-    console.error(err);
-  }
-}
-loadDesignSelect();makeChips();applyData();
-</script></body>
-</html>
+</head><body><div class="app"><h2>🚀 Ultra Pro Poster Maker</h2><div class="subhead">100+ Canva Style Combinations: Background × Layout × Shape × Pattern × Font</div><div class="status" id="statusMsg"></div><div class="grid"><div class="panel">
+<input id="badge" placeholder="Top Badge" value="RCM BUSINESS SEMINAR"><input id="title" placeholder="Title" value="RCM नये भारत का निर्माण"><textarea id="sub" placeholder="Subtitle">स्मार्ट बचत, आरोग्य आणि उत्पन्नाची सुवर्णसंधी</textarea><input id="name" placeholder="Speaker / Leader Name" value="दिनेश राजपूत सर"><div class="row2"><input id="date" placeholder="Date" value="26 एप्रिल 2026"><input id="time" placeholder="Time" value="सकाळी 9:30 वा."></div><textarea id="venue" placeholder="Venue">कृष्णाई RCM सेवा केंद्र, स्नेह शारदा नगर, वसमत रोड, परभणी</textarea><div class="row2"><input id="host" placeholder="Host Name" value="DS WORLD TEAM"><input id="mobile" placeholder="Mobile" value="9876543210"></div><input type="file" id="photo" accept="image/*">
+<div class="sec">Manual Theme Controls</div><div class="row2"><select id="bgSel" onchange="applyCombo()"></select><select id="layoutSel" onchange="applyCombo()"></select></div><div class="row3"><select id="shapeSel" onchange="applyCombo()"></select><select id="patternSel" onchange="applyCombo()"></select><select id="fontSel" onchange="applyCombo()"></select></div><div class="row2"><select id="textSel" onchange="applyCombo()"></select><select id="photoSel" onchange="applyCombo()"></select></div>
+<button class="purple" onclick="randomCombo()">🎲 Random Canva Design</button><button onclick="updatePoster()">Update Poster</button><div class="row2"><button class="green" onclick="savePosterFirebase()">Save Firebase</button><button class="orange" onclick="loadPosterFirebase()">Load Firebase</button></div><div class="row2"><button class="red" onclick="downloadPoster()">Download HD</button><button class="dark" onclick="resetPoster()">Reset</button></div><div class="hint">Total combinations: 10 backgrounds × 5 layouts × 5 shapes × 5 patterns × 4 fonts = 5000+ looks.</div></div>
+<div><div class="poster l0 sType1 p1" id="poster"><div class="bg bg0" id="bgLayer"></div><div class="overlay"></div><div class="shape"></div><div class="shape2"></div><div class="pattern"></div><div class="decorText">RCM BUSINESS</div><div class="logo">DS WORLD</div><div class="badge" id="pBadge"></div><div class="title" id="pTitle"></div><div class="subtitle" id="pSub"></div><div class="photo" id="pPhoto">Photo</div><div class="speaker" id="pName"></div><div class="info">📅 <span id="pDate"></span><br>⏰ <span id="pTime"></span><br>📍 <span id="pVenue"></span></div><div class="host"><span id="pHost"></span> | <span id="pMobile"></span></div></div></div></div></div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+const firebaseConfig={apiKey:"AIzaSyCsgwBoTiEtSNJ2xMm4di0F0GiAtFxoswM",authDomain:"order-b15a8.firebaseapp.com",projectId:"order-b15a8",storageBucket:"order-b15a8.firebasestorage.app",messagingSenderId:"614443594278",appId:"1:614443594278:web:e31715b6ee592b30326ce7"};const app=initializeApp(firebaseConfig);const db=getFirestore(app);const POSTER_DOC_ID="rcm_ultra_poster";
+const B=["Tricolor RCM","Business Blue","Luxury Gold","Health Green","Purple Product","Award Red Gold","Clean White","Training Sky","Festival Orange","Diagonal Viral"];const L=["Center Classic","Photo Right","Round Center","Viral Split","Premium Invite"];const S=["No Shape","Circle Glow","Diagonal Band","Luxury Border","Bottom Wave"];const P=["No Pattern","Dots","Grid","Diagonal Lines","Spark Dots"];const F=["Baloo 2","Poppins","Noto Serif Devanagari","Oswald"];const T=["Normal Text","Light Mode","Gold Text","Blue Text","Green Text"];const PH=["Rounded Card","Circle","Square","Luxury Ring","Tilted Card"];
+let combo={bg:0,layout:0,shape:1,pattern:1,font:0,text:0,photo:0};function fill(sel,arr,key){sel.innerHTML="";arr.forEach((x,i)=>{let o=document.createElement("option");o.value=i;o.textContent=(i+1)+". "+x;sel.appendChild(o)});sel.value=combo[key]}
+function initControls(){fill(bgSel,B,"bg");fill(layoutSel,L,"layout");fill(shapeSel,S,"shape");fill(patternSel,P,"pattern");fill(fontSel,F,"font");fill(textSel,T,"text");fill(photoSel,PH,"photo")}
+function syncCombo(){combo={bg:+bgSel.value,layout:+layoutSel.value,shape:+shapeSel.value,pattern:+patternSel.value,font:+fontSel.value,text:+textSel.value,photo:+photoSel.value}}
+function applyCombo(){syncCombo();poster.className=`poster l${combo.layout} sType${combo.shape} p${combo.pattern}`;bgLayer.className=`bg bg${combo.bg}`;poster.style.fontFamily=F[combo.font];poster.classList.remove("lightMode","goldText","blueText","greenText");if(combo.text===1)poster.classList.add("lightMode");if(combo.text===2)poster.classList.add("goldText");if(combo.text===3)poster.classList.add("blueText");if(combo.text===4)poster.classList.add("greenText");applyPhotoStyle();updatePoster()}window.applyCombo=applyCombo;
+function applyPhotoStyle(){pPhoto.style.transform="";if(combo.photo===0){pPhoto.style.borderRadius="34px"}if(combo.photo===1){pPhoto.style.borderRadius="50%"}if(combo.photo===2){pPhoto.style.borderRadius="0"}if(combo.photo===3){pPhoto.style.borderRadius="50%";pPhoto.style.borderColor="#fbbf24";pPhoto.style.borderWidth="12px"}if(combo.photo===4){pPhoto.style.borderRadius="28px";pPhoto.style.transform="rotate(-3deg)"}}
+function randomCombo(){combo={bg:Math.floor(Math.random()*B.length),layout:Math.floor(Math.random()*L.length),shape:Math.floor(Math.random()*S.length),pattern:Math.floor(Math.random()*P.length),font:Math.floor(Math.random()*F.length),text:Math.floor(Math.random()*T.length),photo:Math.floor(Math.random()*PH.length)};initControls();applyCombo();showMsg("🎨 New Canva style design ready","green")}window.randomCombo=randomCombo;
+function showMsg(t,c="#000080"){statusMsg.innerText=t;statusMsg.style.color=c;setTimeout(()=>statusMsg.innerText="",2600)}
+function updatePoster(){pBadge.innerText=badge.value;pTitle.innerText=title.value;pSub.innerText=sub.value;pName.innerText=name.value;pDate.innerText=date.value;pTime.innerText=time.value;pVenue.innerText=venue.value;pHost.innerText=host.value;pMobile.innerText=mobile.value}window.updatePoster=updatePoster;
+photo.onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{pPhoto.innerHTML=`<img src="${r.result}">`;localStorage.setItem("ultra_poster_photo",r.result)};r.readAsDataURL(f)};
+async function savePosterFirebase(){updatePoster();syncCombo();let data={badge:badge.value,title:title.value,sub:sub.value,name:name.value,date:date.value,time:time.value,venue:venue.value,host:host.value,mobile:mobile.value,combo,updatedAt:new Date().toISOString()};try{await setDoc(doc(db,"rcm_posters",POSTER_DOC_ID),data);showMsg("✅ Firebase मध्ये save झाले","green")}catch(e){showMsg("❌ Save error: "+e.message,"red")}}window.savePosterFirebase=savePosterFirebase;
+async function loadPosterFirebase(){try{let snap=await getDoc(doc(db,"rcm_posters",POSTER_DOC_ID));if(!snap.exists()){showMsg("⚠️ Firebase data नाही","orange");return}let d=snap.data();badge.value=d.badge||badge.value;title.value=d.title||title.value;sub.value=d.sub||sub.value;name.value=d.name||name.value;date.value=d.date||date.value;time.value=d.time||time.value;venue.value=d.venue||venue.value;host.value=d.host||host.value;mobile.value=d.mobile||mobile.value;combo=d.combo||combo;initControls();applyCombo();showMsg("✅ Firebase data load झाला","green")}catch(e){showMsg("❌ Load error: "+e.message,"red")}}window.loadPosterFirebase=loadPosterFirebase;
+async function downloadPoster(){updatePoster();await document.fonts.ready;let old=poster.style.transform;poster.style.transform="none";html2canvas(poster,{scale:3,useCORS:true,allowTaint:true,width:720,height:1080}).then(c=>{poster.style.transform=old;let a=document.createElement("a");a.href=c.toDataURL("image/png",1.0);a.download="Ultra-Pro-RCM-Poster.png";a.click()})}window.downloadPoster=downloadPoster;
+function resetPoster(){badge.value="RCM BUSINESS SEMINAR";title.value="RCM नये भारत का निर्माण";sub.value="स्मार्ट बचत, आरोग्य आणि उत्पन्नाची सुवर्णसंधी";name.value="दिनेश राजपूत सर";date.value="26 एप्रिल 2026";time.value="सकाळी 9:30 वा.";venue.value="कृष्णाई RCM सेवा केंद्र, स्नेह शारदा नगर, वसमत रोड, परभणी";host.value="DS WORLD TEAM";mobile.value="9876543210";combo={bg:0,layout:0,shape:1,pattern:1,font:0,text:0,photo:0};initControls();applyCombo();updatePoster()}window.resetPoster=resetPoster;
+window.addEventListener("load",()=>{let saved=localStorage.getItem("ultra_poster_photo");if(saved)pPhoto.innerHTML=`<img src="${saved}">`;initControls();applyCombo();loadPosterFirebase()});
+</script></body></html>
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ultra Pro Poster Maker</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Baloo+2:wght@600;700;800&family=Noto+Serif+Devanagari:wght@600;700;800&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Poppins,Arial,sans-serif;background:linear-gradient(135deg,#ff9933,#fff,#138808);background-size:300% 300%;animation:bg 9s infinite;padding:12px}@keyframes bg{0%{background-position:0%}50%{background-position:100%}100%{background-position:0%}}
+.app{max-width:1240px;margin:auto;background:rgba(255,255,255,.97);padding:14px;border-radius:22px;box-shadow:0 18px 40px rgba(0,0,0,.18)}h2{margin:0;color:#000080;text-align:center}.subhead{text-align:center;color:#64748b;font-weight:800;margin:5px 0 12px}.grid{display:grid;grid-template-columns:420px 1fr;gap:18px}.panel{background:#f8fafc;border:1px solid #e5e7eb;border-radius:18px;padding:14px}input,textarea,select{width:100%;padding:10px;margin:5px 0;border-radius:12px;border:1px solid #d1d5db;font-family:inherit;font-size:14px;background:#fff}textarea{min-height:62px;resize:vertical}.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}button{padding:12px;border:none;border-radius:13px;font-weight:900;margin-top:8px;background:#000080;color:white;width:100%;cursor:pointer;font-family:inherit;box-shadow:0 7px 15px rgba(0,0,0,.15)}.green{background:#138808}.orange{background:#ff9933;color:#111}.red{background:#d32f2f}.dark{background:#111827}.purple{background:#7c3aed}.status{font-weight:900;text-align:center;min-height:22px;margin:5px;color:#000080}.chips{display:grid;grid-template-columns:1fr 1fr;gap:7px;max-height:190px;overflow:auto;background:#fff;padding:8px;border-radius:14px;border:1px solid #e5e7eb}.chip{padding:9px;background:#f8fafc;border:1px solid #e5e7eb;border-radius:14px;cursor:pointer;font-size:12px;font-weight:900}.chip.active{background:#000080;color:#fff}.hint{font-size:12px;color:#64748b;text-align:center;margin-top:8px}.sec{font-weight:900;color:#000080;margin:10px 0 4px}
+.poster{width:720px;height:1080px;margin:auto;position:relative;overflow:hidden;color:#fff;background:#111;box-shadow:0 18px 45px rgba(0,0,0,.25);font-family:'Baloo 2',Poppins,sans-serif}.poster *{position:relative;z-index:3}.bg,.shape,.shape2,.pattern,.overlay{position:absolute;z-index:0;pointer-events:none}.bg{inset:0}.overlay{inset:0;z-index:1}.pattern{inset:0;z-index:2;opacity:.11}.logo{position:absolute;top:26px;right:34px;font-size:24px;font-weight:900;text-shadow:0 4px 12px rgba(0,0,0,.35);z-index:5}.badge{display:inline-block;border-radius:999px;font-weight:900}.title{font-weight:900;line-height:1.02}.subtitle{font-weight:800;line-height:1.18}.photo{overflow:hidden;background:#eee;color:#555;display:grid;place-items:center;font-weight:900;box-shadow:0 20px 40px rgba(0,0,0,.28)}.photo img{width:100%;height:100%;object-fit:cover}.speaker{font-weight:900}.info{font-weight:900;line-height:1.45}.host{position:absolute;font-weight:900}.decorText{position:absolute;font-size:92px;font-weight:900;opacity:.07;z-index:1;white-space:nowrap;left:-15px;bottom:250px;transform:rotate(-18deg)}
+/* Background themes */.bg0{background:linear-gradient(135deg,#ff9933,#fff,#138808)}.bg1{background:linear-gradient(135deg,#0f172a,#1d4ed8,#38bdf8)}.bg2{background:radial-gradient(circle at top,#fef3c7,#92400e,#09090b)}.bg3{background:linear-gradient(135deg,#064e3b,#16a34a,#dcfce7)}.bg4{background:linear-gradient(180deg,#1e1b4b,#7c3aed,#f0abfc)}.bg5{background:linear-gradient(135deg,#111827,#991b1b,#fbbf24)}.bg6{background:#f8fafc}.bg7{background:linear-gradient(135deg,#0c4a6e,#0284c7,#e0f2fe)}.bg8{background:radial-gradient(circle at 20% 10%,#fde68a,#f97316,#7c2d12)}.bg9{background:linear-gradient(145deg,#f97316 0 34%,#fff 34% 55%,#138808 55%)}
+/* Layouts */.l0 .badge{margin:62px 0 0 58px;padding:13px 32px;font-size:25px;background:#fbbf24;color:#111}.l0 .title{font-size:70px;margin:34px 58px 8px}.l0 .subtitle{font-size:33px;margin:0 62px}.l0 .photo{width:300px;height:300px;border-radius:44px;border:10px solid #fff;margin:48px auto 18px}.l0 .speaker{text-align:center;font-size:45px}.l0 .info{background:#fff;color:#111;margin:34px 62px 0;padding:28px;border-radius:32px;font-size:29px}.l0 .host{left:58px;right:58px;bottom:38px;background:rgba(0,0,0,.68);border-radius:999px;padding:18px;font-size:27px;text-align:center}
+.l1 .badge{margin:56px 0 0 48px;padding:12px 28px;font-size:24px;background:#000080;color:#fff}.l1 .title{font-size:68px;margin:46px 350px 8px 48px}.l1 .subtitle{font-size:32px;margin:0 360px 0 50px}.l1 .photo{position:absolute;right:48px;top:260px;width:285px;height:360px;border-radius:34px;border:10px solid #fff}.l1 .speaker{position:absolute;left:52px;bottom:340px;width:330px;font-size:44px;text-align:left}.l1 .info{position:absolute;left:50px;right:50px;bottom:105px;background:#fff;color:#111;border-radius:28px;padding:26px;font-size:28px}.l1 .host{left:0;right:0;bottom:0;background:rgba(0,0,0,.7);padding:22px;font-size:27px;text-align:center}
+.l2 .badge{margin:58px auto 0;display:block;width:max-content;padding:12px 32px;font-size:25px;background:#fff;color:#111}.l2 .title{text-align:center;font-size:66px;margin:42px 62px 8px}.l2 .subtitle{text-align:center;font-size:32px;margin:0 70px}.l2 .photo{width:285px;height:285px;border-radius:50%;border:12px solid #fff;margin:54px auto 18px}.l2 .speaker{text-align:center;font-size:44px}.l2 .info{background:rgba(255,255,255,.94);color:#111;margin:36px 64px 0;padding:28px;border-radius:34px;font-size:29px}.l2 .host{left:0;right:0;bottom:0;background:rgba(0,0,0,.72);padding:22px;font-size:27px;text-align:center}
+.l3 .badge{margin:44px 0 0 44px;padding:12px 28px;font-size:24px;background:#111;color:#fff}.l3 .title{font-size:74px;margin:64px 38px 8px;color:#000080;text-shadow:none}.l3 .subtitle{font-size:33px;margin:0 42px;color:#111;text-shadow:none}.l3 .photo{position:absolute;right:42px;bottom:235px;width:285px;height:285px;border-radius:50%;border:12px solid #000080}.l3 .speaker{position:absolute;left:44px;bottom:330px;width:310px;color:#000080;text-shadow:none;font-size:45px;text-align:left}.l3 .info{position:absolute;left:42px;right:42px;bottom:100px;background:#fff;color:#111;border:4px solid #000080;border-radius:28px;padding:24px;font-size:27px}.l3 .host{left:0;right:0;bottom:0;background:#000080;color:#fff;padding:22px;font-size:27px;text-align:center}
+.l4 .badge{margin:74px auto 0;display:block;width:max-content;padding:12px 34px;font-size:24px;background:#111827;color:#fbbf24;border:2px solid #fbbf24}.l4 .title{text-align:center;font-size:66px;margin:52px 76px 10px;font-family:'Noto Serif Devanagari',serif}.l4 .subtitle{text-align:center;font-size:31px;margin:0 82px}.l4 .photo{width:270px;height:270px;border-radius:50%;border:12px solid #fbbf24;margin:50px auto 18px}.l4 .speaker{text-align:center;font-size:42px;color:#fbbf24}.l4 .info{background:rgba(17,24,39,.86);color:#fff;margin:34px 78px 0;padding:26px;border-radius:28px;border:2px solid #fbbf24;font-size:28px}.l4 .host{left:80px;right:80px;bottom:54px;background:#fbbf24;color:#111;border-radius:999px;padding:16px;font-size:26px;text-align:center}
+/* Shapes */.sType0 .shape{display:none}.sType1 .shape{width:620px;height:620px;border-radius:50%;background:rgba(255,255,255,.14);top:-180px;right:-220px}.sType1 .shape2{width:360px;height:360px;border-radius:50%;background:rgba(255,255,255,.10);bottom:80px;left:-120px}.sType2 .shape{width:920px;height:260px;background:rgba(255,255,255,.13);bottom:170px;left:-130px;transform:rotate(-12deg)}.sType3 .shape{inset:42px;border:4px solid rgba(255,255,255,.45);border-radius:32px}.sType3 .shape2{inset:62px;border:1px solid rgba(255,255,255,.25);border-radius:24px}.sType4 .shape{width:100%;height:230px;bottom:0;background:rgba(0,0,0,.34);transform:skewY(-6deg);transform-origin:left top}
+/* patterns */.p0 .pattern{display:none}.p1 .pattern{background-image:radial-gradient(circle,#fff 2px,transparent 3px);background-size:42px 42px}.p2 .pattern{background-image:linear-gradient(45deg,rgba(255,255,255,.7) 1px,transparent 1px);background-size:26px 26px}.p3 .pattern{background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.65) 0 2px,transparent 2px 18px)}.p4 .pattern{background-image:radial-gradient(circle at 30% 20%,rgba(255,255,255,.9) 0 2px,transparent 3px),radial-gradient(circle at 70% 60%,rgba(255,255,255,.9) 0 2px,transparent 3px);background-size:58px 58px}
+/* color tweaks */.lightMode{color:#111}.lightMode .logo{color:#111;text-shadow:none}.lightMode .title,.lightMode .subtitle{color:#111;text-shadow:none}.goldText .title,.goldText .speaker{color:#fbbf24}.blueText .title,.blueText .speaker{color:#000080;text-shadow:none}.greenText .title,.greenText .speaker{color:#dcfce7}
+@media(max-width:950px){.grid{grid-template-columns:1fr}.poster{width:360px;height:540px;font-size:50%}.logo{font-size:12px!important;top:13px!important;right:17px!important}.badge{transform:scale(.5);transform-origin:top left}.l2 .badge,.l4 .badge{transform-origin:top center}.title{font-size:35px!important}.subtitle{font-size:16px!important}.speaker{font-size:22px!important}.info{font-size:14px!important}.host{font-size:13px!important}.photo{width:150px!important;height:150px!important;border-width:5px!important}.l1 .photo{right:24px!important;top:130px!important;width:142px!important;height:180px!important}.l1 .speaker{left:26px!important;bottom:170px!important;width:165px!important}.l1 .info{left:25px!important;right:25px!important;bottom:52px!important}.l3 .photo{right:21px!important;bottom:117px!important;width:142px!important;height:142px!important}.l3 .speaker{left:22px!important;bottom:165px!important;width:155px!important}.l3 .info{left:21px!important;right:21px!important;bottom:50px!important}.chips{grid-template-columns:1fr 1fr}.row3{grid-template-columns:1fr}}
+</style>
+</head><body><div class="app"><h2>🚀 Ultra Pro Poster Maker</h2><div class="subhead">100+ Canva Style Combinations: Background × Layout × Shape × Pattern × Font</div><div class="status" id="statusMsg"></div><div class="grid"><div class="panel">
+<input id="badge" placeholder="Top Badge" value="RCM BUSINESS SEMINAR"><input id="title" placeholder="Title" value="RCM नये भारत का निर्माण"><textarea id="sub" placeholder="Subtitle">स्मार्ट बचत, आरोग्य आणि उत्पन्नाची सुवर्णसंधी</textarea><input id="name" placeholder="Speaker / Leader Name" value="दिनेश राजपूत सर"><div class="row2"><input id="date" placeholder="Date" value="26 एप्रिल 2026"><input id="time" placeholder="Time" value="सकाळी 9:30 वा."></div><textarea id="venue" placeholder="Venue">कृष्णाई RCM सेवा केंद्र, स्नेह शारदा नगर, वसमत रोड, परभणी</textarea><div class="row2"><input id="host" placeholder="Host Name" value="DS WORLD TEAM"><input id="mobile" placeholder="Mobile" value="9876543210"></div><input type="file" id="photo" accept="image/*">
+<div class="sec">Manual Theme Controls</div><div class="row2"><select id="bgSel" onchange="applyCombo()"></select><select id="layoutSel" onchange="applyCombo()"></select></div><div class="row3"><select id="shapeSel" onchange="applyCombo()"></select><select id="patternSel" onchange="applyCombo()"></select><select id="fontSel" onchange="applyCombo()"></select></div><div class="row2"><select id="textSel" onchange="applyCombo()"></select><select id="photoSel" onchange="applyCombo()"></select></div>
+<button class="purple" onclick="randomCombo()">🎲 Random Canva Design</button><button onclick="updatePoster()">Update Poster</button><div class="row2"><button class="green" onclick="savePosterFirebase()">Save Firebase</button><button class="orange" onclick="loadPosterFirebase()">Load Firebase</button></div><div class="row2"><button class="red" onclick="downloadPoster()">Download HD</button><button class="dark" onclick="resetPoster()">Reset</button></div><div class="hint">Total combinations: 10 backgrounds × 5 layouts × 5 shapes × 5 patterns × 4 fonts = 5000+ looks.</div></div>
+<div><div class="poster l0 sType1 p1" id="poster"><div class="bg bg0" id="bgLayer"></div><div class="overlay"></div><div class="shape"></div><div class="shape2"></div><div class="pattern"></div><div class="decorText">RCM BUSINESS</div><div class="logo">DS WORLD</div><div class="badge" id="pBadge"></div><div class="title" id="pTitle"></div><div class="subtitle" id="pSub"></div><div class="photo" id="pPhoto">Photo</div><div class="speaker" id="pName"></div><div class="info">📅 <span id="pDate"></span><br>⏰ <span id="pTime"></span><br>📍 <span id="pVenue"></span></div><div class="host"><span id="pHost"></span> | <span id="pMobile"></span></div></div></div></div></div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+const firebaseConfig={apiKey:"AIzaSyCsgwBoTiEtSNJ2xMm4di0F0GiAtFxoswM",authDomain:"order-b15a8.firebaseapp.com",projectId:"order-b15a8",storageBucket:"order-b15a8.firebasestorage.app",messagingSenderId:"614443594278",appId:"1:614443594278:web:e31715b6ee592b30326ce7"};const app=initializeApp(firebaseConfig);const db=getFirestore(app);const POSTER_DOC_ID="rcm_ultra_poster";
+const B=["Tricolor RCM","Business Blue","Luxury Gold","Health Green","Purple Product","Award Red Gold","Clean White","Training Sky","Festival Orange","Diagonal Viral"];const L=["Center Classic","Photo Right","Round Center","Viral Split","Premium Invite"];const S=["No Shape","Circle Glow","Diagonal Band","Luxury Border","Bottom Wave"];const P=["No Pattern","Dots","Grid","Diagonal Lines","Spark Dots"];const F=["Baloo 2","Poppins","Noto Serif Devanagari","Oswald"];const T=["Normal Text","Light Mode","Gold Text","Blue Text","Green Text"];const PH=["Rounded Card","Circle","Square","Luxury Ring","Tilted Card"];
+let combo={bg:0,layout:0,shape:1,pattern:1,font:0,text:0,photo:0};function fill(sel,arr,key){sel.innerHTML="";arr.forEach((x,i)=>{let o=document.createElement("option");o.value=i;o.textContent=(i+1)+". "+x;sel.appendChild(o)});sel.value=combo[key]}
+function initControls(){fill(bgSel,B,"bg");fill(layoutSel,L,"layout");fill(shapeSel,S,"shape");fill(patternSel,P,"pattern");fill(fontSel,F,"font");fill(textSel,T,"text");fill(photoSel,PH,"photo")}
+function syncCombo(){combo={bg:+bgSel.value,layout:+layoutSel.value,shape:+shapeSel.value,pattern:+patternSel.value,font:+fontSel.value,text:+textSel.value,photo:+photoSel.value}}
+function applyCombo(){syncCombo();poster.className=`poster l${combo.layout} sType${combo.shape} p${combo.pattern}`;bgLayer.className=`bg bg${combo.bg}`;poster.style.fontFamily=F[combo.font];poster.classList.remove("lightMode","goldText","blueText","greenText");if(combo.text===1)poster.classList.add("lightMode");if(combo.text===2)poster.classList.add("goldText");if(combo.text===3)poster.classList.add("blueText");if(combo.text===4)poster.classList.add("greenText");applyPhotoStyle();updatePoster()}window.applyCombo=applyCombo;
+function applyPhotoStyle(){pPhoto.style.transform="";if(combo.photo===0){pPhoto.style.borderRadius="34px"}if(combo.photo===1){pPhoto.style.borderRadius="50%"}if(combo.photo===2){pPhoto.style.borderRadius="0"}if(combo.photo===3){pPhoto.style.borderRadius="50%";pPhoto.style.borderColor="#fbbf24";pPhoto.style.borderWidth="12px"}if(combo.photo===4){pPhoto.style.borderRadius="28px";pPhoto.style.transform="rotate(-3deg)"}}
+function randomCombo(){combo={bg:Math.floor(Math.random()*B.length),layout:Math.floor(Math.random()*L.length),shape:Math.floor(Math.random()*S.length),pattern:Math.floor(Math.random()*P.length),font:Math.floor(Math.random()*F.length),text:Math.floor(Math.random()*T.length),photo:Math.floor(Math.random()*PH.length)};initControls();applyCombo();showMsg("🎨 New Canva style design ready","green")}window.randomCombo=randomCombo;
+function showMsg(t,c="#000080"){statusMsg.innerText=t;statusMsg.style.color=c;setTimeout(()=>statusMsg.innerText="",2600)}
+function updatePoster(){pBadge.innerText=badge.value;pTitle.innerText=title.value;pSub.innerText=sub.value;pName.innerText=name.value;pDate.innerText=date.value;pTime.innerText=time.value;pVenue.innerText=venue.value;pHost.innerText=host.value;pMobile.innerText=mobile.value}window.updatePoster=updatePoster;
+photo.onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{pPhoto.innerHTML=`<img src="${r.result}">`;localStorage.setItem("ultra_poster_photo",r.result)};r.readAsDataURL(f)};
+async function savePosterFirebase(){updatePoster();syncCombo();let data={badge:badge.value,title:title.value,sub:sub.value,name:name.value,date:date.value,time:time.value,venue:venue.value,host:host.value,mobile:mobile.value,combo,updatedAt:new Date().toISOString()};try{await setDoc(doc(db,"rcm_posters",POSTER_DOC_ID),data);showMsg("✅ Firebase मध्ये save झाले","green")}catch(e){showMsg("❌ Save error: "+e.message,"red")}}window.savePosterFirebase=savePosterFirebase;
+async function loadPosterFirebase(){try{let snap=await getDoc(doc(db,"rcm_posters",POSTER_DOC_ID));if(!snap.exists()){showMsg("⚠️ Firebase data नाही","orange");return}let d=snap.data();badge.value=d.badge||badge.value;title.value=d.title||title.value;sub.value=d.sub||sub.value;name.value=d.name||name.value;date.value=d.date||date.value;time.value=d.time||time.value;venue.value=d.venue||venue.value;host.value=d.host||host.value;mobile.value=d.mobile||mobile.value;combo=d.combo||combo;initControls();applyCombo();showMsg("✅ Firebase data load झाला","green")}catch(e){showMsg("❌ Load error: "+e.message,"red")}}window.loadPosterFirebase=loadPosterFirebase;
+async function downloadPoster(){updatePoster();await document.fonts.ready;let old=poster.style.transform;poster.style.transform="none";html2canvas(poster,{scale:3,useCORS:true,allowTaint:true,width:720,height:1080}).then(c=>{poster.style.transform=old;let a=document.createElement("a");a.href=c.toDataURL("image/png",1.0);a.download="Ultra-Pro-RCM-Poster.png";a.click()})}window.downloadPoster=downloadPoster;
+function resetPoster(){badge.value="RCM BUSINESS SEMINAR";title.value="RCM नये भारत का निर्माण";sub.value="स्मार्ट बचत, आरोग्य आणि उत्पन्नाची सुवर्णसंधी";name.value="दिनेश राजपूत सर";date.value="26 एप्रिल 2026";time.value="सकाळी 9:30 वा.";venue.value="कृष्णाई RCM सेवा केंद्र, स्नेह शारदा नगर, वसमत रोड, परभणी";host.value="DS WORLD TEAM";mobile.value="9876543210";combo={bg:0,layout:0,shape:1,pattern:1,font:0,text:0,photo:0};initControls();applyCombo();updatePoster()}window.resetPoster=resetPoster;
+window.addEventListener("load",()=>{let saved=localStorage.getItem("ultra_poster_photo");if(saved)pPhoto.innerHTML=`<img src="${saved}">`;initControls();applyCombo();loadPosterFirebase()});
+</script></body></html>
